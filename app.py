@@ -30,21 +30,31 @@ def after_request(response):
     return response
 
 
+@app.route("/")
+def check():
+    return render_template("index.html")
 # ... route
-@app.route("/...Palmwinecode fill in the name")
-# add view function
+# @app.route("/...Palmwinecode fill in the name")
+# # add view function
 
 
 # Register route
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        pass
+
+    # if method is GET
+    else:
+        return render_template("register.html")
 # add view function
 
 
-# Login route
-@app.route("/login")
-# add view function
+# # Login route
+# @app.route("/login")
+# # add view function
 
 
-# Logout route
-@app.route("/logout")
+# # Logout route
+# @app.route("/logout")
 # add view function
