@@ -45,21 +45,18 @@ def register():
     else:
         return render_template("register.html")
 
-# add view function
-
 
 # Login route
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """ Write login view function """
     if request.method == "POST":
-        return render_template("login.html")
-
+        pass
     else:
         return render_template("login.html")
 
 
-# # Logout route
-# @app.route("/logout")
+# Logout route
+@app.route("/logout")
 def logout():
     """ Write Logout view function """
