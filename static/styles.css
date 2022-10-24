@@ -1,0 +1,4 @@
+/* change all form focus color to match theme of the app */
+.form-control:focus {
+    border-color: #872eb8;
+    box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);}
