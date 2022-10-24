@@ -36,15 +36,22 @@ def after_request(response):
 
 
 # Register route
-@app.route("/register")
+@app.route("/register", methods=["POST", "GET"])
+def register():
+    if request.method == "POST":
+        pass
+    # if method is GET
+    else:
+        return render_template("register.html")
+
 # add view function
 
 
 # # Login route
-@app.route("/login")
+# @app.route("/login")
 # # add view function
 
 
 # # Logout route
-@app.route("/logout")
+# @app.route("/logout")
 # add view function
