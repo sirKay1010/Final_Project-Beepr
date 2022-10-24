@@ -37,9 +37,15 @@ def index():
 
 
 # Register route
-@app.route("/register")
+@app.route("/register", methods=["POST", "GET"])
 def register():
-    """ Write register view function """
+    if request.method == "POST":
+        pass
+    # if method is GET
+    else:
+        return render_template("register.html")
+
+# add view function
 
 
 # Login route
@@ -53,7 +59,7 @@ def login():
         return render_template("login.html")
 
 
-# Logout route
-@app.route("/logout")
+# # Logout route
+# @app.route("/logout")
 def logout():
     """ Write Logout view function """
