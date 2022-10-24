@@ -31,8 +31,8 @@ def after_request(response):
 
 
 # ... route
-@app.route("/...Palmwinecode fill in the name")
-# add view function
+# @app.route("/...Palmwinecode fill in the name")
+# # add view function
 
 
 # Register route
@@ -40,11 +40,11 @@ def after_request(response):
 # add view function
 
 
-# Login route
+# # Login route
 @app.route("/login")
-# add view function
+# # add view function
 
 
-# Logout route
+# # Logout route
 @app.route("/logout")
 # add view function
