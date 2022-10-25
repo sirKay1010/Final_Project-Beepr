@@ -31,8 +31,9 @@ def after_request(response):
 
 
 # ... route
-# @app.route("/...Palmwinecode fill in the name")
-# # add view function
+@app.route("/...Palmwinecode fill in the name")
+def index():
+    """ Write index view function """
 
 
 # Register route
@@ -44,14 +45,18 @@ def register():
     else:
         return render_template("register.html")
 
-# add view function
+
+# Login route
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """ Write login view function """
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("login.html")
 
 
-# # Login route
-# @app.route("/login")
-# # add view function
-
-
-# # Logout route
-# @app.route("/logout")
-# add view function
+# Logout route
+@app.route("/logout")
+def logout():
+    """ Write Logout view function """
