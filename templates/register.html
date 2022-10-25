@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+{% block title%}
+Register
+{% endblock%}
+
 {% block body %}
 <form action="/register" method="post">
 	<div class="container py-5 text-center">
@@ -30,7 +34,7 @@
 	        <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm password"
 	            type="password">
 	    </div>
-	        <button style="background-color: #872eb8;" class="mx-auto my-3 w-auto btn btn text-white" type="submit">
+	        <button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit">
 	        Register</button>
         <div>
         	<p>Already have an account? <a style="text-decoration: none; color: blue;" href="">login</a></p>
