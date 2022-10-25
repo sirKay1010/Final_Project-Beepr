@@ -1,9 +1,5 @@
 /* change all form focus color to match theme of the app */
-.form-control:focus {
-    border-color: #872eb8;
-    box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);}
-
-.form-control:focus {
+.form-control:focus{
     border-color: #872eb8;
     box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);}
 
@@ -15,15 +11,10 @@
     background-color: #929ad9;
 }
 
-input[type=checkbox]{
-    /* display: none; */
-    /* -webkit-appearance: none; */
-}
-.custom-checkbox label:before{
-    border-radius: 3px;
-}
+/* .form-check-input{
+	border: 1px solid #000000;
+} */
 
-input[type="checkbox"]:checked{
-    content: "\2713";
-    color: #000000;
+.form-check-input:checked{
+	background-color: #872eb8;
 }
