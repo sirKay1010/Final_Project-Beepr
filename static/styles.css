@@ -10,3 +10,16 @@
 .submit-btn:hover{
     background-color: #929ad9;
 }
+
+input[type=checkbox]{
+    /* display: none; */
+    /* -webkit-appearance: none; */
+}
+.custom-checkbox label:before{
+    border-radius: 3px;
+}
+
+input[type="checkbox"]:checked{
+    content: "\2713";
+    color: #000000;
+}
