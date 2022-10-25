@@ -60,3 +60,13 @@ def login():
 @app.route("/logout")
 def logout():
     """ Write Logout view function """
+
+
+# chat_page route
+@app.route("/chat_page", methods=["GET", "POST"])
+def chat():
+    """ Modify chat view function """
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("chat_page.html")
