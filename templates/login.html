@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
 {% block style %}
-    <!-- Temp styling for BeepR Logo -->
-    <style>
-        .hr1{
-            width:15%;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #872eb8;
-            border-top: 5px dotted #ffffff;
-            border-radius: 25px;
-        }
-    </style>
+<!-- Temp styling for BeepR Logo -->
+<style>
+    .hr1 {
+        width: 15%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #872eb8;
+        border-top: 5px dotted #ffffff;
+        border-radius: 25px;
+    }
+</style>
 {% endblock %}
 
 {% block title%}
@@ -19,42 +19,50 @@ Sign In
 {% endblock%}
 
 {% block body%}
-<div class="container text-center">
+    <!-- Login form -->
+<form action="/login" method="post">
+<div class="container text-center my-1">
     <!-- Logo section -->
     <hr class="hr1">
-    <div class="container mb-5 text-center fs-3 fw-bolder">
+    <div class="mb-5 fs-3 fw-bolder">
         <p>Beep<span style="color:#872eb8">R</span></p>
-    <hr class="hr1">
+        <hr class="hr1">
     </div>
-
-    <!-- Login form -->
-    <div class="container w-25 py-2">
-        <form action="/login" method="post">
+        <div class="row">
             <!-- Username Field -->
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control mx-auto" id="floatingUsername" name="username" placeholder="Username"
-                    autofocus autocomplete="off">
-                <label for="floatingUsername mx-auto w-auto">Username</label>
+            <div class="col-xlg">
+                <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingUsername" name="username"
+                    placeholder="Username" autofocus autocomplete="off">
+                <label for="floatingUsername">Username</label>
+                </div>
             </div>
             <!-- Password Field -->
-            <div class="form-floating mb-3">
+            <div class="col-xlg">
+            <div class="form-floating mb-1">
                 <input type="password" class="form-control" id="floatingPassword" name="password"
                     placeholder="Password">
                 <label for="floatingPassword">Password</label>
                 <!-- Forgot password feild -->
-                <div class="float-end mb-3">
+                <div class="float-end mt-1">
                     <p><a style="text-decoration:none" href="">Forgot Password?</a></p>
                 </div>
             </div>
+        </div>
             <!-- Remember me checkBox -->
-            <div class="form-check mb-3 pt-1">
-                <input type="checkbox" class="form-check-input" id="checkbox">
-                <label for="checkbox" class="form-check-label">Remember me</label>
-            </div><br>
+            <div class="col-12 mt-0">
+                <div class="form-check mb-3 pt-1">
+                    <input type="checkbox" class="form-check-input" id="checkbox">
+                    <label for="checkbox" class="float-start form-check-label">Remember me</label>
+                </div><br>
+            </div>
             <!-- Submit button -->
-            <button type="submit" class="btn text-white submit-btn" name="password" placeholder="Password">Sign In</button>
-        </form>
-    </div>
+            <div class="col-12">
+                <button type="submit" class="btn text-white submit-btn" name="password" placeholder="Password">Sign
+                    In</button>
+            </div>
+        </div>
+
 
     <div class="row mb-3">
         <p class="">Dont have an account? <a href="/...">Sign up</a></p>
@@ -65,4 +73,5 @@ Sign In
         Final Project BeepR!
     </footer>
 </div>
+</form>
 {% endblock%}
