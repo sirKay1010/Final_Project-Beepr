@@ -11,9 +11,10 @@
     background-color: #929ad9;
 }
 
-/* .form-check-input{
-	border: 1px solid #000000;
-} */
+.form-check-input:hover{
+    background-color: #929ad9;
+    cursor: pointer;
+}
 
 .form-check-input:checked{
 	background-color: #872eb8;

@@ -19,59 +19,56 @@ Sign In
 {% endblock%}
 
 {% block body%}
-    <!-- Login form -->
+<!-- Login form -->
 <form action="/login" method="post">
-<div class="container text-center my-1">
-    <!-- Logo section -->
-    <hr class="hr1">
-    <div class="mb-5 fs-3 fw-bolder">
-        <p>Beep<span style="color:#872eb8">R</span></p>
-        <hr class="hr1">
-    </div>
-        <div class="row">
-            <!-- Username Field -->
-            <div class="col-xlg">
+    <!-- Main Outter Container -->
+    <div class="container text-center my-1">
+        <!-- Logo section -->
+        <div class="mb-4 fs-3 fw-bolder">
+            <hr class="hr1">
+            <p>Beep<span style="color:#872eb8">R</span></p>
+            <hr class="hr1">
+        </div>
+        <!-- Row to contain the form -->
+        <div class="row justify-content-center">
+            <!-- Row to contain the form -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <!-- Username Field -->
                 <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingUsername" name="username"
-                    placeholder="Username" autofocus autocomplete="off">
-                <label for="floatingUsername">Username</label>
+                    <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username"
+                        autofocus autocomplete="off">
+                    <label for="floatingUsername">Username</label>
                 </div>
-            </div>
-            <!-- Password Field -->
-            <div class="col-xlg">
-            <div class="form-floating mb-1">
-                <input type="password" class="form-control" id="floatingPassword" name="password"
-                    placeholder="Password">
-                <label for="floatingPassword">Password</label>
-                <!-- Forgot password feild -->
-                <div class="float-end mt-1">
-                    <p><a style="text-decoration:none" href="">Forgot Password?</a></p>
+                <!-- Password Field -->
+                <div class="form-floating mb-1">
+                    <input type="password" class="form-control" id="floatingPassword" name="password"
+                        placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                    <!-- Forgot password container -->
+                    <div class="float-end my-1">
+                        <a style="text-decoration:none" href="">Forgot Password?</a>
+                    </div>
                 </div>
+                <!-- Remember me checkBox -->
+                <div class="col mt-4">
+                    <div class="form-check mb-3 pt-1">
+                        <input type="checkbox" class="form-check-input" id="checkbox">
+                        <label for="checkbox" class="float-start form-check-label">Remember me</label>
+                    </div><br>
+                </div>
+                <!-- Submit button -->
+                <div class="col">
+                    <button type="submit" class="btn text-white submit-btn" name="password" placeholder="Password">Sign In</button>
             </div>
         </div>
-            <!-- Remember me checkBox -->
-            <div class="col-12 mt-0">
-                <div class="form-check mb-3 pt-1">
-                    <input type="checkbox" class="form-check-input" id="checkbox">
-                    <label for="checkbox" class="float-start form-check-label">Remember me</label>
-                </div><br>
+            <div class="row my-2">
+                <p class="">Dont have an account? <a href="/...">Sign up</a></p>
             </div>
-            <!-- Submit button -->
-            <div class="col-12">
-                <button type="submit" class="btn text-white submit-btn" name="password" placeholder="Password">Sign
-                    In</button>
-            </div>
-        </div>
-
-
-    <div class="row mb-3">
-        <p class="">Dont have an account? <a href="/...">Sign up</a></p>
+            <!-- Temp Page Footer -->
+            <footer class="mt-5 text-center text-muted">
+                <hr>
+                Final Project BeepR!
+            </footer>
     </div>
-    <!-- Temp Page Footer -->
-    <footer class="mt-5 text-center text-muted">
-        <hr>
-        Final Project BeepR!
-    </footer>
-</div>
 </form>
 {% endblock%}
