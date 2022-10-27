@@ -7,13 +7,11 @@
 .submit-btn{
     background-color: #872eb8;
 }
+
 .submit-btn:hover{
     background-color: #929ad9;
 }
-.fa-1x {
-    font-size: 1.5rem;
-}
-
+/* Reset btn for hamburger */
 .reset-btn{
     background-color: transparent;
     border-width: 0;
@@ -26,12 +24,26 @@
 }
 
 .hamburger-menu{
+    display: flex;
+    justify-content: center;
     width: 30px;
     height: 4px;
     background-color: #872eb8;
     margin: 6px 0;
 }
-/* Fix for a simple animation */
+
+.gray-hover-highlight-btn{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.gray-hover-highlight-btn:hover{
+    background-color:#929ad9;
+    transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+/* Fix this, for a simple animation */
 .hamburger-menu:hover{
     width: 20px;
     height: 6px;
