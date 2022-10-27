@@ -10,3 +10,31 @@
 .submit-btn:hover{
     background-color: #929ad9;
 }
+.fa-1x {
+    font-size: 1.5rem;
+}
+
+.reset-btn{
+    background-color: transparent;
+    border-width: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    padding: 0;
+}
+
+.hamburger-menu{
+    width: 30px;
+    height: 4px;
+    background-color: #872eb8;
+    margin: 6px 0;
+}
+/* Fix for a simple animation */
+.hamburger-menu:hover{
+    width: 20px;
+    height: 6px;
+    background-color: #929ad9;
+    margin: 6px 0;
+}

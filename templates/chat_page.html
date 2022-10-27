@@ -12,30 +12,76 @@ GENERAL TODO
 
 <!-- NOTE: ALL the text in white and the borders is just to show the schematic, DELETE once no longer needed! -->
 
-    <!-- Main Page Container -->
-    <div class="container-fluid my-1 p-3 text-center border">
-        CHAT PAGE!
-        <!-- Row to fit the two columns -->
-        <div class="row border">
-            <!-- Left Panel Section -->
-            <div class="col-3 section border">
-                Edit Left Panel Section
-                <!-- TODO -->
+<!-- Main Page Container -->
+<div class="container-fluid my-1 p-3 text-center border">
+    <!-- Row to fit the two columns -->
+    <div class="row border">
+        <!-- Left Panel Section -->
+        <div class="col-3 section border">
 
-                <!-- New chat bubble setion -->
-                <div class="">
-                    Edit New chat bubble section
-                    <!-- TODO -->
+            <!-- Profile/Logo/hamburger menu -->
+            <div class="row border-bottom border-dark">
+                <div class="col-3 border pt-4">
+                    <!-- Hamburger Menu anchor -->
+                    <button class="reset-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile_section" aria-controls="profile_section">
+                                <div class="hamburger-menu"></div>
+                                <div class="hamburger-menu"></div>
+                                <div class="hamburger-menu"></div>
+                            </span>
+                      </button>
+                </div>
+                        <!-- Offcanvas Start -->
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="profile_section"
+                        aria-labelledby="profile_Label">
+                        <!-- Header -->
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="profile_Label">Offcanvas</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <!-- Body -->
+                        <div class="offcanvas-body">
+                            <div>
+                                Profile
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Logo section -->
+                <div class="col-6 fs-5 fw-bolder text-center border pt-4">
+                    Beep<span style="color:#872eb8">R</span>
+                </div>
+                <div class="col-3 border  pt-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/2560px-A_black_image.jpg" style="width: 42px;" alt="profile img" class="rounded-circle">
                 </div>
             </div>
-
-            <!-- Chat section -->
-            <div class="col section border">
-                Edit Chat section
-                <!-- TODO -->
+            <!-- Search bar -->
+            <div class="row py-2 border-bottom border-dark">
+                <div class="container-fluid">
+                    <form class="d-flex">
+                        <input type="search" class="form-control rounded-pill" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Friends Chat section -->
+            <div class="row">
             </div>
 
+            <!-- New chat bubble setion -->
+            <div class="">
+                Edit New chat bubble section
+                <!-- TODO -->
+            </div>
         </div>
+
+        <!-- Chat section -->
+        <div class="col section border">
+            Edit Chat section
+            <!-- TODO -->
+        </div>
+
     </div>
+</div>
 
 {% endblock%}
