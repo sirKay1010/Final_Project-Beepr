@@ -31,29 +31,17 @@ def after_request(response):
 
 
 # ... route
-@app.route("/...Palmwinecode fill in the name")
-def index():
-    """ Write index view function """
+@app.route("/onboarding")
+def onboarding():
+    """ """
+
+    return render_template("onboarding.html")
 
 
-# Register route
-@app.route("/register", methods=["POST", "GET"])
-def register():
-    if request.method == "POST":
-        pass
-    # if method is GET
-    else:
-        return render_template("register.html")
+# # Register route
+# @app.route("/register")
+# # add view function
 
-
-# Login route
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    """ Write login view function """
-    if request.method == "POST":
-        pass
-    else:
-        return render_template("login.html")
 
 
 # Logout route
