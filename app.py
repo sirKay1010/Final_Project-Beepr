@@ -49,7 +49,6 @@ def register():
 # Login route
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """ Write login view function """
     if request.method == "POST":
         pass
     else:

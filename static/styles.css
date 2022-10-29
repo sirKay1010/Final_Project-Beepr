@@ -22,7 +22,7 @@
 }
 
 /* change all form focus color to match theme of the app */
-.form-control:focus {
+.form-control:focus{
     border-color: #872eb8;
     box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);}
 
@@ -94,3 +94,11 @@
 
 
 /* "https://avatars.dicebear.com/api/human/123.svg" */
+.form-check-input:hover{
+    background-color: #929ad9;
+    cursor: pointer;
+}
+
+.form-check-input:checked{
+	background-color: #872eb8;
+}
