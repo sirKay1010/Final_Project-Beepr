@@ -1,0 +1,18 @@
+Git commands:
+While In main: git merge <branch name>
+git branch --delete/-D <branch name>
+git checkout --f (DISCARDS ANY LOCAL CHANGES WHICH ARE NOT COMMITED IN ALL LOCAL BRANCHES AND THE MASTER)
+
+Flask commands:
+export FLASK_APP=app.py ("FLASK_APP" is a system variable and it Stores our app somwhere in memory)
+export FLASK_DEBUG=1 (Turns on debug mode)
+flask run
+
+Using sass in CSS:
+sass <name>.scss <name>.css (Basically compiles the sass code into css)
+sass --watch <name>.scss:<name>.css
+NOTE: SASS makes use of nesting and inheritance
+
+
+echo "This Repository contains all files involved in the development of "Beepr", (a chat app) our cs50 final project. Which includes Static repo, templates repo and a flask session repo. " > README.md
+
