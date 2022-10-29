@@ -1,21 +1,82 @@
+
+
 /* change all form focus color to match theme of the app */
-.form-control:focus{
+.form-control:focus {
     border-color: #872eb8;
-    box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);}
-
-/* Set all submit buttons to THEME COLOR */
-.submit-btn{
-    background-color: #872eb8;
-}
-.submit-btn:hover{
-    background-color: #929ad9;
+    box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);
 }
 
-.form-check-input:hover{
+.form-check-input:hover {
     background-color: #929ad9;
     cursor: pointer;
 }
 
-.form-check-input:checked{
-	background-color: #872eb8;
+.form-check-input:checked {
+    background-color: #872eb8;
 }
+
+/* Set all submit buttons to THEME COLOR */
+.submit-btn {
+    background-color: #872eb8;
+}
+
+.submit-btn:hover {
+    background-color: #929ad9;
+}
+
+/* Reset btn for hamburger */
+.reset-btn {
+    background-color: transparent;
+    border-width: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    padding: 0;
+}
+
+.hamburger-menu {
+    display: flex;
+    justify-content: center;
+    width: 30px;
+    height: 4px;
+    background-color: #872eb8;
+    margin: 6px 0;
+}
+
+.gray-hover-highlight-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.gray-hover-highlight-btn:hover {
+    background-color: #929ad9;
+    transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+/* Fix this, for a simple animation */
+.hamburger-menu:hover {
+    width: 20px;
+    height: 6px;
+    background-color: #929ad9;
+    margin: 6px 0;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 35px;
+    border: 1px solid #000000;
+    border-radius: 20px;
+}
+
+.reset-text-input {
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+}
+
+/* "https://avatars.dicebear.com/api/human/123.svg" */
