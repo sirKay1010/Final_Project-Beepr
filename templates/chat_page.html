@@ -5,27 +5,31 @@ Chat
 {% endblock%}
 
 {% block body%}
-<!--
-GENERAL TODO
+<!--las
+GENERAL TODO:
 1. Make responsive for mobile devices and tablets
 -->
 
 <!-- NOTE: ALL the text in white and the borders is just to show the schematic, DELETE once no longer needed! -->
 
 <!-- Main Page Container -->
-<div class="container-fluid my-1 p-3 text-center border">
-    <!-- Row to fit the two columns -->
-    <div class="row border">
+<div class="container-fluid p-3 text-center border main-body">
+    <!-- Row Containing Left Panel and Main Chat Sections-->
+    <div class="row border app-body">
+
         <!-- Left Panel Section -->
-        <div class="col-3 section border">
+        <div class="col-3 left-panel-section border">
             <!-- Profile/Logo/hamburger menu -->
             <div class="row border-bottom border-dark">
 
                 <!-- Profile settings -->
-                <div class="col-3 border pt-3 pb-2">
-                    <button class="reset-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile_section" aria-controls="profile_section">
+                <div class="col-lg-3 border pt-3 pb-2">
+                    <button class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile_section" aria-controls="profile_section">
                         <span>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/2560px-A_black_image.jpg" style="width: 42px;" alt="profile img" class="rounded-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
                             <!-- <div class="hamburger-menu"></div>
                             <div class="hamburger-menu"></div>
                             <div class="hamburger-menu"></div> -->
@@ -50,12 +54,12 @@ GENERAL TODO
                     </div>
 
                 <!-- Logo section -->
-                <div class="col-6 fs-5 fw-bolder border pt-3 pb-2">
+                <div class="col-lg-6 fs-5 fw-bolder border pt-3 pb-2">
                     Beep<span style="color:#872eb8">R</span>
                 </div>
 
-                <!-- Hamburger Menu anchor -->
-                <div class="col-3 border pt-3 pb-2">
+                <!-- Hamburger/Vertical 3 dots Menu anchor -->
+                <div class="col-lg-3 border pt-3 pb-2">
                     <div class="dropstart">
                         <button class="reset-btn gray-hover-highlight-btn" type="button" id="settings-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/2560px-A_black_image.jpg" style="width: 42px;" alt="profile img" class="rounded-circle"> -->
@@ -78,34 +82,36 @@ GENERAL TODO
                     </div>
                 </div>
             </div>
-            <!-- Search bar -->
+            <!-- Left Panel Search bar -->
             <div class="row py-2 border-bottom border-dark">
-                <div class="container-fluid">
-                    <form class="d-flex">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" >
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon1">
-                                <svg id="button-addon1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <div class="container-fluid border search-container">
+                    <!-- <form class="d-flex">
+                        <div class="input-group"> -->
+                            <!-- <input type="text" class="form-control" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" > -->
+                            <input type="text" class="reset-text-input" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" >
+                            <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon1"> -->
+                                <svg id="button-addon1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 35px;">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                               </svg>
-                            </button>
-                          </div>
-                    </form>
+                            <!-- </button> -->
+                          <!-- </div>
+                    </form> -->
                 </div>
             </div>
-            <!-- Friends Chat section -->
-            <div class="row">
-            </div>
+            <!--Left Panel Friends Chat section -->
+            <div class="row left-panel-chat-section border border-dark">
+                <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;">
 
-            <!-- New chat bubble setion -->
-            <div class="">
-                Edit New chat bubble section
-                <!-- TODO -->
+                <!-- Left Panel New chat bubble setion -->
+                <div class="">
+                    Edit New chat bubble section
+                    <!-- TODO -->
+                </div>
             </div>
         </div>
 
-        <!-- Chat section -->
-        <div class="col section border">
+        <!-- Main Chat section -->
+        <div class="col chat-section border">
             Edit Chat section
             <!-- TODO -->
         </div>

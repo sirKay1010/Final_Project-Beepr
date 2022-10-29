@@ -1,3 +1,26 @@
+/* General page body */
+.main-body{
+    background-color: lightgray ;
+    height: 100vh;
+}
+
+/* .app-body{
+    background-color: #ffffff;
+    height: 95vh;
+} */
+
+/* Left panel section */
+.left-panel-section{
+    display: flex;
+    flex-direction: column;
+    /* flex: 0.35; */
+}
+
+.left-panel-chat-section{
+    flex: 1;
+    overflow-y: scroll;
+}
+
 /* change all form focus color to match theme of the app */
 .form-control:focus {
     border-color: #872eb8;
@@ -11,6 +34,7 @@
 .submit-btn:hover{
     background-color: #929ad9;
 }
+
 /* Reset btn for hamburger */
 .reset-btn{
     background-color: transparent;
@@ -50,3 +74,23 @@
     background-color: #929ad9;
     margin: 6px 0;
 }
+
+.search-container{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 35px;
+    border: 1px solid #000000;
+    border-radius: 20px;
+}
+
+.reset-text-input{
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+}
+
+
+
+
+/* "https://avatars.dicebear.com/api/human/123.svg" */
