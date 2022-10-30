@@ -31,9 +31,11 @@ def after_request(response):
 
 
 # ... route
-@app.route("/...Palmwinecode fill in the name")
+@app.route("/onboarding")
 def index():
-    """ Write index view function """
+    """  """
+
+    return render_template("onboarding.html")
 
 
 # Register route
