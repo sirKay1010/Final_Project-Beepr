@@ -33,9 +33,6 @@ GENERAL TODO:
                                 <path fill-rule="evenodd"
                                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                             </svg>
-                            <!-- <div class="hamburger-menu"></div>
-                            <div class="hamburger-menu"></div>
-                            <div class="hamburger-menu"></div> -->
                         </span>
                     </button>
                 </div>
@@ -119,6 +116,7 @@ GENERAL TODO:
                         aria-controls="offcanvasExample" class="float">
                         <!-- plus icon ---- ignore for now------>
                         <!-- <i class="fa-thin fa-user-plus"></i> -->
+                        New Chat
                     </a>
 
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
@@ -129,9 +127,9 @@ GENERAL TODO:
                                 aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
-                            <div class="container text-center ">
-                                <button class="btn btn text-white" id="contactform"
-                                    style="background-color: #872eb8;">add contact</button>
+                            <div class="container text-center">
+                                <button class="submit-btn btn text-white" id="contactform">add contact</button>
+                                <!-- Style....................................-->
                             </div>
 
                             <!-- form adds a new contact either by uername or phone number -->
@@ -150,9 +148,11 @@ GENERAL TODO:
                                             id="phone_number" name="phone_number" placeholder="phone number"
                                             type="text">
                                     </div>
-                                    <button style="background-color: #872eb8;"
-                                        class="mx-auto my-1 w-auto btn btn text-white" type="submit">
-                                        Add user</button>
+                                    <button class="submit-btn mx-auto my-1 w-auto btn text-white" type="submit">
+                                        <!--btn btn-->
+                                        Add user
+                                    </button>
+                                    <!--STyle.....................-->
                                     <button class="btn btn-secondary" id="cancel">Cancel</button>
                                 </div>
                             </form>
@@ -160,31 +160,23 @@ GENERAL TODO:
                             <!-- dummy contacts -->
                             <div class="chatlist" id="contacts">
                                 <div class="block">
-                                    <div class="imgBox">
-                                        <img src="static/images/download.png" class="avatar" alt="">
-                                    </div>
+                                    <!-- <div class="imgBox"> -->
+                                    <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
+                                    <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" > -->
+                                    <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
+                                    <!-- </div> -->
                                     <div class="details">
                                         <div class="listHead">
                                             <h4>Ibrahim</h4>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="block">
-                                    <div class="imgBox">
-                                        <img src="static/images/download.png" class="avatar" alt="">
-                                    </div>
-                                    <div class="details">
-                                        <div class="listHead">
-                                            <h4>Abubakar</h4>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block">
-                                    <div class="imgBox">
-                                        <img src="static/images/download.png" class="avatar" alt="">
-                                    </div>
+                                    <!-- <div class="imgBox"> -->
+                                    <img class="imgBox" src="https://avatars.dicebear.com/api/human/erewqr.svg">
+                                    <!-- <img src="https://avatars.dicebear.com/api/human/987.svg" > -->
+                                    <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
+                                    <!-- </div> -->
                                     <div class="details">
                                         <div class="listHead">
                                             <h4>Kayode</h4>
@@ -192,9 +184,11 @@ GENERAL TODO:
                                     </div>
                                 </div>
                                 <div class="block">
-                                    <div class="imgBox">
-                                        <img src="static/images/download.png" class="avatar" alt="">
-                                    </div>
+                                    <!-- <div class="imgBox"> -->
+                                    <img class="imgBox" src="https://avatars.dicebear.com/api/human/321.svg">
+                                    <!-- <img src="https://avatars.dicebear.com/api/human/321.svg" > -->
+                                    <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
+                                    <!-- </div> -->
                                     <div class="details">
                                         <div class="listHead">
                                             <h4>Jerry</h4>
@@ -205,10 +199,9 @@ GENERAL TODO:
                         </div>
                     </div>
                 </div>
-
             </div>
+        <!-- Left Panel Section -->
         </div>
-    </div>
 
     <!-- Main Chat section -->
     <div class="col chat-section border">
@@ -216,7 +209,10 @@ GENERAL TODO:
         <!-- TODO -->
     </div>
 
+    <!-- Row Containing Left Panel and Main Chat Sections -->
 </div>
+<!-- Main Page Container -->
 </div>
 
 {% endblock%}
+
