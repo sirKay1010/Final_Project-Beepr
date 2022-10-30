@@ -6,36 +6,117 @@ Chat
 
 {% block body%}
 <!--
-GENERAL TODO
+GENERAL TODO:
 1. Make responsive for mobile devices and tablets
 -->
 
 <!-- NOTE: ALL the text in white and the borders is just to show the schematic, DELETE once no longer needed! -->
 
-    <!-- Main Page Container -->
-    <div class="container-fluid my-1 p-3 text-center border">
-        CHAT PAGE!
-        <!-- Row to fit the two columns -->
-        <div class="row border">
-            <!-- Left Panel Section -->
-            <div class="col-3 section border">
-                Edit Left Panel Section
-                <!-- TODO -->
+<!-- Main Page Container -->
+<div class="container-fluid p-3 text-center border main-body">
+    <!-- Row Containing Left Panel and Main Chat Sections-->
+    <div class="row border app-body">
 
-                <!-- New chat bubble setion -->
+        <!-- Left Panel Section -->
+        <div class="col-3 left-panel-section border">
+            <!-- Profile/Logo/hamburger menu -->
+            <div class="row border-bottom border-dark">
+
+                <!-- Profile settings -->
+                <div class="col-lg-3 border pt-3 pb-2">
+                    <button class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile_section" aria-controls="profile_section">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
+                            <!-- <div class="hamburger-menu"></div>
+                            <div class="hamburger-menu"></div>
+                            <div class="hamburger-menu"></div> -->
+                        </span>
+                      </button>
+                </div>
+                        <!-- Offcanvas Start -->
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="profile_section"
+                        aria-labelledby="profile_Label">
+                        <!-- Header -->
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="profile_Label">Profile</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <!-- Body -->
+                        <div class="offcanvas-body">
+                            <div>
+                                Users Profile
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Logo section -->
+                <div class="col-lg-6 fs-5 fw-bolder border pt-3 pb-2">
+                    Beep<span style="color:#872eb8">R</span>
+                </div>
+
+                <!-- Hamburger/Vertical 3 dots Menu anchor -->
+                <div class="col-lg-3 border pt-3 pb-2">
+                    <div class="dropstart">
+                        <button class="reset-btn gray-hover-highlight-btn" type="button" id="settings-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/2560px-A_black_image.jpg" style="width: 42px;" alt="profile img" class="rounded-circle"> -->
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                            </svg> -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                            <!-- <div class="hamburger-menu"></div>
+                            <div class="hamburger-menu"></div>
+                            <div class="hamburger-menu"></div> -->
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="settings-dropdown">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Notifications</a></li>
+                            <li><a class="dropdown-item" href="#">Theme</a></li>
+                            <li><a class="dropdown-item" href="#">Log out</a></li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Left Panel Search bar -->
+            <div class="row py-2 border-bottom border-dark">
+                <div class="container-fluid border search-container">
+                    <!-- <form class="d-flex">
+                        <div class="input-group"> -->
+                            <!-- <input type="text" class="form-control" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" > -->
+                            <input type="text" class="reset-text-input" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" >
+                            <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon1"> -->
+                                <svg id="button-addon1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 35px;">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                              </svg>
+                            <!-- </button> -->
+                          <!-- </div>
+                    </form> -->
+                </div>
+            </div>
+            <!--Left Panel Friends Chat section -->
+            <div class="row left-panel-chat-section border border-dark">
+                <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;">
+
+                <!-- Left Panel New chat bubble setion -->
                 <div class="">
                     Edit New chat bubble section
                     <!-- TODO -->
                 </div>
             </div>
-
-            <!-- Chat section -->
-            <div class="col section border">
-                Edit Chat section
-                <!-- TODO -->
-            </div>
-
         </div>
+
+        <!-- Main Chat section -->
+        <div class="col chat-section border">
+            Edit Chat section
+            <!-- TODO -->
+        </div>
+
     </div>
+</div>
 
 {% endblock%}
