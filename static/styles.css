@@ -18,6 +18,7 @@
 
 .left-panel-chat-section {
     flex: 1;
+    position: relative;
     overflow-y: scroll;
 }
 
@@ -77,14 +78,6 @@
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 
-/* Fix this, for a simple animation */
-/* .hamburger-menu:hover {
-    width: 20px;
-    height: 6px;
-    background-color: #929ad9;
-    margin: 6px 0;
-} */
-
 .search-container {
     display: flex;
     align-items: center;
@@ -99,9 +92,6 @@
     border: none;
     margin-left: 5px;
 }
-
-/* "https://avatars.dicebear.com/api/human/123.svg" */
-
 
 .offcanvas-body {
     padding-left: 0;
@@ -138,7 +128,6 @@
     height: 45px;
     border-radius: 50%;
     margin-right: 10px;
-    /* .....................added..................... */
     padding: 5px;
     border: 2px solid #000000;
 }
@@ -168,23 +157,10 @@
     border-radius: 50%;
 }
 
-
-/* positioning for the add chat button */
-/* .float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 40px;
-    left: 400px;
-    background-color: #872eb8;
-    color: #872eb8;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 2px 2px 3px #999;
-} */
-
 .float {
-    position: fixed;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
     width: 50px;
     height: 50px;
     background-color: #872eb8;
