@@ -59,20 +59,19 @@ def login():
         # if no username was typed
         if not request.form.get("username"):
             error = "Please enter a username"
-            # return redirect("/login", error=error)
+            return render_template("login.html", error=error)
 
         # if no password was entered
-        if not request.form.get("password"):
+        elif not request.form.get("password"):
             error = "Please type in your password"
-            
-        return render_template("login.html", error=error)
+            return render_template("login.html", error=error)
 
         # get the user info from the name
         # rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # username exists and password is correct
         # if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            pass # error message
+        # error message
 
 
 
