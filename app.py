@@ -59,10 +59,12 @@ def login():
         # if no username was typed
         if not request.form.get("username"):
             error = "Please enter a username"
+            return redirect("/login")
 
         # if no password was entered
         if not request.form.get("password"):
             error = "Please type in your password"
+            return redirect("/login")
 
         # get the user info from the name
         # rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
