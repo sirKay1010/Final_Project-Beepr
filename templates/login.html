@@ -38,8 +38,6 @@ Sign In
                     <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username"
                         autofocus autocomplete="off">
                     <label for="floatingUsername">Username</label>
-                    {% if error %}
-                    <p>{{ error }}</p>
                 </div>
                 <!-- Password Field -->
                 <div class="form-floating mb-1">
@@ -66,19 +64,13 @@ Sign In
             <div class="row my-2">
                 <p class="">Dont have an account? <a href="/...">Sign up</a></p>
             </div>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <ul class=flashes>
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+                {% if error %}
+                <p>{{ error }}</p>
                 <!-- turn the border red -->
                 <script>
-                    document.querySelector("").style.border = "3px solid red";
+                    document.querySelector("#floatingUsername").style.border = "3px solid red";
                 </script>
                 {% endif %}
-            {% endwith %}
             <!-- Temp Page Footer -->
             <footer class="mt-5 text-center text-muted">
                 <hr>
