@@ -38,6 +38,8 @@ Sign In
                     <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username"
                         autofocus autocomplete="off">
                     <label for="floatingUsername">Username</label>
+                    {% if error %}
+                    <p>{{ error }}</p>
                 </div>
                 <!-- Password Field -->
                 <div class="form-floating mb-1">
