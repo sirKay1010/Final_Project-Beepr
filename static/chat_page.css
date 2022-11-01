@@ -1,0 +1,99 @@
+/* styling for the chat page section of the app */
+.offcanvas-body {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* list of contacts */
+.chatlist {
+    position: relative;
+    height: calc(100% - 110px);
+    overflow: auto;
+    padding-top: 20px;
+}
+
+/* each individual contact */
+.chatlist .block {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+}
+
+.chatlist .block:hover {
+    background: #e8bff2;
+}
+
+.chatlist .block .imgBox {
+    vertical-align: middle;
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    /* .....................added..................... */
+    padding: 5px;
+    border: 2px solid #000000;
+}
+
+.chatlist .block .details {
+    position: relative;
+    width: 100%;
+}
+
+.chatlist .block .details .listHead {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.chatlist .block .details .listHead h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #111;
+}
+
+/* styling for the avatar profile pictures */
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+/* positioning for the add chat button */
+/* .float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    left: 400px;
+    background-color: #872eb8;
+    color: #872eb8;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+} */
+
+.float {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-color: #872eb8;
+    color: white;
+    border-radius: 50px;
+    box-shadow: 2px 2px 3px #999;
+    text-decoration: none;
+}
+
+.float:hover {
+    color: white;
+}
+
+.my-float {
+    margin-top: 22px;
+}
