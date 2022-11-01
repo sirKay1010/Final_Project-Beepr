@@ -2,9 +2,9 @@
 let form = document.getElementById("addcontact");
 
 // prevent the page from submitting
-form.addEventListener('submit', event => {
-    event.preventDefault();
-});
+// form.addEventListener('submit', event => {
+//     event.preventDefault();
+// });
 
 //
 document.getElementById("cancel").onclick = function () {

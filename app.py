@@ -21,6 +21,8 @@ Session(app)
 db = SQL("sqlite:///beepr.db")
 
 # request handling
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -30,7 +32,7 @@ def after_request(response):
     return response
 
 
-# ... route
+# Onboarding route
 @app.route("/onboarding")
 def index():
     """  """
@@ -41,8 +43,31 @@ def index():
 # Register route
 @app.route("/register", methods=["POST", "GET"])
 def register():
+    # Select all usernames
+    usernames = db.execute("SELECT username FROM users")
     if request.method == "POST":
-        pass
+        # create a dictionary to store a new users info
+        new_users = {}
+        new_users["firstname"] = request.form.get("firstname")
+        new_users["lastname"] = request.form.get("lastname")
+        new_users["username"] = request.form.get("username")
+        new_users["email"] = request.form.get("email")
+        new_users["password"] = request.form.get("password")
+
+        # What happens if code enters this if block? @mrsinister and @palmwinecode.
+        if not new_users["firstname"] or not new_users["lastname"] or not new_users["username"] or not new_users["email"] or not new_users["password"]:
+            return redirect("/register")
+
+        # Check for duplicate username
+        for pair in usernames:
+            if new_users["username"] == pair["username"]:
+                # What happens if username already exists @mrsinister and @palmwinecode.
+                return redirect("/register")
+
+        password_hash = generate_password_hash(new_users["password"])
+        db.execute("INSERT INTO users (name, username, email, password_hash) VALUES(?,?,?,?)", new_users["firstname"] + " " + new_users["lastname"],  new_users["username"], new_users["email"], password_hash)
+        return redirect("/login")
+
     # if method is GET
     else:
         return render_template("register.html")

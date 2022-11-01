@@ -1,5 +1,79 @@
 {% extends "layout.html" %}
 
+{% block style %}
+<style>
+	body {
+		background-color: #929ad9;
+	}
+
+	.form-body {
+		background-color: #f5f5f5;
+		box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);
+	}
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+	// Wait for Page to load
+	document.addEventListener("DOMContentLoaded", function () {
+		// Select and disable button
+		const register_btn = document.getElementById("register_btn");
+		register_btn.disabled = true;
+
+		// Selcet all input fields
+		const inputs = document.querySelectorAll(".inputField");
+		// Add an input event listener for each input field
+		for (const input of inputs) {
+			input.addEventListener("input", buttonStatus);
+		}
+		// Validate the email and password fields
+		register_btn.onclick = validateFields;
+	});
+
+	// Function to disable btn until all fields are filled
+	function buttonStatus() {
+		let empty;
+		document.querySelectorAll(".inputField").forEach((input) => {
+			if (input.value === "") {
+				empty = true;
+			}
+		});
+		if (empty) {
+			register_btn.disabled = true;
+		}
+		else {
+			register_btn.disabled = false;
+		}
+	}
+
+	function validateFields() {
+		const email = document.querySelector("#email");
+		const password = document.querySelector("#password");
+
+		// Set the regular expressions to validate email and password
+		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+
+		// Validate email and password
+		if (emailRegEx.test(email.value)) {
+			email.setCustomValidity('');
+		}
+		else {
+			email.setCustomValidity('"' + email.value + '" is not a valid email.');
+		}
+
+		if (passwordRegEx.test(password.value)) {
+			password.setCustomValidity('');
+		}
+		else {
+			password.setCustomValidity('"' + password.value + '" is not a valid email.');
+		}
+	}
+
+</script>
+{% endblock %}
+
 {% block title%}
 Register
 {% endblock%}
@@ -7,39 +81,36 @@ Register
 {% block body %}
 <form action="/register" method="post">
 	<div class="container py-5 text-center">
-	<div class="card">
-		<div class="my-3">
-			<h2 style="color: #872eb8;">Welcome to Beepr.</h2>
+		<div class="card form-body">
+			<div class="my-3">
+				<h2 style="color: #872eb8;">Welcome to Beepr.</h2>
+			</div>
+			<div class="mb-3">
+				<input autocomplete="off" autofocus class="inputField form-control mx-auto w-auto" id="firstname"
+					name="firstname" placeholder="First name" type="text" required>
+			</div>
+			<div class="mb-3">
+				<input autocomplete="off" class="inputField form-control mx-auto w-auto" id="lastname" name="lastname"
+					placeholder="Last name" type="text" required>
+			</div>
+			<div class="mb-3">
+				<input autocomplete="off" class="inputField form-control mx-auto w-auto" id="username" name="username"
+					placeholder="Username" type="text" required>
+			</div>
+			<div class="mb-3">
+				<input autocomplete="off" class="inputField form-control mx-auto w-auto" id="email" name="email"
+					placeholder="example@gmail.com" type="text" required>
+			</div>
+			<div class="mb-3">
+				<input class="inputField form-control mx-auto w-auto" id="password" name="password" placeholder="Password"
+					type="password" required>
+			</div>
+			<button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit" id="register_btn">
+				Register</button>
+			<div>
+				<p>Already have an account? <a style="text-decoration: none; color: blue;" href="">login</a></p>
+			</div>
 		</div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="firstname" name="firstname"
-	            placeholder="First name" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="lastname" name="lastname"
-	            placeholder="Last name" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username"
-	            placeholder="Username" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email"
-	            placeholder="email" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
-	    </div>
-	    <div class="mb-3">
-	        <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm password"
-	            type="password">
-	    </div>
-	        <button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit">
-	        Register</button>
-        <div>
-        	<p>Already have an account? <a style="text-decoration: none; color: blue;" href="">login</a></p>
-        </div>
-	</div>
 	</div>
 </form>
 {% endblock %}
