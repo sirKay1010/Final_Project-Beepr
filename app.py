@@ -51,8 +51,34 @@ def register():
 # Login route
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # error for error messages
+    error = None
+
     if request.method == "POST":
-        pass
+
+        # if no username was typed
+        if not request.form.get("username"):
+            error = "Please enter a username"
+
+        # if no password was entered
+        if not request.form.get("password"):
+            error = "Please type in your password"
+
+        # get the user info from the name
+        # rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+
+        # username exists and password is correct
+        # if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+            pass # error message
+
+
+
+        # # Remember which user has logged in
+        # session["user_id"] = rows[0]["id"]
+
+        # return redirect("/chat_page")
+
+
     else:
         return render_template("login.html")
 
@@ -65,6 +91,7 @@ def logout():
 
 # chat_page route
 @app.route("/chat_page", methods=["GET", "POST"])
+# @login_required
 def chat():
     """ Modify chat view function """
     if request.method == "POST":
