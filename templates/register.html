@@ -8,7 +8,12 @@
 
 	.form-body {
 		background-color: #f5f5f5;
+		padding: 50px 20px;
 		box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);
+	}
+	.errorMessage {
+		color: red;
+		font-size: 14px;
 	}
 </style>
 {% endblock %}
@@ -16,60 +21,119 @@
 {% block script %}
 <script>
 	// Wait for Page to load
+	var emailValidated = false;
+	var passwordValidated = false;
+	var usernameValidated = false;
 	document.addEventListener("DOMContentLoaded", function () {
 		// Select and disable button
 		const register_btn = document.getElementById("register_btn");
 		register_btn.disabled = true;
 
+		// var emailValidated = false;
+		const email = document.querySelector("#email");
+		const emailErrorMessage = document.querySelector("#emailErrorMessage");
+		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+		// Validate email
+		email.onkeyup = function () {
+			if (!emailRegEx.test(email.value)) {
+				email.style.borderColor = "red";
+				emailErrorMessage.innerHTML = "Invalid Email!";
+				emailErrorMessage.style.display = "flex";
+				emailValidated = false;
+			}
+			else {
+				email.style.borderColor = "lightgray";
+				emailErrorMessage.style.display = "none";
+				emailValidated = true;
+			}
+		}
+
+		// var passwordValidated = false;
+		// Validate password
+		const password = document.querySelector("#password");
+		const passwordErrorMessage = document.querySelector("#passwordErrorMessage");
+		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		password.onkeyup = function () {
+			// if (password.value === "") {passwordErrorMessage.innerHTML = "Please input a password!";}
+			if (!passwordRegEx.test(password.value)) {
+				password.style.borderColor = "#ff9494";
+				password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+				passwordErrorMessage.innerHTML = "Invalid password!";
+				"Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
+				passwordErrorMessage.style.display = "flex";
+				passwordValidated = false;
+			}
+			else {
+				password.style.borderColor = "lightgray";
+				passwordErrorMessage.style.display = "none";
+				passwordValidated = true;
+			}
+		}
+
+		// var usernameValidated = false;
+		// Validate duplicate username
+		const username = document.querySelector("#username");
+		const usernameErrorMessage = document.querySelector("#usernameErrorMessage");
+		// username.onkeyup = function () {
+		// 	username.style.borderColor = "transparent";
+		// 	usernameErrorMessage.style.display = "none";
+		// }
+		username.oninput = function () {
+			// setTimeout(validateUsername, 3000);
+			if ({{usernames | tojson}}.includes(username.value)){
+				username.style.borderColor = "red";
+				usernameErrorMessage.innerHTML = "Username already exists!";
+				usernameErrorMessage.style.display = "flex";
+				usernameValidated = false;
+			}
+			else {
+				username.style.borderColor = "lightgray";
+				usernameErrorMessage.style.display = "none";
+				usernameValidated = true;
+			}
+		}
+
 		// Selcet all input fields
 		const inputs = document.querySelectorAll(".inputField");
 		// Add an input event listener for each input field
 		for (const input of inputs) {
-			input.addEventListener("input", buttonStatus);
+			input.addEventListener("keyup", validateForm);
 		}
-		// Validate the email and password fields
-		register_btn.onclick = validateFields;
 	});
 
-	// Function to disable btn until all fields are filled
-	function buttonStatus() {
-		let empty;
+	// Function to disable btn until all fields are filled correctly
+	function validateForm() {
+		var empty = false;
 		document.querySelectorAll(".inputField").forEach((input) => {
-			if (input.value === "") {
+			if (this.value === "") {
 				empty = true;
 			}
 		});
-		if (empty) {
-			register_btn.disabled = true;
-		}
-		else {
+		if (!empty && emailValidated && passwordValidated && usernameValidated) {
 			register_btn.disabled = false;
 		}
+		else {
+			register_btn.disabled = true;
+		}
 	}
 
-	function validateFields() {
-		const email = document.querySelector("#email");
-		const password = document.querySelector("#password");
+	// function validateUsername() {
+	// 	username_list = {{ usernames | tojson }};
+	// 	alert(username_list.length);
+	// 	if (usernames_list.includes(username.value)){
+	// 	// if ({{ usernames | tojson }}.includes(username.value)){
+	// 		username.style.borderColor = "red";
+	// 		usernameErrorMessage.innerHTML = "Username already exists!";
+	// 		usernameErrorMessage.style.display = "flex";
+	// 		usernameValidated = false;
+	// 	}
+	// 	else {
+	// 		username.style.borderColor = "lightgray";
+	// 		usernameErrorMessage.style.display = "none";
+	// 		usernameValidated = true;
+	// 	}
 
-		// Set the regular expressions to validate email and password
-		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-
-		// Validate email and password
-		if (emailRegEx.test(email.value)) {
-			email.setCustomValidity('');
-		}
-		else {
-			email.setCustomValidity('"' + email.value + '" is not a valid email.');
-		}
-
-		if (passwordRegEx.test(password.value)) {
-			password.setCustomValidity('');
-		}
-		else {
-			password.setCustomValidity('"' + password.value + '" is not a valid email.');
-		}
-	}
+	// }
 
 </script>
 {% endblock %}
@@ -80,37 +144,54 @@ Register
 
 {% block body %}
 <form action="/register" method="post">
-	<div class="container py-5 text-center">
-		<div class="card form-body">
-			<div class="my-3">
-				<h2 style="color: #872eb8;">Welcome to Beepr.</h2>
-			</div>
-			<div class="mb-3">
-				<input autocomplete="off" autofocus class="inputField form-control mx-auto w-auto" id="firstname"
-					name="firstname" placeholder="First name" type="text" required>
-			</div>
-			<div class="mb-3">
-				<input autocomplete="off" class="inputField form-control mx-auto w-auto" id="lastname" name="lastname"
-					placeholder="Last name" type="text" required>
-			</div>
-			<div class="mb-3">
-				<input autocomplete="off" class="inputField form-control mx-auto w-auto" id="username" name="username"
-					placeholder="Username" type="text" required>
-			</div>
-			<div class="mb-3">
-				<input autocomplete="off" class="inputField form-control mx-auto w-auto" id="email" name="email"
-					placeholder="example@gmail.com" type="text" required>
-			</div>
-			<div class="mb-3">
-				<input class="inputField form-control mx-auto w-auto" id="password" name="password" placeholder="Password"
-					type="password" required>
-			</div>
-			<button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit" id="register_btn">
-				Register</button>
-			<div>
-				<p>Already have an account? <a style="text-decoration: none; color: blue;" href="">login</a></p>
+	<div class="container text-center	">
+		<div class="my-4 py-2">
+			<h2 class="fw-bolder">Welcome to Beep<span style="color:#872eb8">R</span></h2>
+			{{usernames}}
+		</div>
+		<div class="row justify-content-center my-4">
+			<div class="col-lg-3 col-md-6 form-body ">
+				<!-- <div class="row"> -->
+				<div class="mb-3">
+					<input autocomplete="on" autofocus class="inputField form-control " id="firstname" name="firstname"
+						placeholder="First name" type="text" required>
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="lastname" name="lastname"
+						placeholder="Last name" type="text" required>
+					<!-- </div> -->
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="username" name="username"
+						placeholder="Username" type="text" required>
+						<p class="errorMessage" id="usernameErrorMessage"></p>
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="email" name="email"
+						placeholder="example@gmail.com" type="text" required>
+						<p class="errorMessage" id="emailErrorMessage"></p>
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="password" name="password"
+						placeholder="Password"  required> <!--type="password"-->
+						<p class="errorMessage" id="passwordErrorMessage"></p>
+				</div>
+				<button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit" id="register_btn">
+					Register</button>
+
+					{% if error %}
+					<p class="fw-bolder" style="color: red">{{ error }}!</p>
+					{% endif %}
 			</div>
 		</div>
+		<div class="row my-2">
+			<p class="">Already have an account? <a href="#">Sign in</a></p>
+		</div>
+		<!-- Temp Page Footer -->
+		<footer class="mt-5 text-center text-muted text-dark">
+			<hr>
+			Final Project BeepR!
+		</footer>
 	</div>
 </form>
 {% endblock %}

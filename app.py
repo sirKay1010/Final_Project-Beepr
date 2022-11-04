@@ -1,7 +1,8 @@
 import os
+import re
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, json
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -45,32 +46,53 @@ def index():
 def register():
     # Select all usernames
     usernames = db.execute("SELECT username FROM users")
-    if request.method == "POST":
-        # create a dictionary to store a new users info
-        new_users = {}
-        new_users["firstname"] = request.form.get("firstname")
-        new_users["lastname"] = request.form.get("lastname")
-        new_users["username"] = request.form.get("username")
-        new_users["email"] = request.form.get("email")
-        new_users["password"] = request.form.get("password")
+    usernames_list = usernames[0].values()
 
-        # What happens if code enters this if block? @mrsinister and @palmwinecode.
-        if not new_users["firstname"] or not new_users["lastname"] or not new_users["username"] or not new_users["email"] or not new_users["password"]:
-            return redirect("/register")
+    if request.method == "POST":
+        # store a new users info
+        firstname = request.form.get("firstname")
+        lastname = request.form.get("lastname")
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        # set error message variable
+        error = None
+        # Check all input fields for an input
+        if not firstname or not lastname or not username or not email or not password:
+            error = "Please input all fields!"
+            return render_template("register.html", error=error)
 
         # Check for duplicate username
         for pair in usernames:
-            if new_users["username"] == pair["username"]:
-                # What happens if username already exists @mrsinister and @palmwinecode.
-                return redirect("/register")
+            if username == pair["username"]:
+                error = "Username already exists"
+                return render_template("register.html", error=error, firstname=firstname)
 
-        password_hash = generate_password_hash(new_users["password"])
-        db.execute("INSERT INTO users (name, username, email, password_hash) VALUES(?,?,?,?)", new_users["firstname"] + " " + new_users["lastname"],  new_users["username"], new_users["email"], password_hash)
+        # Set the regular expressions to validate email and password
+        email_RegEx = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        password_RegEx = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+
+        # Validate Email
+        if not re.match(email_RegEx, email):
+            error = "Not a valid email!"
+            return render_template("register.html", error=error)
+
+        # validate password
+        if not re.match(password_RegEx, password):
+            error = "Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!"
+            return render_template("register.html", error=error)
+
+        # Generate passwords hash
+        password_hash = generate_password_hash(password)
+
+        # Update users table with users info
+        db.execute("INSERT INTO users (name, username, email, password_hash) VALUES(?,?,?,?)", firstname + " " + lastname,  username, email, password_hash)
         return redirect("/login")
 
-    # if method is GET
     else:
-        return render_template("register.html")
+        # return render_template("register.html",  usernames=usernames)
+        return render_template("register.html",  usernames=json.dumps(usernames))
 
 
 # Login route
