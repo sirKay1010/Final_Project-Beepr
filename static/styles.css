@@ -78,21 +78,6 @@
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 
-.search-container {
-    display: flex;
-    align-items: center;
-    width: 80%;
-    height: 35px;
-    border: 1px solid #000000;
-    border-radius: 20px;
-}
-
-.reset-text-input {
-    background-color: transparent;
-    border: none;
-    margin-left: 5px;
-}
-
 .offcanvas-body {
     padding-left: 0;
     padding-right: 0;

@@ -84,21 +84,22 @@ GENERAL TODO:
             </div>
             <!-- Left Panel Search bar -->
             <div class="row py-2 border-bottom border-dark">
-                <div class="container-fluid border search-container">
-                    <!-- <form class="d-flex">
-                        <div class="input-group"> -->
-                    <!-- <input type="text" class="form-control" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" > -->
-                    <input type="text" class="reset-text-input" placeholder="Search"
-                        aria-label="Example text with button addon" aria-describedby="button-addon1">
-                    <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon1"> -->
-                    <svg id="button-addon1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
-                        class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 35px;">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                    <!-- </button> -->
-                    <!-- </div>
-                    </form> -->
+                <div class="container-fluid">
+                    <div class="row">
+                    <!-- <form class=""> -->
+                        <div class="col-10">
+                            <input type="text" class="form-control rounded-pill" placeholder="Search"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-2 pt-1 pe-4">
+                            <svg id="button-addon1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="gray" class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </div>
+                    <!-- </form> -->
+                    </div>
                 </div>
             </div>
             <!--Left Panel Friends Chat section -->
@@ -106,7 +107,7 @@ GENERAL TODO:
                 <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;">
 
                 <!-- Left Panel New chat bubble setion -->
-                <div class=" border border-dark" >
+                <div class=" border border-dark">
                     Edit New chat bubble section
                     <!-- floating button to add contact -->
                     <a data-bs-toggle="offcanvas" role="button" href="#offcanvasExample"
@@ -197,18 +198,18 @@ GENERAL TODO:
                     </div>
                 </div>
             </div>
-        <!-- Left Panel Section -->
+            <!-- Left Panel Section -->
         </div>
 
-    <!-- Main Chat section -->
-    <div class="col chat-section border">
-        Edit Chat section
-        <!-- TODO -->
-    </div>
+        <!-- Main Chat section -->
+        <div class="col chat-section border">
+            Edit Chat section
+            <!-- TODO -->
+        </div>
 
-    <!-- Row Containing Left Panel and Main Chat Sections -->
-</div>
-<!-- Main Page Container -->
+        <!-- Row Containing Left Panel and Main Chat Sections -->
+    </div>
+    <!-- Main Page Container -->
 </div>
 
 {% endblock%}
