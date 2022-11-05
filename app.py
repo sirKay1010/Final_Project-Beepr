@@ -45,8 +45,10 @@ def index():
 @app.route("/register", methods=["POST", "GET"])
 def register():
     # Select all usernames
+    usernames_list = []
     usernames = db.execute("SELECT username FROM users")
-    usernames_list = usernames[0].values()
+    for username in usernames:
+        usernames_list.append(username["username"])
 
     if request.method == "POST":
         # store a new users info
@@ -67,6 +69,7 @@ def register():
         for pair in usernames:
             if username == pair["username"]:
                 error = "Username already exists"
+                flash("Username already")
                 return render_template("register.html", error=error, firstname=firstname)
 
         # Set the regular expressions to validate email and password
@@ -92,7 +95,7 @@ def register():
 
     else:
         # return render_template("register.html",  usernames=usernames)
-        return render_template("register.html",  usernames=json.dumps(usernames))
+        return render_template("register.html",  usernames=json.dumps(usernames), usernames_list=usernames_list)
 
 
 # Login route

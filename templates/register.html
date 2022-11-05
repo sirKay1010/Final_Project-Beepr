@@ -11,6 +11,7 @@
 		padding: 50px 20px;
 		box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);
 	}
+
 	.errorMessage {
 		color: red;
 		font-size: 14px;
@@ -29,23 +30,34 @@
 		const register_btn = document.getElementById("register_btn");
 		register_btn.disabled = true;
 
+		// Select all input fields
+		const inputs = document.querySelectorAll(".inputField");
+		// Add an input event listener for each input field
+		for (const input of inputs) {
+			input.addEventListener("input", function(){
+				setTimeout(validateForm, 3000);
+			});
+		}
+
 		// var emailValidated = false;
 		const email = document.querySelector("#email");
 		const emailErrorMessage = document.querySelector("#emailErrorMessage");
 		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 		// Validate email
 		email.onkeyup = function () {
-			if (!emailRegEx.test(email.value)) {
-				email.style.borderColor = "red";
-				emailErrorMessage.innerHTML = "Invalid Email!";
-				emailErrorMessage.style.display = "flex";
-				emailValidated = false;
-			}
-			else {
-				email.style.borderColor = "lightgray";
-				emailErrorMessage.style.display = "none";
-				emailValidated = true;
-			}
+			setTimeout(resetValidation, 0, email, emailErrorMessage);
+			setTimeout(validateEmail, 2500, emailRegEx, email, emailErrorMessage);
+			// 	if (!emailRegEx.test(email.value)) {
+			// 		email.style.borderColor = "red";
+			// 		emailErrorMessage.innerHTML = "Invalid Email!";
+			// 		emailErrorMessage.style.display = "flex";
+			// 		emailValidated = false;
+			// 	}
+			// 	else {
+			// 		email.style.borderColor = "lightgray";
+			// 		emailErrorMessage.style.display = "none";
+			// 		emailValidated = true;
+			// 	}
 		}
 
 		// var passwordValidated = false;
@@ -54,20 +66,21 @@
 		const passwordErrorMessage = document.querySelector("#passwordErrorMessage");
 		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 		password.onkeyup = function () {
-			// if (password.value === "") {passwordErrorMessage.innerHTML = "Please input a password!";}
-			if (!passwordRegEx.test(password.value)) {
-				password.style.borderColor = "#ff9494";
-				password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
-				passwordErrorMessage.innerHTML = "Invalid password!";
-				"Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
-				passwordErrorMessage.style.display = "flex";
-				passwordValidated = false;
-			}
-			else {
-				password.style.borderColor = "lightgray";
-				passwordErrorMessage.style.display = "none";
-				passwordValidated = true;
-			}
+			setTimeout(resetValidation, 0, password, passwordErrorMessage);
+			setTimeout(validatePassword, 2500, passwordRegEx, password, passwordErrorMessage);
+			// 	if (!passwordRegEx.test(password.value)) {
+			// 		password.style.borderColor = "#ff9494";
+			// 		password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+			// 		passwordErrorMessage.innerHTML = "Invalid password!";
+			// 		"Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
+			// 		passwordErrorMessage.style.display = "flex";
+			// 		passwordValidated = false;
+			// 	}
+			// 	else {
+			// 		password.style.borderColor = "lightgray";
+			// 		passwordErrorMessage.style.display = "none";
+			// 		passwordValidated = true;
+			// 	}
 		}
 
 		// var usernameValidated = false;
@@ -78,10 +91,14 @@
 		// 	username.style.borderColor = "transparent";
 		// 	usernameErrorMessage.style.display = "none";
 		// }
-		username.oninput = function () {
-			// setTimeout(validateUsername, 3000);
-			if ({{usernames | tojson}}.includes(username.value)){
-				username.style.borderColor = "red";
+		username.onkeyup = function () {
+			// setTimeout(resetValidation, 0, username, usernameErrorMessage);
+			// setTimeout(validateUsername, 4000, usernameErrorMessage);
+			// if ({{ usernames | tojson }}.includes(username.value)){
+			if ({{ usernames_list | tojson }}.includes(username.value)){
+				// alert({{ usernames_list | tojson }}.length);
+				username.style.borderColor = "ff9494";
+				username.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
 				usernameErrorMessage.innerHTML = "Username already exists!";
 				usernameErrorMessage.style.display = "flex";
 				usernameValidated = false;
@@ -89,23 +106,19 @@
 			else {
 				username.style.borderColor = "lightgray";
 				usernameErrorMessage.style.display = "none";
+				username.style.boxShadow = "none";
 				usernameValidated = true;
 			}
 		}
-
-		// Selcet all input fields
-		const inputs = document.querySelectorAll(".inputField");
-		// Add an input event listener for each input field
-		for (const input of inputs) {
-			input.addEventListener("keyup", validateForm);
-		}
 	});
 
+	// FUNCTION DECLEARATIONS
 	// Function to disable btn until all fields are filled correctly
 	function validateForm() {
 		var empty = false;
-		document.querySelectorAll(".inputField").forEach((input) => {
-			if (this.value === "") {
+		document.querySelectorAll(".inputField").forEach((field) => {
+			// if (this.value === "") {
+			if (field.value === "") {
 				empty = true;
 			}
 		});
@@ -135,6 +148,46 @@
 
 	// }
 
+	function validateEmail(emailRegEx, email, emailErrorMessage) {
+		if (!emailRegEx.test(email.value)) {
+			email.style.borderColor = "#ff9494";
+			email.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+			emailErrorMessage.style.display = "flex";
+			emailErrorMessage.innerHTML = "Invalid Email!";
+			emailValidated = false;
+		}
+		else {
+			email.style.borderColor = "lightgray";
+			emailErrorMessage.style.display = "none";
+			email.style.boxShadow = "none";
+			emailValidated = true;
+		}
+	}
+
+	function validatePassword(passwordRegEx, password, passwordErrorMessage) {
+		if (!passwordRegEx.test(password.value)) {
+			password.style.borderColor = "#ff9494";
+			password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+			passwordErrorMessage.style.display = "flex";
+			passwordErrorMessage.innerHTML = "Invalid password!";
+			"Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
+			passwordValidated = false;
+		}
+		else {
+			password.style.borderColor = "lightgray";
+			passwordErrorMessage.style.display = "none";
+			password.style.boxShadow = "none";
+			passwordValidated = true;
+		}
+	}
+
+	function resetValidation(element, elementErrorMessage) {
+		element.style.borderColor = "lightgray";
+		elementErrorMessage.style.display = "none";
+		element.style.boxShadow = "none";
+	}
+
+
 </script>
 {% endblock %}
 
@@ -147,7 +200,8 @@ Register
 	<div class="container text-center	">
 		<div class="my-4 py-2">
 			<h2 class="fw-bolder">Welcome to Beep<span style="color:#872eb8">R</span></h2>
-			{{usernames}}
+			{{usernames}} <br>
+			{{usernames_list}}
 		</div>
 		<div class="row justify-content-center my-4">
 			<div class="col-lg-3 col-md-6 form-body ">
@@ -164,24 +218,25 @@ Register
 				<div class="mb-3">
 					<input autocomplete="on" class="inputField form-control " id="username" name="username"
 						placeholder="Username" type="text" required>
-						<p class="errorMessage" id="usernameErrorMessage"></p>
+					<p class="errorMessage" id="usernameErrorMessage"></p>
 				</div>
 				<div class="mb-3">
 					<input autocomplete="on" class="inputField form-control " id="email" name="email"
 						placeholder="example@gmail.com" type="text" required>
-						<p class="errorMessage" id="emailErrorMessage"></p>
+					<p class="errorMessage" id="emailErrorMessage"></p>
 				</div>
 				<div class="mb-3">
 					<input autocomplete="on" class="inputField form-control " id="password" name="password"
-						placeholder="Password"  required> <!--type="password"-->
-						<p class="errorMessage" id="passwordErrorMessage"></p>
+						placeholder="Password" required>
+					<!--type="password"-->
+					<p class="errorMessage" id="passwordErrorMessage"></p>
 				</div>
 				<button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit" id="register_btn">
 					Register</button>
 
-					{% if error %}
-					<p class="fw-bolder" style="color: red">{{ error }}!</p>
-					{% endif %}
+				{% if error %}
+				<p class="fw-bolder" style="color: red">{{ error }}!</p>
+				{% endif %}
 			</div>
 		</div>
 		<div class="row my-2">
