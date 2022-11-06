@@ -16,10 +16,13 @@
     /* flex: 0.35; */
 }
 
+
 .left-panel-chat-section {
     flex: 1;
+    position: relative;
     overflow-y: scroll;
 }
+
 
 /* change all form focus color to match theme of the app */
 .form-control:focus {
