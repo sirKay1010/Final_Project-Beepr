@@ -27,17 +27,17 @@ GENERAL TODO:
 <!-- NOTE: ALL the text in white and the borders is just to show the schematic, DELETE once no longer needed! -->
 
 <!-- Main Page Container -->
-<div class="container-fluid p-3 text-center border main-body">
+<div class="container-fluid text-center main-body">
     <!-- Row Containing Left Panel and Main Chat Sections-->
-    <div class="row border app-body">
+    <div class="row app-body">
 
         <!-- Left Panel Section -->
-        <div class="col-3 left-panel-section border">
+        <div class="col-3 left-panel-section border-end border-end-secondary">
             <!-- Profile/Logo/hamburger menu -->
-            <div class="row border-bottom border-dark">
+            <div class="row shadow-sm align-items-center" style="height: 3.5rem;">
 
                 <!-- Profile settings (DP)-->
-                <div class="col-lg-3 border pt-3 pb-2">
+                <div class="col-3">
                     <button class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#profile_section" aria-controls="profile_section">
                         <span>
@@ -68,12 +68,12 @@ GENERAL TODO:
                 </div>
 
                 <!-- Logo section -->
-                <div class="col-lg-6 fs-5 fw-bolder border pt-3 pb-2">
+                <div class="col-6 fs-5 fw-bolder">
                     Beep<span style="color:#872eb8">R</span>
                 </div>
 
                 <!-- Vertical 3 dots Menu anchor -->
-                <div class="col-lg-3 border pt-3 pb-2">
+                <div class="col-3">
                     <div class="dropstart">
                         <button class="reset-btn gray-hover-highlight-btn" type="button" id="settings-dropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,7 +97,7 @@ GENERAL TODO:
                 </div>
             </div>
             <!-- Left Panel Search bar -->
-            <div class="row py-2 border-bottom border-dark">
+            <div class="row py-2">
                 <div class="container-fluid">
                     <div class="row">
                         <!-- <form class=""> -->
@@ -117,8 +117,8 @@ GENERAL TODO:
                 </div>
             </div>
             <!--Left Panel Friends Chat section -->
-            <div class="row left-panel-chat-section border border-dark">
-                <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;">
+            <div class="row left-panel-chat-section">
+                <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;"> -->
 
                 <!-- Left Panel New chat bubble setion -->
                 <!-- <div class="border border-dark"> -->
@@ -230,7 +230,8 @@ GENERAL TODO:
                                 <!-- <div class="mb-3">
                                     <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
                                         id="phone_number" name="phone_number" placeholder="phone number" type="text">
-                                </div> -->
+
+                                    </div> -->
                                 <button class="submit-btn mx-auto my-1 w-auto btn text-white" type="submit">
                                     <!--btn btn-->
                                     Add user
@@ -246,11 +247,11 @@ GENERAL TODO:
         </div>
 
         <!-- Main Chat section -->
-        <div class="col chat-section" style="position: relative">
+        <div class="col" style="position: relative">
             <!-- Top bar -->
-            <div class="row shadow-sm align-items-center">
+            <div class="row shadow-sm align-items-center" style="height: 3.5rem;">
                 <!-- Contact info section -->
-                <div class="col justify-content-center">
+                <div class="col">
                     <div class="row">
                         <!-- Profile settings -->
                         <div class="col-2 m-auto">
@@ -268,19 +269,24 @@ GENERAL TODO:
                         </div>
 
                         <div class="col">
-                            <div class="row fs-5">
-                                Jerry
-                            </div>
-                            <div class="row text-muted">
-                                online
-                            </div>
+                            <!-- <div class="row border justify-content-start m-auto"> -->
+                                <div class="row fs-5">
+                                    Jerry
+                                    <!-- <p class="text-start">Jerry</p> -->
+                                </div>
+                                <div class="row text-muted">
+                                    online
+                                    <!-- <p class="text-start">online</p> -->
+                                </div>
+                            <!-- </div> -->
                         </div>
+
                     </div>
                 </div>
 
                 <!-- More options section -->
                 <div class="col">
-                    <div class="row m-auto align-items-center justify-content-end">
+                    <div class="row m-auto justify-content-end">
                         <!-- Search off-canvas -->
                         <div class="col-1">
                             <div class="row">

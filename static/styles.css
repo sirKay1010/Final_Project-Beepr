@@ -6,23 +6,8 @@
 
 .app-body {
     background-color: #ffffff;
-    height: 95vh;
+    height: 100vh;
 }
-
-/* Left panel section */
-.left-panel-section {
-    display: flex;
-    flex-direction: column;
-    /* flex: 0.35; */
-}
-
-
-.left-panel-chat-section {
-    flex: 1;
-    position: relative;
-    overflow-y: scroll;
-}
-
 
 /* change all form focus color to match theme of the app */
 .form-control:focus {
