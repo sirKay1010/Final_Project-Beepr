@@ -2,7 +2,7 @@ import os
 import re
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, json
+from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -46,9 +46,11 @@ def index():
 def register():
     # Select all usernames
     usernames_list = []
-    usernames = db.execute("SELECT username FROM users")
-    for username in usernames:
-        usernames_list.append(username["username"])
+    email_list = []
+    usernames = db.execute("SELECT username, email FROM users")
+    for userdata in usernames:
+        usernames_list.append(userdata["username"])
+        email_list.append(userdata["email"])
 
     if request.method == "POST":
         # store a new users info
@@ -59,18 +61,21 @@ def register():
         password = request.form.get("password")
 
         # set error message variable
-        error = None
+        # error = None
+
         # Check all input fields for an input
         if not firstname or not lastname or not username or not email or not password:
-            error = "Please input all fields!"
-            return render_template("register.html", error=error)
+            flash("Please input all fields!")
+            return redirect("/register")
+            # error = "Please input all fields!"
+            # return render_template("register.html", error=error)
 
         # Check for duplicate username
-        for pair in usernames:
-            if username == pair["username"]:
-                error = "Username already exists"
-                flash("Username already")
-                return render_template("register.html", error=error, firstname=firstname)
+        if username in usernames_list:
+            flash("Username already exists!")
+            return redirect("/register")
+            # error = "Username already exists!"
+            # return render_template("register.html", error=error)
 
         # Set the regular expressions to validate email and password
         email_RegEx = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -78,13 +83,24 @@ def register():
 
         # Validate Email
         if not re.match(email_RegEx, email):
-            error = "Not a valid email!"
-            return render_template("register.html", error=error)
+            flash("Invalid Email!")
+            return redirect("/register")
+            # error = "Not a valid email!"
+            # return render_template("register.html", error=error)
+
+        # Check for duplicate username
+        if email in email_list:
+            flash("Email already exists!")
+            return redirect("/register")
+            # error = "Email already exists!"
+            # return render_template("register.html", error=error)
 
         # validate password
         if not re.match(password_RegEx, password):
-            error = "Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!"
-            return render_template("register.html", error=error)
+            flash("Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!")
+            return redirect("/register")
+            # error = "Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!"
+            # return render_template("register.html", error=error)
 
         # Generate passwords hash
         password_hash = generate_password_hash(password)
@@ -94,8 +110,7 @@ def register():
         return redirect("/login")
 
     else:
-        # return render_template("register.html",  usernames=usernames)
-        return render_template("register.html",  usernames=json.dumps(usernames), usernames_list=usernames_list)
+        return render_template("register.html",  usernames=usernames, usernames_list=usernames_list, email_list=email_list)
 
 
 # Login route

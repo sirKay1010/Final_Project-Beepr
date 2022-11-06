@@ -35,94 +35,44 @@
 		// Add an input event listener for each input field
 		for (const input of inputs) {
 			input.addEventListener("input", function(){
-				setTimeout(validateForm, 3000);
+				setTimeout(validateForm, 2551, inputs);
 			});
 		}
 
-		// var emailValidated = false;
+		// Server side validation of user name to be returned here in time... (Removed due to the jon error issue! )
+
+		// Validate email
 		const email = document.querySelector("#email");
 		const emailErrorMessage = document.querySelector("#emailErrorMessage");
+		const ErrorMessageForEmail = "Invalid Email!"
 		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-		// Validate email
 		email.onkeyup = function () {
-			setTimeout(resetValidation, 0, email, emailErrorMessage);
-			setTimeout(validateEmail, 2500, emailRegEx, email, emailErrorMessage);
-			// 	if (!emailRegEx.test(email.value)) {
-			// 		email.style.borderColor = "red";
-			// 		emailErrorMessage.innerHTML = "Invalid Email!";
-			// 		emailErrorMessage.style.display = "flex";
-			// 		emailValidated = false;
-			// 	}
-			// 	else {
-			// 		email.style.borderColor = "lightgray";
-			// 		emailErrorMessage.style.display = "none";
-			// 		emailValidated = true;
-			// 	}
+			resetValidation(email, emailErrorMessage);
+			setTimeout(validateEmail, 2500, emailRegEx, email, emailErrorMessage, ErrorMessageForEmail);
 		}
 
-		// var passwordValidated = false;
 		// Validate password
 		const password = document.querySelector("#password");
 		const passwordErrorMessage = document.querySelector("#passwordErrorMessage");
+		const ErrorMessageForPassword = "Invalid Password!"
 		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 		password.onkeyup = function () {
-			setTimeout(resetValidation, 0, password, passwordErrorMessage);
-			setTimeout(validatePassword, 2500, passwordRegEx, password, passwordErrorMessage);
-			// 	if (!passwordRegEx.test(password.value)) {
-			// 		password.style.borderColor = "#ff9494";
-			// 		password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
-			// 		passwordErrorMessage.innerHTML = "Invalid password!";
-			// 		"Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
-			// 		passwordErrorMessage.style.display = "flex";
-			// 		passwordValidated = false;
-			// 	}
-			// 	else {
-			// 		password.style.borderColor = "lightgray";
-			// 		passwordErrorMessage.style.display = "none";
-			// 		passwordValidated = true;
-			// 	}
-		}
-
-		// var usernameValidated = false;
-		// Validate duplicate username
-		const username = document.querySelector("#username");
-		const usernameErrorMessage = document.querySelector("#usernameErrorMessage");
-		// username.onkeyup = function () {
-		// 	username.style.borderColor = "transparent";
-		// 	usernameErrorMessage.style.display = "none";
-		// }
-		username.onkeyup = function () {
-			// setTimeout(resetValidation, 0, username, usernameErrorMessage);
-			// setTimeout(validateUsername, 4000, usernameErrorMessage);
-			// if ({{ usernames | tojson }}.includes(username.value)){
-			if ({{ usernames_list | tojson }}.includes(username.value)){
-				// alert({{ usernames_list | tojson }}.length);
-				username.style.borderColor = "ff9494";
-				username.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
-				usernameErrorMessage.innerHTML = "Username already exists!";
-				usernameErrorMessage.style.display = "flex";
-				usernameValidated = false;
-			}
-			else {
-				username.style.borderColor = "lightgray";
-				usernameErrorMessage.style.display = "none";
-				username.style.boxShadow = "none";
-				usernameValidated = true;
-			}
+			resetValidation(password, passwordErrorMessage);
+			setTimeout(validatePassword, 2500, passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword);
 		}
 	});
 
 	// FUNCTION DECLEARATIONS
 	// Function to disable btn until all fields are filled correctly
-	function validateForm() {
+	function validateForm(inputs) {
 		var empty = false;
-		document.querySelectorAll(".inputField").forEach((field) => {
-			// if (this.value === "") {
+			inputs.forEach((field) => {
 			if (field.value === "") {
 				empty = true;
 			}
 		});
-		if (!empty && emailValidated && passwordValidated && usernameValidated) {
+		// if (!empty && emailValidated && passwordValidated && usernameValidated) {
+		if (!empty && emailValidated && passwordValidated) {
 			register_btn.disabled = false;
 		}
 		else {
@@ -130,53 +80,30 @@
 		}
 	}
 
-	// function validateUsername() {
-	// 	username_list = {{ usernames | tojson }};
-	// 	alert(username_list.length);
-	// 	if (usernames_list.includes(username.value)){
-	// 	// if ({{ usernames | tojson }}.includes(username.value)){
-	// 		username.style.borderColor = "red";
-	// 		usernameErrorMessage.innerHTML = "Username already exists!";
-	// 		usernameErrorMessage.style.display = "flex";
-	// 		usernameValidated = false;
-	// 	}
-	// 	else {
-	// 		username.style.borderColor = "lightgray";
-	// 		usernameErrorMessage.style.display = "none";
-	// 		usernameValidated = true;
-	// 	}
-
-	// }
-
-	function validateEmail(emailRegEx, email, emailErrorMessage) {
+	function validateEmail(emailRegEx, email, emailErrorMessage, ErrorMessageForEmail) {
 		if (!emailRegEx.test(email.value)) {
-			email.style.borderColor = "#ff9494";
-			email.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
-			emailErrorMessage.style.display = "flex";
-			emailErrorMessage.innerHTML = "Invalid Email!";
-			emailValidated = false;
+			isvalidated(email, emailErrorMessage, ErrorMessageForEmail);
+			// email.style.borderColor = "#ff9494";
+			// email.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+			// emailErrorMessage.style.display = "flex";
+			// emailErrorMessage.innerHTML = "Invalid Email!";
+			// emailValidated = false;
 		}
 		else {
-			email.style.borderColor = "lightgray";
-			emailErrorMessage.style.display = "none";
-			email.style.boxShadow = "none";
 			emailValidated = true;
 		}
 	}
 
-	function validatePassword(passwordRegEx, password, passwordErrorMessage) {
+	function validatePassword(passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword) {
 		if (!passwordRegEx.test(password.value)) {
-			password.style.borderColor = "#ff9494";
-			password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
-			passwordErrorMessage.style.display = "flex";
-			passwordErrorMessage.innerHTML = "Invalid password!";
-			"Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
-			passwordValidated = false;
+			isvalidated(password, passwordErrorMessage, ErrorMessageForPassword);
+			// password.style.borderColor = "#ff9494";
+			// password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+			// passwordErrorMessage.style.display = "flex";
+			// passwordErrorMessage.innerHTML = "Invalid password!";
+			// passwordValidated = false;
 		}
 		else {
-			password.style.borderColor = "lightgray";
-			passwordErrorMessage.style.display = "none";
-			password.style.boxShadow = "none";
 			passwordValidated = true;
 		}
 	}
@@ -186,8 +113,13 @@
 		elementErrorMessage.style.display = "none";
 		element.style.boxShadow = "none";
 	}
-
-
+	function isvalidated(field, fieldErrorMessage, ErrorMessageForField) {
+		field.style.borderColor = "#ff9494";
+		field.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+		fieldErrorMessage.style.display = "flex";
+		fieldErrorMessage.innerHTML = ErrorMessageForField;
+		// "Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
+	}
 </script>
 {% endblock %}
 
@@ -200,8 +132,6 @@ Register
 	<div class="container text-center	">
 		<div class="my-4 py-2">
 			<h2 class="fw-bolder">Welcome to Beep<span style="color:#872eb8">R</span></h2>
-			{{usernames}} <br>
-			{{usernames_list}}
 		</div>
 		<div class="row justify-content-center my-4">
 			<div class="col-lg-3 col-md-6 form-body ">
@@ -227,16 +157,17 @@ Register
 				</div>
 				<div class="mb-3">
 					<input autocomplete="on" class="inputField form-control " id="password" name="password"
-						placeholder="Password" required>
-					<!--type="password"-->
+						placeholder="Password" type="password" required>
 					<p class="errorMessage" id="passwordErrorMessage"></p>
 				</div>
 				<button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit" id="register_btn">
 					Register</button>
 
+				<!-- Subject to whether its better than flash messages -->
 				{% if error %}
 				<p class="fw-bolder" style="color: red">{{ error }}!</p>
 				{% endif %}
+
 			</div>
 		</div>
 		<div class="row my-2">
