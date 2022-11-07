@@ -11,6 +11,16 @@
         border-top: 5px dotted #ffffff;
         border-radius: 25px;
     }
+
+    body {
+        background-color: #929ad9;
+    }
+
+    .form-body {
+        background-color: #f5f5f5;
+        padding: 50px 20px;
+        box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);
+    }
 </style>
 {% endblock %}
 
@@ -22,17 +32,17 @@ Sign In
 <!-- Login form -->
 <form action="/login" method="post">
     <!-- Main Outter Container -->
-    <div class="container text-center my-1">
+    <div class="container text-center py-1">
         <!-- Logo section -->
-        <div class="mb-4 fs-3 fw-bolder">
+        <div class="mb-4">
             <hr class="hr1">
-            <p>Beep<span style="color:#872eb8">R</span></p>
+            <h2 class="fw-bolder">Beep<span style="color:#872eb8">R</span></h2>
             <hr class="hr1">
         </div>
         <!-- Row to contain the form -->
         <div class="row justify-content-center">
             <!-- Row to contain the form -->
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-6 col-sm-6 form-body">
                 <!-- Username Field -->
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingUsername" name="username" placeholder="Username"
@@ -58,17 +68,18 @@ Sign In
                 </div>
                 <!-- Submit button -->
                 <div class="col">
-                    <button type="submit" class="btn text-white submit-btn" name="password" placeholder="Password">Sign In</button>
+                    <button type="submit" class="btn text-white submit-btn" name="password" placeholder="Password">Sign
+                        In</button>
+                </div>
             </div>
-        </div>
             <div class="row my-2">
                 <p class="">Dont have an account? <a href="/...">Sign up</a></p>
             </div>
             <!-- Temp Page Footer -->
-            <footer class="mt-5 text-center text-muted">
+            <footer class="mt-5 text-center text-muted text-dark">
                 <hr>
                 Final Project BeepR!
             </footer>
-    </div>
+        </div>
 </form>
 {% endblock%}

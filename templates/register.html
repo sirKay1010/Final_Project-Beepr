@@ -1,45 +1,183 @@
 {% extends "layout.html" %}
 
+{% block style %}
+<style>
+	body {
+		background-color: #929ad9;
+	}
+
+	.form-body {
+		background-color: #f5f5f5;
+		padding: 50px 20px;
+		box-shadow: 0 0 0 0.2rem rgba(135, 46, 184, 0.25);
+	}
+
+	.errorMessage {
+		color: red;
+		font-size: 14px;
+	}
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+	// Wait for Page to load
+	var emailValidated = false;
+	var passwordValidated = false;
+	var usernameValidated = false;
+	document.addEventListener("DOMContentLoaded", function () {
+		// Select and disable button
+		const register_btn = document.getElementById("register_btn");
+		register_btn.disabled = true;
+
+		// Select all input fields
+		const inputs = document.querySelectorAll(".inputField");
+		// Add an input event listener for each input field
+		for (const input of inputs) {
+			input.addEventListener("input", function(){
+				setTimeout(validateForm, 2551, inputs);
+			});
+		}
+
+		// Server side validation of user name to be returned here in time... (Removed due to the jon error issue! )
+
+		// Validate email
+		const email = document.querySelector("#email");
+		const emailErrorMessage = document.querySelector("#emailErrorMessage");
+		const ErrorMessageForEmail = "Invalid Email!"
+		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+		email.onkeyup = function () {
+			resetValidation(email, emailErrorMessage);
+			setTimeout(validateEmail, 2500, emailRegEx, email, emailErrorMessage, ErrorMessageForEmail);
+		}
+
+		// Validate password
+		const password = document.querySelector("#password");
+		const passwordErrorMessage = document.querySelector("#passwordErrorMessage");
+		const ErrorMessageForPassword = "Invalid Password!"
+		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		password.onkeyup = function () {
+			resetValidation(password, passwordErrorMessage);
+			setTimeout(validatePassword, 2500, passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword);
+		}
+	});
+
+	// FUNCTION DECLEARATIONS
+	// Function to disable btn until all fields are filled correctly
+	function validateForm(inputs) {
+		var empty = false;
+			inputs.forEach((field) => {
+			if (field.value === "") {
+				empty = true;
+			}
+		});
+		// if (!empty && emailValidated && passwordValidated && usernameValidated) {
+		if (!empty && emailValidated && passwordValidated) {
+			register_btn.disabled = false;
+		}
+		else {
+			register_btn.disabled = true;
+		}
+	}
+
+	function validateEmail(emailRegEx, email, emailErrorMessage, ErrorMessageForEmail) {
+		if (!emailRegEx.test(email.value)) {
+			isvalidated(email, emailErrorMessage, ErrorMessageForEmail);
+			// email.style.borderColor = "#ff9494";
+			// email.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+			// emailErrorMessage.style.display = "flex";
+			// emailErrorMessage.innerHTML = "Invalid Email!";
+			// emailValidated = false;
+		}
+		else {
+			emailValidated = true;
+		}
+	}
+
+	function validatePassword(passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword) {
+		if (!passwordRegEx.test(password.value)) {
+			isvalidated(password, passwordErrorMessage, ErrorMessageForPassword);
+			// password.style.borderColor = "#ff9494";
+			// password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+			// passwordErrorMessage.style.display = "flex";
+			// passwordErrorMessage.innerHTML = "Invalid password!";
+			// passwordValidated = false;
+		}
+		else {
+			passwordValidated = true;
+		}
+	}
+
+	function resetValidation(element, elementErrorMessage) {
+		element.style.borderColor = "lightgray";
+		elementErrorMessage.style.display = "none";
+		element.style.boxShadow = "none";
+	}
+	function isvalidated(field, fieldErrorMessage, ErrorMessageForField) {
+		field.style.borderColor = "#ff9494";
+		field.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+		fieldErrorMessage.style.display = "flex";
+		fieldErrorMessage.innerHTML = ErrorMessageForField;
+		// "Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!";
+	}
+</script>
+{% endblock %}
+
 {% block title%}
 Register
 {% endblock%}
 
 {% block body %}
 <form action="/register" method="post">
-	<div class="container py-5 text-center">
-	<div class="card">
-		<div class="my-3">
-			<h2 style="color: #872eb8;">Welcome to Beepr.</h2>
+	<div class="container text-center	">
+		<div class="my-4 py-2">
+			<h2 class="fw-bolder">Welcome to Beep<span style="color:#872eb8">R</span></h2>
 		</div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="firstname" name="firstname"
-	            placeholder="First name" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="lastname" name="lastname"
-	            placeholder="Last name" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username"
-	            placeholder="Username" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email"
-	            placeholder="email" type="text">
-	    </div>
-	    <div class="mb-3">
-	        <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
-	    </div>
-	    <div class="mb-3">
-	        <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm password"
-	            type="password">
-	    </div>
-	        <button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit">
-	        Register</button>
-        <div>
-        	<p>Already have an account? <a style="text-decoration: none; color: blue;" href="">login</a></p>
-        </div>
-	</div>
+		<div class="row justify-content-center my-4">
+			<div class="col-lg-3 col-md-6 form-body ">
+				<!-- <div class="row"> -->
+				<div class="mb-3">
+					<input autocomplete="on" autofocus class="inputField form-control " id="firstname" name="firstname"
+						placeholder="First name" type="text" required>
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="lastname" name="lastname"
+						placeholder="Last name" type="text" required>
+					<!-- </div> -->
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="username" name="username"
+						placeholder="Username" type="text" required>
+					<p class="errorMessage" id="usernameErrorMessage"></p>
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="email" name="email"
+						placeholder="example@gmail.com" type="text" required>
+					<p class="errorMessage" id="emailErrorMessage"></p>
+				</div>
+				<div class="mb-3">
+					<input autocomplete="on" class="inputField form-control " id="password" name="password"
+						placeholder="Password" type="password" required>
+					<p class="errorMessage" id="passwordErrorMessage"></p>
+				</div>
+				<button class="mx-auto my-3 w-auto btn btn text-white submit-btn" type="submit" id="register_btn">
+					Register</button>
+
+				<!-- Subject to whether its better than flash messages -->
+				{% if error %}
+				<p class="fw-bolder" style="color: red">{{ error }}!</p>
+				{% endif %}
+
+			</div>
+		</div>
+		<div class="row my-2">
+			<p class="">Already have an account? <a href="#">Sign in</a></p>
+		</div>
+		<!-- Temp Page Footer -->
+		<footer class="mt-5 text-center text-muted text-dark">
+			<hr>
+			Final Project BeepR!
+		</footer>
 	</div>
 </form>
 {% endblock %}

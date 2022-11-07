@@ -1,4 +1,5 @@
 import os
+import re
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -21,6 +22,8 @@ Session(app)
 db = SQL("sqlite:///beepr.db")
 
 # request handling
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -30,7 +33,7 @@ def after_request(response):
     return response
 
 
-# ... route
+# Onboarding route
 @app.route("/onboarding")
 def index():
     """  """
@@ -41,11 +44,73 @@ def index():
 # Register route
 @app.route("/register", methods=["POST", "GET"])
 def register():
+    # Select all usernames
+    usernames_list = []
+    email_list = []
+    usernames = db.execute("SELECT username, email FROM users")
+    for userdata in usernames:
+        usernames_list.append(userdata["username"])
+        email_list.append(userdata["email"])
+
     if request.method == "POST":
-        pass
-    # if method is GET
+        # store a new users info
+        firstname = request.form.get("firstname")
+        lastname = request.form.get("lastname")
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        # set error message variable
+        # error = None
+
+        # Check all input fields for an input
+        if not firstname or not lastname or not username or not email or not password:
+            flash("Please input all fields!")
+            return redirect("/register")
+            # error = "Please input all fields!"
+            # return render_template("register.html", error=error)
+
+        # Check for duplicate username
+        if username in usernames_list:
+            flash("Username already exists!")
+            return redirect("/register")
+            # error = "Username already exists!"
+            # return render_template("register.html", error=error)
+
+        # Set the regular expressions to validate email and password
+        email_RegEx = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        password_RegEx = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+
+        # Validate Email
+        if not re.match(email_RegEx, email):
+            flash("Invalid Email!")
+            return redirect("/register")
+            # error = "Not a valid email!"
+            # return render_template("register.html", error=error)
+
+        # Check for duplicate username
+        if email in email_list:
+            flash("Email already exists!")
+            return redirect("/register")
+            # error = "Email already exists!"
+            # return render_template("register.html", error=error)
+
+        # validate password
+        if not re.match(password_RegEx, password):
+            flash("Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!")
+            return redirect("/register")
+            # error = "Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!"
+            # return render_template("register.html", error=error)
+
+        # Generate passwords hash
+        password_hash = generate_password_hash(password)
+
+        # Update users table with users info
+        db.execute("INSERT INTO users (name, username, email, password_hash) VALUES(?,?,?,?)", firstname + " " + lastname,  username, email, password_hash)
+        return redirect("/login")
+
     else:
-        return render_template("register.html")
+        return render_template("register.html",  usernames=usernames, usernames_list=usernames_list, email_list=email_list)
 
 
 # Login route
