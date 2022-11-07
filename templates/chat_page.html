@@ -1,5 +1,19 @@
 {% extends "layout.html" %}
 
+{% block style %}
+
+<!-- Stylsheet for the chat page -->
+<link href="static/chat_page.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block script %}
+<!-- script file for the chat page -->
+<script src="static/chat_page.js" defer></script>
+{% endblock %}
+
+
 {% block title%}
 Chat
 {% endblock%}
@@ -13,17 +27,17 @@ GENERAL TODO:
 <!-- NOTE: ALL the text in white and the borders is just to show the schematic, DELETE once no longer needed! -->
 
 <!-- Main Page Container -->
-<div class="container-fluid p-3 text-center border main-body">
+<div class="container-fluid text-center main-body">
     <!-- Row Containing Left Panel and Main Chat Sections-->
-    <div class="row border app-body">
+    <div class="row app-body">
 
         <!-- Left Panel Section -->
-        <div class="col-3 left-panel-section border">
+        <div class="col-3 left-panel-section border-end border-end-secondary">
             <!-- Profile/Logo/hamburger menu -->
-            <div class="row border-bottom border-dark">
+            <div class="row shadow-sm align-items-center" style="height: 3.5rem;">
 
-                <!-- Profile settings -->
-                <div class="col-lg-3 border pt-3 pb-2">
+                <!-- Profile settings (DP)-->
+                <div class="col-3">
                     <button class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#profile_section" aria-controls="profile_section">
                         <span>
@@ -54,12 +68,12 @@ GENERAL TODO:
                 </div>
 
                 <!-- Logo section -->
-                <div class="col-lg-6 fs-5 fw-bolder border pt-3 pb-2">
+                <div class="col-6 fs-5 fw-bolder">
                     Beep<span style="color:#872eb8">R</span>
                 </div>
 
-                <!-- Hamburger/Vertical 3 dots Menu anchor -->
-                <div class="col-lg-3 border pt-3 pb-2">
+                <!-- Vertical 3 dots Menu anchor -->
+                <div class="col-3">
                     <div class="dropstart">
                         <button class="reset-btn gray-hover-highlight-btn" type="button" id="settings-dropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,9 +86,6 @@ GENERAL TODO:
                                 <path
                                     d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                             </svg>
-                            <!-- <div class="hamburger-menu"></div>
-                            <div class="hamburger-menu"></div>
-                            <div class="hamburger-menu"></div> -->
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="settings-dropdown">
                             <li><a class="dropdown-item" href="#">Settings</a></li>
@@ -86,132 +97,301 @@ GENERAL TODO:
                 </div>
             </div>
             <!-- Left Panel Search bar -->
-            <div class="row py-2 border-bottom border-dark">
-                <div class="container-fluid border search-container">
-                    <!-- <form class="d-flex">
-                        <div class="input-group"> -->
-                    <!-- <input type="text" class="form-control" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" > -->
-                    <input type="text" class="reset-text-input" placeholder="Search"
-                        aria-label="Example text with button addon" aria-describedby="button-addon1">
-                    <!-- <button class="btn btn-outline-secondary" type="button" id="button-addon1"> -->
-                    <svg id="button-addon1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
-                        class="bi bi-search" viewBox="0 0 16 16" style="margin-left: 35px;">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                    <!-- </button> -->
-                    <!-- </div>
-                    </form> -->
+            <div class="row py-2">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- <form class=""> -->
+                        <div class="col-10">
+                            <input type="text" class="form-control rounded-pill" placeholder="Search"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        </div>
+                        <div class="col-2 pt-1 pe-4">
+                            <svg id="button-addon1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="gray" class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </div>
+                        <!-- </form> -->
+                    </div>
                 </div>
             </div>
             <!--Left Panel Friends Chat section -->
-            <div class="row left-panel-chat-section border border-dark">
-                <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;">
+            <div class="row left-panel-chat-section">
+                <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;"> -->
 
                 <!-- Left Panel New chat bubble setion -->
-                <div class="">
-                    Edit New chat bubble section
-                    <!-- floating button to add contact -->
-                    <a data-bs-toggle="offcanvas" role="button" href="#offcanvasExample"
-                        aria-controls="offcanvasExample" class="float">
-                        <!-- plus icon ---- ignore for now------>
-                        <!-- <i class="fa-thin fa-user-plus"></i> -->
-                        New Chat
+                <!-- <div class="border border-dark"> -->
+                <div class="dropdown">
+                    <a class="btn float" href="#" role="button" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-plus-lg pt-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                        </svg>
                     </a>
 
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                        aria-labelledby="offcanvasExampleLabel" data-bs-backdrop="false">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Contacts</h5>
-                            <button type="button" id="dismiss" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li>
+                            <!-- floating button to add contact -->
+                            <a data-bs-toggle="offcanvas" href="#offcanvasExample" aria-controls="offcanvasExample"
+                                class="dropdown-item">
+                                <!-- plus icon ---- ignore for now------>
+                                <!-- <i class="fa-thin fa-user-plus"></i> -->
+                                New Chat
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" aria-controls="addcontact_offcanvas" data-bs-toggle="offcanvas"
+                                href="#addcontact_offcanvas">Add New Contact</a></li>
+                    </ul>
+                </div>
+
+
+                <!-- New chat off canvas -->
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                    aria-labelledby="offcanvasExampleLabel" data-bs-backdrop="false">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Contacts</h5>
+                        <button type="button" id="dismiss" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="container text-center">
+                            <!-- <a class="btn submit-btn text-white" aria-controls="addcontact_offcanvas" role="button" href="#addcontact_offcanvas" data-bs-toggle="offcanvas">Add Contact</a> -->
+                            <button class="submit-btn btn text-white" data-bs-target="#addcontact_offcanvas" aria-controls="addcontact_offcanvas" data-bs-toggle="offcanvas" id="contactform">Add contact</button>
+                            <!-- Style....................................-->
                         </div>
-                        <div class="offcanvas-body">
-                            <div class="container text-center">
-                                <button class="submit-btn btn text-white" id="contactform">add contact</button>
-                                <!-- Style....................................-->
+
+                        <!-- dummy contacts -->
+                        <div class="chatlist" id="contacts">
+                            <div class="block">
+                                <!-- <div class="imgBox"> -->
+                                <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
+                                <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" > -->
+                                <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
+                                <!-- </div> -->
+                                <div class="details">
+                                    <div class="listHead">
+                                        <h4>Ibrahim</h4>
+                                    </div>
+                                </div>
                             </div>
-
-                            <!-- form adds a new contact either by uername or phone number -->
-                            <form style="display: none;" action="/add_contact" method="post" id="addcontact">
-                                <div class="container py-5 text-center">
-
-                                    <h4 style="padding-bottom: 20px;">Add by username or phone number</h4>
-                                    <div class="mb-3">
-                                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
-                                            id="username" name="username" placeholder="username" type="text">
-                                    </div>
-
-
-                                    <div class="mb-3">
-                                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
-                                            id="phone_number" name="phone_number" placeholder="phone number"
-                                            type="text">
-                                    </div>
-                                    <button class="submit-btn mx-auto my-1 w-auto btn text-white" type="submit">
-                                        <!--btn btn-->
-                                        Add user
-                                    </button>
-                                    <!--STyle.....................-->
-                                    <button class="btn btn-secondary" id="cancel">Cancel</button>
-                                </div>
-                            </form>
-
-                            <!-- dummy contacts -->
-                            <div class="chatlist" id="contacts">
-                                <div class="block">
-                                    <!-- <div class="imgBox"> -->
-                                    <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
-                                    <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" > -->
-                                    <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
-                                    <!-- </div> -->
-                                    <div class="details">
-                                        <div class="listHead">
-                                            <h4>Ibrahim</h4>
-                                        </div>
+                            <div class="block">
+                                <!-- <div class="imgBox"> -->
+                                <img class="imgBox" src="https://avatars.dicebear.com/api/human/erewqr.svg">
+                                <!-- <img src="https://avatars.dicebear.com/api/human/987.svg" > -->
+                                <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
+                                <!-- </div> -->
+                                <div class="details">
+                                    <div class="listHead">
+                                        <h4>Kayode</h4>
                                     </div>
                                 </div>
-                                <div class="block">
-                                    <!-- <div class="imgBox"> -->
-                                    <img class="imgBox" src="https://avatars.dicebear.com/api/human/erewqr.svg">
-                                    <!-- <img src="https://avatars.dicebear.com/api/human/987.svg" > -->
-                                    <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
-                                    <!-- </div> -->
-                                    <div class="details">
-                                        <div class="listHead">
-                                            <h4>Kayode</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="block">
-                                    <!-- <div class="imgBox"> -->
-                                    <img class="imgBox" src="https://avatars.dicebear.com/api/human/321.svg">
-                                    <!-- <img src="https://avatars.dicebear.com/api/human/321.svg" > -->
-                                    <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
-                                    <!-- </div> -->
-                                    <div class="details">
-                                        <div class="listHead">
-                                            <h4>Jerry</h4>
-                                        </div>
+                            </div>
+                            <div class="block">
+                                <!-- <div class="imgBox"> -->
+                                <img class="imgBox" src="https://avatars.dicebear.com/api/human/321.svg">
+                                <!-- <img src="https://avatars.dicebear.com/api/human/321.svg" > -->
+                                <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
+                                <!-- </div> -->
+                                <div class="details">
+                                    <div class="listHead">
+                                        <h4>Jerry</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- </div> -->
+
+                <!-- Add contact offcanvas -->
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="addcontact_offcanvas"
+                    aria-labelledby="add_contact_offcanvas_label" data-bs-backdrop="false">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="add_contact_offcanvas_label"> Add Contact</h5>
+                        <button type="button" id="dismiss" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- form adds a new contact either by uername -->
+                        <!-- Temporarily disabled the form submission -->
+                        <form action="/add_contact" onsubmit="return false;" method="post" id="addcontact">
+                            <div class="container py-5 text-center">
+
+                                <h4 style="padding-bottom: 20px;">Enter username</h4>
+                                <div class="mb-3">
+                                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
+                                        id="username" name="username" placeholder="Username" type="text">
+                                </div>
+
+
+                                <!-- <div class="mb-3">
+                                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
+                                        id="phone_number" name="phone_number" placeholder="phone number" type="text">
+
+                                    </div> -->
+                                <button class="submit-btn mx-auto my-1 w-auto btn text-white" type="submit">
+                                    <!--btn btn-->
+                                    Add user
+                                </button>
+                                <!--STyle.....................-->
+                                <button class="btn btn-secondary" id="cancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        <!-- Left Panel Section -->
+            <!-- Left Panel Section -->
         </div>
 
-    <!-- Main Chat section -->
-    <div class="col chat-section border">
-        Edit Chat section
-        <!-- TODO -->
+        <!-- Main Chat section -->
+        <div class="col" style="position: relative">
+            <!-- Top bar -->
+            <div class="row shadow-sm align-items-center" style="height: 3.5rem;">
+                <!-- Contact info section -->
+                <div class="col">
+                    <div class="row">
+                        <!-- Profile settings -->
+                        <div class="col-2 m-auto">
+                            <div class="row">
+                                <button class="btn" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#profile_section" aria-controls="profile_section">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
+                                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd"
+                                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <!-- <div class="row border justify-content-start m-auto"> -->
+                                <div class="row fs-5">
+                                    Jerry
+                                    <!-- <p class="text-start">Jerry</p> -->
+                                </div>
+                                <div class="row text-muted">
+                                    online
+                                    <!-- <p class="text-start">online</p> -->
+                                </div>
+                            <!-- </div> -->
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- More options section -->
+                <div class="col">
+                    <div class="row m-auto justify-content-end">
+                        <!-- Search off-canvas -->
+                        <div class="col-1">
+                            <div class="row">
+                                <button class="btn" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#search_offcanvas" aria-controls="search_offcanvas">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                        class="bi bi-search" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                    </svg>
+                                </button>
+
+                                <div class="offcanvas offcanvas-end" tabindex="-1" id="search_offcanvas"
+                                    aria-labelledby="search_offcanvasLabel">
+                                    <div class="offcanvas-header">
+                                        <h5 class="offcanvas-title" id="search_offcanvasLabel">Search</h5>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <!-- Search input field -->
+                                        <div class="container">
+                                            <input type="text" class="form-control mx-auto rounded-pill"
+                                                placeholder="Search">
+                                        </div>
+
+                                        <!-- Placeholder text -->
+                                        <div
+                                            class="container align-items-center justify-content-center text-center mt-5">
+                                            <div class="container ">
+                                                Search for chats
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vertical 3 dots Menu anchor -->
+                        <div class="col-1">
+                            <div class="dropstart row">
+                                <button class="btn" type="button" id="settings-dropdown" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                        class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="settings-dropdown">
+                                    <li><a class="dropdown-item" href="#">Foo</a></li>
+                                    <li><a class="dropdown-item" href="#">Bar</a></li>
+                                    <li><a class="dropdown-item" href="#">Baz</a></li>
+                                    <li><a class="dropdown-item" href="#">Foobar</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom chat row -->
+            <div class="row border-top p-2 justify-content-center" style="position: absolute; bottom: 0; width: 100%">
+                <!-- Left of chat field -->
+                <div class="col-1">
+                    <div class="row">
+                        <button class="btn" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path
+                                    d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <form class="col">
+                    <div class="row">
+                        <!-- Chat input field -->
+                        <div class="col">
+                            <div>
+                                <input type="text" class="form-control rounded-pill" placeholder="Type a message">
+                            </div>
+                        </div>
+
+                        <!-- Right of chat field -->
+                        <div class="col-1">
+                            <div class="row">
+                                <button class="btn" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-send-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Row Containing Left Panel and Main Chat Sections -->
+        </div>
+        <!-- Main Page Container -->
     </div>
 
-    <!-- Row Containing Left Panel and Main Chat Sections -->
-</div>
-<!-- Main Page Container -->
-</div>
-
-{% endblock%}
+    {% endblock%}
