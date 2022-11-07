@@ -14,13 +14,60 @@
 </style>
 {% endblock %}
 
+
+{% block script %}
+<script>
+    // wait for DOM to load
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // submit button
+        const submit = document.getElementById("submit");
+
+        // nodelist of the login form inputs
+        const inputs = document.querySelectorAll(".form-control");
+
+        // disable submit button
+        submit.disabled = true;
+
+        // loop through each input and enable the submit button only if both inputs are filled
+        inputs.forEach((input) => {
+            input.addEventListener("keyup", () => {
+                let empty = false;
+
+                for (let field of inputs) {
+                    if (field.value === "") {
+                        empty = true;
+                    }
+                }
+                if (empty == false) {
+                    submit.disabled = false;
+                }
+                else {
+                    submit.disabled = true;
+                }
+            });
+        });
+
+        // if there is an error passed from app.py
+        {% if error %}
+        // turn the element border red
+        document.querySelector({{ element_id | tojson }}).style = "border-color: #ff9494; box-shadow: 0 0 0 0.2rem rgba(255, 148, 148, 1);"
+    {% endif %}
+
+    });
+</script>
+{% endblock %}
+
+
 {% block title%}
 Sign In
 {% endblock%}
-
 {% block body%}
+
+
+
 <!-- Login form -->
-<form action="/login" method="post">
+<form action="/login" name="loginform" method="post">
     <!-- Main Outter Container -->
     <div class="container text-center my-1">
         <!-- Logo section -->
@@ -52,30 +99,36 @@ Sign In
                 <!-- Remember me checkBox -->
                 <div class="col mt-4">
                     <div class="form-check mb-3 pt-1">
-                        <input type="checkbox" class="form-check-input" id="checkbox">
+                        <input type="checkbox" name="remember_me" class="form-check-input" id="checkbox">
                         <label for="checkbox" class="float-start form-check-label">Remember me</label>
                     </div><br>
                 </div>
+                <!-- error message handling -->
+                {% if error %}
+                <p style="color: red;">{{ error }}</p>
+
+                {% endif %}
+
                 <!-- Submit button -->
                 <div class="col">
-                    <button type="submit" class="btn text-white submit-btn" name="password" placeholder="Password">Sign In</button>
+                    <button type="submit" class="btn text-white submit-btn" id="submit" name="password"
+                        placeholder="Password">Sign
+                        in</button>
+                </div>
             </div>
-        </div>
             <div class="row my-2">
                 <p class="">Dont have an account? <a href="/...">Sign up</a></p>
             </div>
-                {% if error %}
-                <p style="color: red;">{{ error }}</p>
-                <!-- turn the border red -->
-                <script>
-                    document.querySelector("#floatingUsername").style.border = "3px solid red";
-                </script>
-                {% endif %}
+
             <!-- Temp Page Footer -->
             <footer class="mt-5 text-center text-muted">
                 <hr>
                 Final Project BeepR!
             </footer>
-    </div>
+        </div>
 </form>
+
+<script>
+</script>
+
 {% endblock%}
