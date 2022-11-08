@@ -15,6 +15,9 @@
         <!-- General app stylesheet -->
         <link href="static/styles.css" rel="stylesheet">
 
+        <!-- General app script file -->
+        <script defer src="static/script.js"></script>
+
         <!-- my personal icon kit. Ya'll can create your own at fontawesome.com -->
         <script src="https://kit.fontawesome.com/15d7487691.js" crossorigin="anonymous"></script>
 
@@ -30,8 +33,15 @@
     </head>
 
     <body>
+        {% if get_flashed_messages() %}
+        <header>
+            <div class="alert alert-primary mb-0 text-center" role="alert">
+                {{ get_flashed_messages() | join(" ") }}
+            </div>
+        </header>
+        {% endif %}
+
         {% block body %}{% endblock %}
 
-        <script type="text/javascript" src="static/script.js"></script>
     </body>
 </html>

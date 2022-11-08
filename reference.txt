@@ -1,0 +1,78 @@
+Git commands:
+While In main: git merge <branch name>
+git branch --delete/-D <branch name>
+git checkout --f (DISCARDS ANY LOCAL CHANGES WHICH ARE NOT COMMITED IN ALL LOCAL BRANCHES AND THE MASTER)
+git switch -c <new-branch-name> (To create a branch from a remote branch that isnt yet merged)
+git push -u origin <local-branch> (creates a remote and tells the remote to track your local branch)
+git branch --track <new-branch> origin/<base-branch> (Creating a branch on the basis of a remote one )
+git reset --hard (Resets all local changes that haven't been commited)
+git stash <save> <"message"> (To stash your changes temporarily, so as to checkout)
+git stash list
+git stash apply | pop OR git apply (Pop removes )
+
+git reset --hard <previous commit>
+git reset --merge <previous commit>
+NOTE: Here is the take-away with the --hard and --merge flags while using them to undo a merge:
+the --hard flag removes uncommitted changes, while the --merge flag keeps uncommitted changes.
+
+Flask commands:
+export FLASK_APP=app.py ("FLASK_APP" is a system variable and it Stores our app somwhere in memory)
+export FLASK_DEBUG=1 (Turns on debug mode)
+flask run
+
+Using sass in CSS:
+sass <name>.scss <name>.css (Basically compiles the sass code into css)
+sass --watch <name>.scss:<name>.css
+NOTE: SASS makes use of nesting and inheritance
+
+CS50 HTML VALIDATION SERVICE
+https://validator.w3.org/#validate_by_input
+
+Editor: Occurrences Highlight
+
+echo "This Repository contains all files involved in the development of "Beepr" which includes the Static, templates and flask_session folders, app.py (python application file) and beepr.db (a database file). BeepR is a simple, userfriendly chat app developed as a final project for Havards CS50x course in 2022." > README.md
+
+BeepR Tables:.......................................................................
+CREATE TABLE users(
+id PRIMARY KEY,
+name TEXT,
+username TEXT UNIQUE,
+phone_number TEXT UNIQUE,
+email TEXT UNIQUE,
+password_hash TEXT,
+bio TEXT DEFAULT "empty"
+);
+
+<html>
+  <body>
+    <button onclick="create()">Create Heading</button>
+    <script>
+      function create() {
+        var h1 = document.createElement('h1');
+        h1.textContent = "New Heading!!!";
+        h1.setAttribute('class', 'note');
+        document.body.appendChild(h1);
+      }
+    </script>
+  </body>
+</html>
+
+.........................IMPORTATNT...........................................
+		// Validate duplicate username
+		const username = document.querySelector("#username");
+		const usernameErrorMessage = document.querySelector("#usernameErrorMessage");
+		username.onkeyup = function () {
+			if ( {{ usernames_list | tojson }}.includes(username.value)){
+				username.style.borderColor = "ff9494";
+				username.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
+				usernameErrorMessage.innerHTML = "Username already exists!";
+				usernameErrorMessage.style.display = "flex";
+				usernameValidated = false;
+			}
+			else {
+				username.style.borderColor = "lightgray";
+				usernameErrorMessage.style.display = "none";
+				username.style.boxShadow = "none";
+				usernameValidated = true;
+			}
+		}
