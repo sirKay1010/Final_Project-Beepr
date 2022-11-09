@@ -178,7 +178,7 @@ def logout():
 
 # chat_page route
 @app.route("/chat_page", methods=["GET", "POST"])
-@login_required
+# @login_required
 def chat():
     #
     # Temporarily assign a session id
@@ -194,10 +194,12 @@ def chat():
 
             # Check if friend exists
             if not friend:
+                flash("User does not exist")
                 return redirect("/chat_page")
 
             # Check if user is trying to self add
             if friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
+                flash("You can not add yourself")
                 return redirect("/chat_page")
 
             # Insert friend into database

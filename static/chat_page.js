@@ -1,3 +1,40 @@
+//
+document.addEventListener("DOMContentLoaded", () => {
+    // Get the add user form node from DOM
+    add_user_form = document.querySelector("#addcontact");
+
+    // Get input field in the form node
+    input = add_user_form.querySelector("input");
+
+    // Get the submit btn in the foem node 
+    submit_btn = add_user_form.querySelector("#add_user_btn");
+
+    // DIsable submit button
+    submit_btn.disabled = true;
+
+    // Listen for keyboard input in input field
+    input.addEventListener("keyup", () => {
+        // Check if the input field is empty
+        if (input.value !== ""){
+            submit_btn.disabled = false;
+        }
+
+        else{
+            submit_btn.disabled = true;
+        }
+
+
+    });
+});
+
+
+
+
+
+
+
+
+
 // /* javascript file for the chat_page */
 
 // // form that adds new contacts / friends

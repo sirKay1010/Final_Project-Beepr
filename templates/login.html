@@ -60,9 +60,9 @@
 
         // if there is an error passed from app.py
         {% if error %}
-        // turn the element border red
-        document.querySelector({{ element_id | tojson }}).style = "border-color: #ff9494; box-shadow: 0 0 0 0.2rem rgba(255, 148, 148, 1);"
-    {% endif %}
+            // turn the element border red
+            document.querySelector({{ element_id | tojson }}).style = "border-color: #ff9494; box-shadow: 0 0 0 0.2rem rgba(255, 148, 148, 1);"
+        {% endif %}
 
     });
 </script>
@@ -121,11 +121,11 @@ Sign In
 
                 <!-- Submit button -->
                 <div class="col">
-                
+
                     <button type="submit" class="btn text-white submit-btn" id="submit" name="password"
                         placeholder="Password">Sign
                         in</button>
-               
+
                 </div>
             </div>
             <div class="row my-2">
