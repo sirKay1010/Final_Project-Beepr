@@ -189,13 +189,17 @@ def chat():
 
         # Check the form that was submitted
         if request.form.get("username"):
+            #
+            error = None
+
             # Get friend data
             friend = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
             # Check if friend exists
             if not friend:
-                flash("User does not exist")
-                return redirect("/chat_page")
+                # flash("User does not exist")
+                error = "User does not exist"
+                return render_template("/chat_page")
 
             # Check if user is trying to self add
             if friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
@@ -213,6 +217,16 @@ def chat():
         # Intialize a list to hold current user's friends
         friends = []
 
+        # Intialize a list to current user's usernames
+        usernames = []
+
+        # Query database for users
+        users = db.execute("SELECT * FROM users")
+
+        for user in users:
+            # Add user's username to the usernames list
+            usernames.append(user["username"])
+
         # Query database for current user's friends
         friends_id = db.execute("SELECT * FROM friends WHERE user_id = ?", session["user_id"])
 
@@ -225,4 +239,4 @@ def chat():
                 # Add friend's username to the friends list
                 friends.append(user[0])
 
-        return render_template("chat_page.html", friends=friends)
+        return render_template("chat_page.html", friends=friends, usernames=usernames)

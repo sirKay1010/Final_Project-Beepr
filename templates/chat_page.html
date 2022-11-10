@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 
+{% block meta %}
+<!--  -->
+<meta id="users" data-users="{{ usernames }}">
+{% endblock %}
+
 {% block style %}
 
 <!-- Stylsheet for the chat page -->
@@ -123,8 +128,8 @@ GENERAL TODO:
                 <!-- Left Panel New chat bubble setion -->
                 <!-- <div class="border border-dark"> -->
                 <div class="dropstart">
-                    <a class="btn float" href="#" role="button" id="dropdownMenuLink"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="btn float" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             class="bi bi-plus-lg pt-2" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -159,25 +164,27 @@ GENERAL TODO:
                     <div class="offcanvas-body">
                         <div class="container text-center">
                             <!-- <a class="btn submit-btn text-white" aria-controls="addcontact_offcanvas" role="button" href="#addcontact_offcanvas" data-bs-toggle="offcanvas">Add Contact</a> -->
-                            <button class="submit-btn btn text-white" data-bs-target="#addcontact_offcanvas" aria-controls="addcontact_offcanvas" data-bs-toggle="offcanvas" id="contactform">Add contact</button>
+                            <button class="submit-btn btn text-white" data-bs-target="#addcontact_offcanvas"
+                                aria-controls="addcontact_offcanvas" data-bs-toggle="offcanvas" id="contactform">Add
+                                contact</button>
                             <!-- Style....................................-->
                         </div>
 
                         <!-- Display list of current user's friends -->
                         <div class="chatlist" id="contacts">
                             {% for friend in friends %}
-                                <div class="block">
-                                    <!-- <div class="imgBox"> -->
-                                    <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
-                                    <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" > -->
-                                    <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
-                                    <!-- </div> -->
-                                    <div class="details">
-                                        <div class="listHead">
-                                            <h4>{{ friend["username"] }}</h4>
-                                        </div>
+                            <div class="block">
+                                <!-- <div class="imgBox"> -->
+                                <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
+                                <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" > -->
+                                <!-- <img src="static/images/download.png" class="avatar" alt=""> -->
+                                <!-- </div> -->
+                                <div class="details">
+                                    <div class="listHead">
+                                        <h4>{{ friend["username"] }}</h4>
                                     </div>
                                 </div>
+                            </div>
                             {% endfor %}
                         </div>
                     </div>
@@ -202,19 +209,18 @@ GENERAL TODO:
                                     <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
                                         id="username" name="username" placeholder="Username" type="text">
                                 </div>
-
-
                                 <!-- <div class="mb-3">
                                     <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
                                         id="phone_number" name="phone_number" placeholder="phone number" type="text">
 
                                     </div> -->
-                                <button id="add_user_btn" class="submit-btn mx-auto my-1 w-auto btn text-white" type="submit">
+                                <button class="submit-btn mx-auto my-1 w-auto btn text-white" type="submit">
                                     <!--btn btn-->
                                     Add user
                                 </button>
                                 <!--STyle.....................-->
-                                <button class="btn btn-secondary" type="button" data-bs-dismiss="offcanvas" id="cancel">Cancel</button>
+                                <button class="btn btn-secondary" type="button"
+                                    data-bs-dismiss="offcanvas">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -247,14 +253,14 @@ GENERAL TODO:
 
                         <div class="col">
                             <!-- <div class="row border justify-content-start m-auto"> -->
-                                <div class="row fs-5">
-                                    Jerry
-                                    <!-- <p class="text-start">Jerry</p> -->
-                                </div>
-                                <div class="row text-muted">
-                                    online
-                                    <!-- <p class="text-start">online</p> -->
-                                </div>
+                            <div class="row fs-5">
+                                Jerry
+                                <!-- <p class="text-start">Jerry</p> -->
+                            </div>
+                            <div class="row text-muted">
+                                online
+                                <!-- <p class="text-start">online</p> -->
+                            </div>
                             <!-- </div> -->
                         </div>
 
