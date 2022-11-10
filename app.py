@@ -189,21 +189,23 @@ def chat():
 
         # Check the form that was submitted
         if request.form.get("username"):
-            #
-            error = None
-
             # Get friend data
             friend = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
             # Check if friend exists
             if not friend:
-                # flash("User does not exist")
-                error = "User does not exist"
-                return render_template("/chat_page")
+                flash("User does not exist")
+                return redirect("/chat_page")
 
             # Check if user is trying to self add
-            if friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
+            elif friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
                 flash("You can not add yourself")
+                return redirect("/chat_page")
+
+            # Check if user already has friend
+            elif db.execute("SELECT friends_id FROM friends WHERE friends_id = ? AND user_id = ?", friend[0]["id"], session["user_id"]):
+                # Add a feature to select the friend from the list of frieds when this happens
+                flash("You already have this user added")
                 return redirect("/chat_page")
 
             # Insert friend into database
