@@ -45,10 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-
 // /* javascript file for the chat_page */
 
 // // form that adds new contacts / friends
