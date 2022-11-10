@@ -89,3 +89,26 @@ CREATE TABLE friends (
 				usernameValidated = true;
 			}
 		}
+
+....................................................BeepR Tables.................................................................
+
+CREATE TABLE friends (
+user_id INTEGER UNIQUE NOT NULL,
+friends_id TEXT NOT NULL,
+FOREIGN KEY(user_id) REFERENCES users(id),
+FOREIGN KEY(friends_id) REFERENCES users(id)
+);
+CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        name TEXT,
+        username TEXT UNIQUE,
+        email TEXT UNIQUE,
+        password_hash TEXT,
+        bio TEXT DEFAULT "empty"
+);
+CREATE TABLE messages (
+    sender_id INTEGER,
+    receiver_id INTEGER,
+    message TEXT,
+    time TIMESTAMP;
+);
