@@ -32,6 +32,30 @@ Editor: Occurrences Highlight
 
 echo "This Repository contains all files involved in the development of "Beepr" which includes the Static, templates and flask_session folders, app.py (python application file) and beepr.db (a database file). BeepR is a simple, userfriendly chat app developed as a final project for Havards CS50x course in 2022." > README.md
 
+BeepR Tables:.......................................................................
+USERS TABLE:
+
+CREATE TABLE users(
+id PRIMARY KEY,
+name TEXT,
+username TEXT UNIQUE,
+phone_number TEXT UNIQUE,
+email TEXT UNIQUE,
+password_hash TEXT,
+bio TEXT DEFAULT "empty"
+);
+
+FRIENDS TABLE:
+CREATE TABLE friends (
+    user_id INTEGER NOT NULL,
+    friends_id INTEGER NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(friends_id) REFERENCES users(id)
+);
+
+
+
+.........................................................................
 <html>
   <body>
     <button onclick="create()">Create Heading</button>

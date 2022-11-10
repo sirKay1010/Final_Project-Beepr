@@ -23,8 +23,6 @@ Session(app)
 db = SQL("sqlite:///beepr.db")
 
 # request handling
-
-
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -180,10 +178,67 @@ def logout():
 
 # chat_page route
 @app.route("/chat_page", methods=["GET", "POST"])
-@login_required
+# @login_required
 def chat():
+    #
+    # Temporarily assign a session id
+    session["user_id"] = 2
+
     """ Modify chat view function """
     if request.method == "POST":
-        pass
+
+        # Check the form that was submitted
+        if request.form.get("username"):
+            # Get friend data
+            friend = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+
+            # Check if friend exists
+            if not friend:
+                flash("User does not exist")
+                return redirect("/chat_page")
+
+            # Check if user is trying to self add
+            elif friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
+                flash("You can not add yourself")
+                return redirect("/chat_page")
+
+            # Check if user already has friend
+            elif db.execute("SELECT friends_id FROM friends WHERE friends_id = ? AND user_id = ?", friend[0]["id"], session["user_id"]):
+                # Add a feature to select the friend from the list of frieds when this happens
+                flash("You already have this user added")
+                return redirect("/chat_page")
+
+            # Insert friend into database
+            db.execute("INSERT INTO friends (user_id, friends_id) VALUES (?, ?)", session["user_id"], friend[0]["id"])
+
+            #
+            return redirect("/chat_page")
+
+    # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("chat_page.html")
+        # Intialize a list to hold current user's friends
+        friends = []
+
+        # Intialize a list to current user's usernames
+        usernames = []
+
+        # Query database for users
+        users = db.execute("SELECT * FROM users")
+
+        for user in users:
+            # Add user's username to the usernames list
+            usernames.append(user["username"])
+
+        # Query database for current user's friends
+        friends_id = db.execute("SELECT * FROM friends WHERE user_id = ?", session["user_id"])
+
+        # Check if user has friends
+        if friends_id:
+            # Query database for the usernames of the friends
+            for friend_id in friends_id:
+                user = db.execute("SELECT * FROM users WHERE id = ?", friend_id["friends_id"])
+
+                # Add friend's username to the friends list
+                friends.append(user[0])
+
+        return render_template("chat_page.html", friends=friends, usernames=usernames)
