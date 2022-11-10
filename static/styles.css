@@ -65,14 +65,6 @@
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 
-/* Fix this, for a simple animation */
-/* .hamburger-menu:hover {
-    width: 20px;
-    height: 6px;
-    background-color: #929ad9;
-    margin: 6px 0;
-} */
-
 .search-container {
     display: flex;
     align-items: center;
@@ -87,7 +79,3 @@
     border: none;
     margin-left: 5px;
 }
-
-/* "https://avatars.dicebear.com/api/human/123.svg" */
-
-
