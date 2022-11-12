@@ -1,5 +1,5 @@
-import os
 import re
+import json
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -7,9 +7,15 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required
+from flask_socketio import SocketIO, send
 
 # Configure application
 app = Flask(__name__)
+
+# Secret Key configuration
+app.config['SECRET_KEY'] = '@secret321'
+socketio = SocketIO(app, cors_allowed_origins="*")
+# socketio = SocketIO(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -47,9 +53,11 @@ def register():
     usernames_list = []
     email_list = []
     usernames = db.execute("SELECT username, email FROM users")
-    for userdata in usernames:
-        usernames_list.append(userdata["username"])
-        email_list.append(userdata["email"])
+    usernames = json.dumps(usernames, indent=1)
+    print(usernames)
+    # for userdata in usernames:
+    #     usernames_list.append(usernames[userdata]["username"])
+    #     email_list.append(userdata["email"])
 
     if request.method == "POST":
         # store a new users info
@@ -178,11 +186,8 @@ def logout():
 
 # chat_page route
 @app.route("/chat_page", methods=["GET", "POST"])
-# @login_required
+@login_required
 def chat():
-    #
-    # Temporarily assign a session id
-    session["user_id"] = 2
 
     """ Modify chat view function """
     if request.method == "POST":
@@ -242,3 +247,19 @@ def chat():
                 friends.append(user[0])
 
         return render_template("chat_page.html", friends=friends, usernames=usernames)
+
+
+# @socketio.on('my event')
+# def handle_my_custom_event(json):
+#     print('received json: ' + str(json))
+
+
+@socketio.on("message")
+def handle_message(message):
+    if message != "Connected!":
+        send(message, broadcast=True)
+
+
+
+if __name__ == '__main__':
+    socketio.run(app, host="localhost")

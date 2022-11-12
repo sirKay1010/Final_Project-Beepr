@@ -332,9 +332,7 @@ GENERAL TODO:
             </div>
 
             <!-- Chat display area -->
-            <div class="row">
-
-            </div>
+            <div class="row" id="chat"></div>
 
             <!-- Bottom chat row -->
             <div class="row border-top p-2 justify-content-center" style="position: absolute; bottom: 0; width: 100%">
@@ -357,14 +355,14 @@ GENERAL TODO:
                         <!-- Chat input field -->
                         <div class="col">
                             <div>
-                                <input type="text" class="form-control rounded-pill" placeholder="Type a message">
+                                <input id="chat_input" type="text" class="form-control rounded-pill" placeholder="Type a message" autocomplete="off">
                             </div>
                         </div>
 
                         <!-- Right of chat field -->
                         <div class="col-1">
                             <div class="row">
-                                <button class="btn" type="button">
+                                <button id="chat_button" class="btn" type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-send-fill" viewBox="0 0 16 16">
                                         <path

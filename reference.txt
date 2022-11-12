@@ -36,8 +36,11 @@ echo "This Repository contains all files involved in the development of "Beepr" 
 		// Validate duplicate username
 		const username = document.querySelector("#username");
 		const usernameErrorMessage = document.querySelector("#usernameErrorMessage");
+		usernamess = JSON.parse({{usernames | tojson}});
+		alert(usernamess.map(function(data){ return data.username}).join(""));
+		// alert( {{ usernames | tojson }});
 		username.onkeyup = function () {
-			if ( {{ usernames_list | tojson }}.includes(username.value)){
+			if ( {{ usernames | tojson }}.includes(username.value)){
 				username.style.borderColor = "ff9494";
 				username.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
 				usernameErrorMessage.innerHTML = "Username already exists!";
@@ -51,7 +54,6 @@ echo "This Repository contains all files involved in the development of "Beepr" 
 				usernameValidated = true;
 			}
 		}
-
 ....................................................BeepR Tables.................................................................
 
 CREATE TABLE users (
