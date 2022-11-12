@@ -53,11 +53,11 @@ def register():
     usernames_list = []
     email_list = []
     usernames = db.execute("SELECT username, email FROM users")
-    usernames = json.dumps(usernames, indent=1)
+    # usernames = json.dumps(usernames, indent=1)
     print(usernames)
-    # for userdata in usernames:
-    #     usernames_list.append(usernames[userdata]["username"])
-    #     email_list.append(userdata["email"])
+    for userdata in usernames:
+        usernames_list.append(userdata["username"])
+        email_list.append(userdata["email"])
 
     if request.method == "POST":
         # store a new users info

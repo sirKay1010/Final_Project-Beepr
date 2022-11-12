@@ -336,7 +336,7 @@ GENERAL TODO:
 
             <!-- Bottom chat row -->
             <div class="row border-top p-2 justify-content-center" style="position: absolute; bottom: 0; width: 100%">
-                <!-- Left of chat field -->
+                <!-- Left of chat field (Emoji button)-->
                 <div class="col-1">
                     <div class="row">
                         <button class="btn" type="button">
@@ -350,7 +350,8 @@ GENERAL TODO:
                     </div>
                 </div>
 
-                <form class="col">
+                <!-- <form class="col"> -->
+                <div class="col">
                     <div class="row">
                         <!-- Chat input field -->
                         <div class="col">
@@ -359,7 +360,7 @@ GENERAL TODO:
                             </div>
                         </div>
 
-                        <!-- Right of chat field -->
+                        <!-- Right of chat field (Send message button) -->
                         <div class="col-1">
                             <div class="row">
                                 <button id="chat_button" class="btn" type="button">
@@ -372,12 +373,11 @@ GENERAL TODO:
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+                <!-- </form> -->
             </div>
-
-            <!-- Row Containing Left Panel and Main Chat Sections -->
         </div>
-        <!-- Main Page Container -->
+        <!-- Main Page Container END -->
     </div>
 
     {% endblock%}

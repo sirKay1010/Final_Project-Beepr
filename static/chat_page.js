@@ -64,3 +64,11 @@ document.querySelector("#chat_button").onclick = function() {
     input.value = "";
     console.log(data)
 };
+
+document.querySelector("#chat_input").addEventListener("keypress", (event) => {
+    // if (event.keyCode == 13){
+        // document.querySelector("#chat_button").click();
+    if (event.key == "Enter"){
+        document.querySelector("#chat_button").click();
+    }
+})
