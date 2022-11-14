@@ -181,7 +181,8 @@ GENERAL TODO:
                                 <!-- </div> -->
                                 <div class="details">
                                     <div class="listHead">
-                                        <h4>{{ friend["username"] }}</h4>
+                                        <h4 >{{ friend["username"] }}</h4>
+                                        <h4 class="friends_id" hidden>{{ friend["id"] }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -253,12 +254,12 @@ GENERAL TODO:
 
                         <div class="col">
                             <!-- <div class="row border justify-content-start m-auto"> -->
-                            <div class="row fs-5">
-                                Jerry
+                            <div class="row fs-5" id="current_chat">
+                                <!-- Jerry -->
                                 <!-- <p class="text-start">Jerry</p> -->
                             </div>
                             <div class="row text-muted">
-                                online
+                                Always online
                                 <!-- <p class="text-start">online</p> -->
                             </div>
                             <!-- </div> -->
@@ -332,11 +333,11 @@ GENERAL TODO:
             </div>
 
             <!-- Chat display area -->
-            <div class="row" id="chat"></div>
+            <div class="" id="chat"></div>
 
             <!-- Bottom chat row -->
             <div class="row border-top p-2 justify-content-center" style="position: absolute; bottom: 0; width: 100%">
-                <!-- Left of chat field -->
+                <!-- Left of chat field (Emoji)-->
                 <div class="col-1">
                     <div class="row">
                         <button class="btn" type="button">
@@ -350,7 +351,7 @@ GENERAL TODO:
                     </div>
                 </div>
 
-                <form class="col">
+                <div class="col">
                     <div class="row">
                         <!-- Chat input field -->
                         <div class="col">
@@ -359,7 +360,7 @@ GENERAL TODO:
                             </div>
                         </div>
 
-                        <!-- Right of chat field -->
+                        <!-- Right of chat field (Chat Send Button)-->
                         <div class="col-1">
                             <div class="row">
                                 <button id="chat_button" class="btn" type="button">
@@ -372,7 +373,7 @@ GENERAL TODO:
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
             <!-- Row Containing Left Panel and Main Chat Sections -->
@@ -380,4 +381,7 @@ GENERAL TODO:
         <!-- Main Page Container -->
     </div>
 
+    <script>
+        const user_ID = `{{session["user_id"]}}`;
+    </script>
     {% endblock%}

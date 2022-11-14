@@ -38,29 +38,97 @@ input.addEventListener("keyup", () => {
     //     event.stopPropagation(e)
     // });
 
+// Set enter key to send message
+document.querySelector("#chat_input").addEventListener("keypress", (event) => {
+    if (event.key == "Enter"){
+        document.querySelector("#chat_button").click();
+    }
+});
 
-// Socket Implementation
+// create list for rooms
+let room_pairs = []
+// Create room variable
+let room;
+
+//  beginning of  Socket Implementation
 var socket = io.connect("http://localhost:5000");
+
 socket.on('connect', function() {
     socket.send("Connected!");
     console.log("Hello");
 });
 
-socket.on("message", function(data) {
-    // Vanilla Javascript
-    // let p = document.createElement("p");
-    // document.querySelector("#chat").append(p.innerHTML = data);
-
-    // Ibrahims Research script
-    // document.querySelector("#chat").append(`<p> + data + </p>`);
-
-    // jQuery
-    $("#chat").append($("<p>").text(data));
-});
-
 document.querySelector("#chat_button").onclick = function() {
     let input = document.querySelector("#chat_input");
-    socket.send(input.value);
+    socket.send({"msg": input.value, "user_ID": user_ID, "room": room});
     input.value = "";
-    console.log(data)
-};
+}
+
+// message event
+socket.on("message", function(data) {
+    // Vanilla Javascript
+    let p = document.createElement("p");
+    let br = document.createElement("br");
+    p.innerHTML = data["msg"] + br.outerHTML;
+    document.querySelector("#chat").append(p);
+});
+
+
+// room selection AND Clicking on a new chat
+document.querySelectorAll(".block").forEach(friend => {
+    friend.addEventListener("click", () => {
+        // set the name of current chat
+        const current_chat = document.querySelector("#current_chat");
+        current_chat.innerHTML = friend.querySelector("h4").innerHTML;
+        friend_id = friend.querySelector(".friends_id").innerHTML;
+
+        // If a room already exists
+        if (room_pairs.includes(user_ID + friend_id) || room_pairs.includes(friend_id + user_ID) ){
+            alert("already exists");
+            // console.log(room_pairs);
+            // leaveRoom(room);
+            joinRoom(rooms);
+        }
+        //create a new room
+        else{
+            let newRoom = user_ID + friend_id; 109
+            if (!room_pairs.includes(newRoom)){
+                room_pairs.push(newRoom);
+            }
+            // room_pairs.push(newRoom);
+            // alert(room_pairs);
+            console.log(room_pairs);
+            leaveRoom(room);
+            joinRoom(newRoom);
+            room = newRoom;
+        }
+
+        // let newRoom = current_chat.innerHTML;
+        // if (newRoom == room){
+        //     msg = `You dey this room already boss!`
+        //     systemMessage(msg);
+        // }
+        // else {
+        //     leaveRoom(room);
+        //     joinRoom(newRoom);
+        //     room = newRoom;
+        // }
+    });
+});
+
+// Create functions for leave room, join room and system message
+function leaveRoom(room){
+    socket.emit("leave", {"user_ID": user_ID, "room": room});
+}
+
+function joinRoom(room){
+    socket.emit("join", {"user_ID": user_ID, "room": room});
+    // clear chat section
+    document.querySelector("#chat").innerHTML = ""
+}
+
+function systemMessage(msg){
+    const p = document.createElement("p");
+    p.innerHTML = msg;
+    document.querySelector("#chat").append(p);
+}

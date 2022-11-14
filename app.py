@@ -7,7 +7,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send, emit, join_room, leave_room
 
 # Configure application
 app = Flask(__name__)
@@ -24,6 +24,9 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+# LIST TO HOLD NAME OF ROOMS
+ROOMS = []
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///beepr.db")
@@ -54,7 +57,7 @@ def register():
     email_list = []
     usernames = db.execute("SELECT username, email FROM users")
     usernames = json.dumps(usernames, indent=1)
-    print(usernames)
+
     # for userdata in usernames:
     #     usernames_list.append(usernames[userdata]["username"])
     #     email_list.append(userdata["email"])
@@ -248,16 +251,26 @@ def chat():
 
         return render_template("chat_page.html", friends=friends, usernames=usernames)
 
-
-# @socketio.on('my event')
-# def handle_my_custom_event(json):
-#     print('received json: ' + str(json))
-
-
+# beginning of socket implementation
+# bucket for messaging
 @socketio.on("message")
 def handle_message(message):
     if message != "Connected!":
-        send(message, broadcast=True)
+        send({"msg": message["msg"], "user_ID": message["user_ID"],}, room=message["room"])
+
+
+# bucket to leave a room
+@socketio.on("leave")
+def leave(data):
+    leave_room(data["room"])
+    send({"msg": "User " + data["user_ID"] + " has left the " + data["room"] + " room"}, room=data["room"])
+
+
+# bucket to join a room
+@socketio.on("join")
+def join(data):
+    join_room(data["room"])
+    send({"msg": "User " + data["user_ID"] + " has joined the " + data["room"]  + " room"}, room=data["room"])
 
 
 
