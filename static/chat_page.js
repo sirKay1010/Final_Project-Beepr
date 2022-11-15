@@ -59,9 +59,11 @@ socket.on('connect', function() {
 });
 
 document.querySelector("#chat_button").onclick = function() {
+    console.log(room);
     let input = document.querySelector("#chat_input");
     socket.send({"msg": input.value, "user_ID": user_ID, "room": room});
     input.value = "";
+    console.log(room);
 }
 
 // message event
@@ -77,42 +79,25 @@ socket.on("message", function(data) {
 // room selection AND Clicking on a new chat
 document.querySelectorAll(".block").forEach(friend => {
     friend.addEventListener("click", () => {
-        // set the name of current chat
+        // Get the name of current chat
         const current_chat = document.querySelector("#current_chat");
         current_chat.innerHTML = friend.querySelector("h4").innerHTML;
+
+        // Get the friends ID to chat with
         friend_id = friend.querySelector(".friends_id").innerHTML;
 
-        // If a room already exists
-        if (room_pairs.includes(user_ID + friend_id) || room_pairs.includes(friend_id + user_ID) ){
-            alert("already exists");
-            // console.log(room_pairs);
-            // leaveRoom(room);
-            joinRoom(rooms);
-        }
-        //create a new room
-        else{
-            let newRoom = user_ID + friend_id; 109
-            if (!room_pairs.includes(newRoom)){
-                room_pairs.push(newRoom);
-            }
-            // room_pairs.push(newRoom);
-            // alert(room_pairs);
-            console.log(room_pairs);
-            leaveRoom(room);
-            joinRoom(newRoom);
-            room = newRoom;
-        }
+        // convert users and friends ID to int
+        users_User_ID = parseInt(user_ID);
+        friend_id = parseInt(friend_id);
 
-        // let newRoom = current_chat.innerHTML;
-        // if (newRoom == room){
-        //     msg = `You dey this room already boss!`
-        //     systemMessage(msg);
-        // }
-        // else {
-        //     leaveRoom(room);
-        //     joinRoom(newRoom);
-        //     room = newRoom;
-        // }
+        // calculate unique value for a room for user and friend
+        room = ((users_User_ID + friend_id + 1)*(users_User_ID + friend_id) / 2) + (users_User_ID*friend_id)
+
+        // convert unique value to string
+        room = room.toString()
+
+        // Join the room
+        joinRoom(room);
     });
 });
 
@@ -127,8 +112,9 @@ function joinRoom(room){
     document.querySelector("#chat").innerHTML = ""
 }
 
-function systemMessage(msg){
-    const p = document.createElement("p");
-    p.innerHTML = msg;
-    document.querySelector("#chat").append(p);
-}
+// function systemMessage(msg){
+//     // Display a system message
+//     const p = document.createElement("p");
+//     p.innerHTML = msg;
+//     document.querySelector("#chat").append(p);
+// }

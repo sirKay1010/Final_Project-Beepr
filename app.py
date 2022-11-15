@@ -26,7 +26,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # LIST TO HOLD NAME OF ROOMS
-ROOMS = []
+# ROOMS = [0]
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///beepr.db")
@@ -271,7 +271,6 @@ def leave(data):
 def join(data):
     join_room(data["room"])
     send({"msg": "User " + data["user_ID"] + " has joined the " + data["room"]  + " room"}, room=data["room"])
-
 
 
 if __name__ == '__main__':
