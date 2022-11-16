@@ -77,15 +77,20 @@ GENERAL TODO:
                     Beep<span style="color:#872eb8">R</span>
                 </div>
 
-                <!-- Vertical 3 dots Menu anchor -->
+                <!-- Logout Icon -->
                 <div class="col-3">
+                    <a href="/logout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                        </svg>
+                    </a>
+<!--
+                    Vertical 3 dots Menu anchor COMMENT
+                    (FEATURE ON HOLD)
                     <div class="dropstart">
                         <button class="reset-btn gray-hover-highlight-btn" type="button" id="settings-dropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/2560px-A_black_image.jpg" style="width: 42px;" alt="profile img" class="rounded-circle"> -->
-                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                            </svg> -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey"
                                 class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                 <path
@@ -99,13 +104,15 @@ GENERAL TODO:
                             <li><a class="dropdown-item" href="#">Log out</a></li>
                         </ul>
                     </div>
+-->
                 </div>
             </div>
-            <!-- Left Panel Search bar -->
+<!--
+            Left Panel Search bar COMMENT
             <div class="row py-2">
                 <div class="container-fluid">
                     <div class="row">
-                        <!-- <form class=""> -->
+                        <form class=""> COMMENT
                         <div class="col-10">
                             <input type="text" class="form-control rounded-pill" placeholder="Search"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
@@ -117,10 +124,11 @@ GENERAL TODO:
                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg>
                         </div>
-                        <!-- </form> -->
+                        </form> COMMENT
                     </div>
                 </div>
             </div>
+-->
             <!--Left Panel Friends Chat section -->
             <div class="row left-panel-chat-section">
                 <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;"> -->
@@ -270,8 +278,19 @@ GENERAL TODO:
 
                 <!-- More options section -->
                 <div class="col">
+                    <!-- Logout Icon -->
                     <div class="row m-auto justify-content-end">
-                        <!-- Search off-canvas -->
+                        <div class="col-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                        </div>
+                    </div>
+<!--
+                    (FEATURE ON HOLD)
+                    <div class="row m-auto justify-content-end">
+                        Search off-canvas COMMENT
                         <div class="col-1">
                             <div class="row">
                                 <button class="btn" type="button" data-bs-toggle="offcanvas"
@@ -291,13 +310,13 @@ GENERAL TODO:
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="offcanvas-body">
-                                        <!-- Search input field -->
+                                        Search input field COMMENT
                                         <div class="container">
                                             <input type="text" class="form-control mx-auto rounded-pill"
                                                 placeholder="Search">
                                         </div>
 
-                                        <!-- Placeholder text -->
+                                        Placeholder text COMMENT
                                         <div
                                             class="container align-items-center justify-content-center text-center mt-5">
                                             <div class="container ">
@@ -309,7 +328,7 @@ GENERAL TODO:
                             </div>
                         </div>
 
-                        <!-- Vertical 3 dots Menu anchor -->
+                        Vertical 3 dots Menu anchor COMMENT
                         <div class="col-1">
                             <div class="dropstart row">
                                 <button class="btn" type="button" id="settings-dropdown" data-bs-toggle="dropdown"
@@ -330,6 +349,7 @@ GENERAL TODO:
                         </div>
                     </div>
                 </div>
+-->
             </div>
 
             <!-- Chat display area -->
@@ -337,7 +357,9 @@ GENERAL TODO:
 
             <!-- Bottom chat row -->
             <div class="row border-top p-2 justify-content-center" style="position: absolute; bottom: 0; width: 100%">
-                <!-- Left of chat field (Emoji)-->
+<!--
+                FEATURE ON HOLD
+                Left of chat field (Emoji) COMMENT
                 <div class="col-1">
                     <div class="row">
                         <button class="btn" type="button">
@@ -350,6 +372,7 @@ GENERAL TODO:
                         </button>
                     </div>
                 </div>
+-->
 
                 <div class="col">
                     <div class="row">
@@ -382,6 +405,6 @@ GENERAL TODO:
     </div>
 
     <script>
-        const user_ID = `{{session["user_id"]}}`;
+        const user_ID = `{{ session["user_id"] }}`;
     </script>
     {% endblock%}
