@@ -49,7 +49,7 @@ document.querySelector("#chat_input").addEventListener("keypress", (event) => {
 let room_pairs = []
 // Create room variable
 let room;
-
+let friend_id;
 //  beginning of  Socket Implementation
 var socket = io.connect("http://localhost:5000");
 
@@ -58,15 +58,25 @@ socket.on('connect', function() {
     console.log("Hello");
 });
 
+// User sending a message
 document.querySelector("#chat_button").onclick = function() {
     console.log(room);
     let input = document.querySelector("#chat_input");
-    socket.send({"msg": input.value, "user_ID": user_ID, "room": room});
+    socket.send({"msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id});
     input.value = "";
-    console.log(room);
 }
 
-// message event
+// previous messages event
+socket.on("previous messages", function(data) {
+    for (message of data) {
+        let p = document.createElement("p");
+        let br = document.createElement("br");
+        p.innerHTML = message["message"] + br.outerHTML;
+        document.querySelector("#chat").append(p);
+    }
+});
+
+// message event. We can't
 socket.on("message", function(data) {
     // Vanilla Javascript
     let p = document.createElement("p");
@@ -91,10 +101,10 @@ document.querySelectorAll(".block").forEach(friend => {
         friend_id = parseInt(friend_id);
 
         // calculate unique value for a room for user and friend
-        room = ((users_User_ID + friend_id + 1)*(users_User_ID + friend_id) / 2) + (users_User_ID*friend_id)
+        room = uniqueRoom(users_User_ID, friend_id);
 
         // convert unique value to string
-        room = room.toString()
+        room = room.toString();
 
         // Join the room
         joinRoom(room);
@@ -107,9 +117,14 @@ function leaveRoom(room){
 }
 
 function joinRoom(room){
-    socket.emit("join", {"user_ID": user_ID, "room": room});
+    socket.emit("join", {"user_ID": user_ID, "friend_id": friend_id, "room": room});
     // clear chat section
     document.querySelector("#chat").innerHTML = ""
+}
+
+// this function creates a unique number from two numbers using a modified cantor pairing function
+function uniqueRoom(id_1, id_2) {
+    return ((id_1 + id_2 + 1)*(id_1 + id_2) / 2) + (id_1 * id_2);
 }
 
 // function systemMessage(msg){
