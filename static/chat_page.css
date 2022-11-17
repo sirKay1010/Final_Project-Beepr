@@ -96,8 +96,15 @@
     animation-name: glide-up;
     animation-duration: 0.2s;
     animation-timing-function: ease-out;
+
+
 }
-.left-panel-chat-section:hover::after .float {
+
+.float::after{
+    transform: translateY(-10%);
+    transition: all 4s;
+}
+/* .left-panel-chat-section:hover::after .float {
     display: block;
     position: absolute;
     bottom: 20px;
@@ -112,7 +119,8 @@
     animation-name: glide-down;
     animation-duration: 0.2s;
     animation-timing-function: ease-out;
-}
+
+} */
 
 @keyframes glide-up{
     from{bottom: -40px;}
@@ -135,3 +143,11 @@
     box-shadow: 2px 2px 3px #999;
     text-decoration: none;
 } */
+
+#logout-btn {
+    color: #000000;
+}
+
+#logout-btn:hover {
+    /* color: #000000; */
+}
