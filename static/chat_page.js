@@ -45,10 +45,6 @@ document.querySelector("#chat_input").addEventListener("keypress", (event) => {
     }
 });
 
-document.querySelector("#logout-btn").onclick = function() {
-    alert("You no wan beep again?");
-}
-
 // create list for rooms
 let room_pairs = []
 // Create room variable
