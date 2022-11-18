@@ -231,15 +231,18 @@ def chat():
         # Intialize a list to hold current user's friends
         friends = []
 
-        # Intialize a list to current user's usernames
-        usernames = []
+        # # Intialize a list to current user's usernames
+        # usernames = []
 
-        # Query database for users
-        users = db.execute("SELECT * FROM users")
+        # # Query database for users
+        # users = db.execute("SELECT * FROM users")
 
-        for user in users:
-            # Add user's username to the usernames list
-            usernames.append(user["username"])
+        # for user in users:
+        #     # Add user's username to the usernames list
+        #     usernames.append(user["username"])
+
+        # # Query database for current user's data
+        user = db.execute("SELECT * FROM users WHERE id = ?", 1)
 
         # Query database for current user's friends
         friends_id = db.execute(
@@ -255,7 +258,7 @@ def chat():
                 # Add friend's username to the friends list
                 friends.append(user[0])
 
-        return render_template("chat_page.html", friends=friends, usernames=usernames)
+        return render_template("chat_page.html", friends=friends, user=user)
 
 # beginning of socket implementation
 # bucket for messaging
