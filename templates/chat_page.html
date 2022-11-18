@@ -46,7 +46,7 @@ GENERAL TODO:
                     <button class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#profile_section" aria-controls="profile_section">
                         <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                                 class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                                 <path fill-rule="evenodd"
@@ -67,9 +67,9 @@ GENERAL TODO:
                     <!-- Body -->
                     <div class="offcanvas-body">
                         <div class="container">
-                            <!-- Profile picture -->
-                            <div class="row py-3">
+                            <div class="row py-2">
                                 <div class="col">
+                                    <!-- Profile picture -->
                                     <div class="row pb-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"
                                             fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -78,10 +78,11 @@ GENERAL TODO:
                                                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                                         </svg>
                                     </div>
+                                    <!-- Name -->
                                     <div class="row pb-1 align-content-center">
                                         <h4>Njom Jeremiah Amen</h4>
                                     </div>
-
+                                    <!-- Bio -->
                                     <div class="row text-muted align-content-center">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                                             tempor incididunt.</p>
@@ -89,8 +90,10 @@ GENERAL TODO:
                                 </div>
                             </div>
 
+                            <!-- User details -->
+                            <!-- Username card -->
                             <div class="row py-2 mb-3 border-bottom justify-content-center align-items-center">
-                                <div class="col-2">
+                                <div class="col-2 text-muted">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                                         class="bi bi-person-fill" viewBox="0 0 16 16">
                                         <path
@@ -102,8 +105,9 @@ GENERAL TODO:
                                 </div>
                             </div>
 
+                            <!-- Email card -->
                             <div class="row py-2 mb-3 border-bottom justify-content-center align-items-center">
-                                <div class="col-2">
+                                <div class="col-2 text-muted">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                                         class="bi bi-at" viewBox="0 0 16 16">
                                         <path
@@ -115,44 +119,39 @@ GENERAL TODO:
                                 </div>
                             </div>
 
+                            <!-- Phone number card -->
                             <div class="row py-2 mb-3 border-bottom justify-content-center align-items-center">
-                                <div class="col-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                                      </svg>
+                                <div class="col-2 text-muted">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                                        class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                                    </svg>
                                 </div>
                                 <div class="col text-start">
                                     <h5>08108377727</h5>
                                 </div>
                             </div>
-                            <!-- <div class="pb-3 justify-content-start">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h6 class="card-subtitle text-muted pb-3">Username</h6>
-                                    <p class="card-text">Dr3dd</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <h5>Title</h5>
+
+                            <!-- Edit profile button -->
+                            <div class="row mt-4">
+                                <div class="col-8">
+                                    <div class="row">
+                                        <a class="btn btn-outline-dark rounded" role="button" href="#">Edit profile</a>
                                     </div>
-                                    <p class="card-title">username : Dr3dd</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row pb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <h5>Title</h5>
+                                <div class="col mx-2">
+                                    <div class="row">
+                                        <a class="btn btn-outline-danger rounded" role="button" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                            </svg>
+                                        </a>
                                     </div>
-                                    <p class="card-title">username : Dr3dd</p>
                                 </div>
                             </div>
-                        </div> -->
                         </div>
                     </div>
                 </div>

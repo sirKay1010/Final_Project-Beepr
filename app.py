@@ -242,7 +242,7 @@ def chat():
         #     usernames.append(user["username"])
 
         # # Query database for current user's data
-        user = db.execute("SELECT * FROM users WHERE id = ?", 1)
+        user = db.execute("SELECT * FROM users WHERE id = ?", session["user_id"])
 
         # Query database for current user's friends
         friends_id = db.execute(
@@ -258,6 +258,7 @@ def chat():
                 # Add friend's username to the friends list
                 friends.append(user[0])
 
+        print(friends)
         return render_template("chat_page.html", friends=friends, user=user)
 
 # beginning of socket implementation
