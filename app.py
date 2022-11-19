@@ -187,7 +187,11 @@ def login():
 # Logout route
 @app.route("/logout")
 def logout():
-    """ Write Logout view function """
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/onboarding")
 
 
 # chat_page route

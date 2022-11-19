@@ -25,6 +25,7 @@
 	var emailValidated = false;
 	var passwordValidated = false;
 	var usernameValidated = false;
+	let time_ID;
 	document.addEventListener("DOMContentLoaded", function () {
 		// Select and disable button
 		const register_btn = document.getElementById("register_btn");
@@ -35,7 +36,7 @@
 		// Add an input event listener for each input field
 		for (const input of inputs) {
 			input.addEventListener("input", function(){
-				setTimeout(validateForm, 2551, inputs);
+				setTimeout(validateForm, 1801, inputs);
 			});
 		}
 
@@ -47,9 +48,10 @@
 		const emailErrorMessage = document.querySelector("#emailErrorMessage");
 		const ErrorMessageForEmail = "Invalid Email!"
 		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-		email.onkeyup = function () {
+		email.onkeypress = function () {
 			resetValidation(email, emailErrorMessage);
-			setTimeout(validateEmail, 2500, emailRegEx, email, emailErrorMessage, ErrorMessageForEmail);
+			clearTimeout(time_ID);
+			time_ID = setTimeout(validateEmail, 1800, emailRegEx, email, emailErrorMessage, ErrorMessageForEmail);
 		}
 
 		// Validate password
@@ -57,9 +59,10 @@
 		const passwordErrorMessage = document.querySelector("#passwordErrorMessage");
 		const ErrorMessageForPassword = "Invalid Password!"
 		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-		password.onkeyup = function () {
+		password.onkeypress = function () {
 			resetValidation(password, passwordErrorMessage);
-			setTimeout(validatePassword, 2500, passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword);
+			clearTimeout(time_ID);
+			time_ID = setTimeout(validatePassword, 1800, passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword);
 		}
 	});
 
@@ -84,11 +87,6 @@
 	function validateEmail(emailRegEx, email, emailErrorMessage, ErrorMessageForEmail) {
 		if (!emailRegEx.test(email.value)) {
 			isvalidated(email, emailErrorMessage, ErrorMessageForEmail);
-			// email.style.borderColor = "#ff9494";
-			// email.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
-			// emailErrorMessage.style.display = "flex";
-			// emailErrorMessage.innerHTML = "Invalid Email!";
-			// emailValidated = false;
 		}
 		else {
 			emailValidated = true;
@@ -98,11 +96,6 @@
 	function validatePassword(passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword) {
 		if (!passwordRegEx.test(password.value)) {
 			isvalidated(password, passwordErrorMessage, ErrorMessageForPassword);
-			// password.style.borderColor = "#ff9494";
-			// password.style.boxShadow = "0 0 0 0.2rem rgba(255, 148, 148, 1)";
-			// passwordErrorMessage.style.display = "flex";
-			// passwordErrorMessage.innerHTML = "Invalid password!";
-			// passwordValidated = false;
 		}
 		else {
 			passwordValidated = true;
