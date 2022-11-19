@@ -37,23 +37,25 @@ GENERAL TODO:
     <div class="row app-body">
 
         <!-- Left Panel Section -->
-        <div class="col-3 left-panel-section border-end border-end-secondary">
+        <div class="col left-panel-section border-end border-end-secondary">
             <!-- Profile/Logo/hamburger menu -->
             <div class="row shadow-sm align-items-center" style="height: 3.5rem;">
 
                 <!-- Profile settings (DP)-->
-                <div class="col-3">
-                    <button class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#profile_section" aria-controls="profile_section">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-person-circle" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                <path fill-rule="evenodd"
-                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                            </svg>
-                        </span>
-                    </button>
+                <div class="col-3" style="display: flex; justify-content: center; align-items: center;">
+                    <div class="gray-hover-highlight-btn">
+                        <button class="reset-btn" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#profile_section" aria-controls="profile_section">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
                 </div>
                 <!-- Offcanvas Start -->
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="profile_section"
@@ -77,15 +79,24 @@ GENERAL TODO:
                     Beep<span style="color:#872eb8">R</span>
                 </div>
 
-                <!-- Vertical 3 dots Menu anchor -->
-                <div class="col-3">
+                <!-- Logout Icon -->
+                <div class="col-3" style="display: flex; justify-content: center; align-items: center;">
+                    <div class="gray-hover-highlight-btn">
+                        <button class="reset-btn">
+                            <a href="/logout" id="logout-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                                </svg>
+                            </a>
+                        </button>
+                    </div>
+<!--
+                    Vertical 3 dots Menu anchor COMMENT
+                    (FEATURE ON HOLD)
                     <div class="dropstart">
                         <button class="reset-btn gray-hover-highlight-btn" type="button" id="settings-dropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/2560px-A_black_image.jpg" style="width: 42px;" alt="profile img" class="rounded-circle"> -->
-                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                            </svg> -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey"
                                 class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                 <path
@@ -99,13 +110,15 @@ GENERAL TODO:
                             <li><a class="dropdown-item" href="#">Log out</a></li>
                         </ul>
                     </div>
+-->
                 </div>
             </div>
-            <!-- Left Panel Search bar -->
+<!--
+            Left Panel Search bar COMMENT
             <div class="row py-2">
                 <div class="container-fluid">
                     <div class="row">
-                        <!-- <form class=""> -->
+                        <form class=""> COMMENT
                         <div class="col-10">
                             <input type="text" class="form-control rounded-pill" placeholder="Search"
                                 aria-label="Example text with button addon" aria-describedby="button-addon1">
@@ -117,16 +130,15 @@ GENERAL TODO:
                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg>
                         </div>
-                        <!-- </form> -->
+                        </form> COMMENT
                     </div>
                 </div>
             </div>
+-->
             <!--Left Panel Friends Chat section -->
             <div class="row left-panel-chat-section">
-                <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;"> -->
 
                 <!-- Left Panel New chat bubble setion -->
-                <!-- <div class="border border-dark"> -->
                 <div class="dropstart">
                     <a class="btn float" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -181,7 +193,8 @@ GENERAL TODO:
                                 <!-- </div> -->
                                 <div class="details">
                                     <div class="listHead">
-                                        <h4>{{ friend["username"] }}</h4>
+                                        <h4 >{{ friend["username"] }}</h4>
+                                        <h4 class="friends_id" hidden>{{ friend["id"] }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +202,6 @@ GENERAL TODO:
                         </div>
                     </div>
                 </div>
-                <!-- </div> -->
 
                 <!-- Add contact offcanvas -->
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="addcontact_offcanvas"
@@ -234,12 +246,13 @@ GENERAL TODO:
             <!-- Top bar -->
             <div class="row shadow-sm align-items-center" style="height: 3.5rem;">
                 <!-- Contact info section -->
-                <div class="col">
-                    <div class="row">
+<!--
+                    <div class="col">
+                    <div class="row"> -->
                         <!-- Profile settings -->
-                        <div class="col-2 m-auto">
+                        <div class="col-1 mx-2 w-auto">
                             <div class="row">
-                                <button class="btn" type="button" data-bs-toggle="offcanvas"
+                                <button class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas"
                                     data-bs-target="#profile_section" aria-controls="profile_section">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
                                         class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -253,25 +266,27 @@ GENERAL TODO:
 
                         <div class="col">
                             <!-- <div class="row border justify-content-start m-auto"> -->
-                            <div class="row fs-5">
-                                Jerry
+                            <div class="row fs-5" id="current_chat">
+                                <!-- Jerry -->
                                 <!-- <p class="text-start">Jerry</p> -->
                             </div>
                             <div class="row text-muted">
-                                online
+                                Always online
                                 <!-- <p class="text-start">online</p> -->
                             </div>
                             <!-- </div> -->
                         </div>
-
+<!--
                     </div>
-                </div>
+                </div> -->
 
                 <!-- More options section -->
-                <div class="col">
-                    <div class="row m-auto justify-content-end">
-                        <!-- Search off-canvas -->
-                        <div class="col-1">
+                <!-- <div class="col border"> -->
+
+                    <!-- (FEATURE ON HOLD) COMMENT -->
+                    <!-- <div class="row m-auto justify-content-end"> -->
+                        <!-- Search off-canvas COMMENT -->
+                        <!-- <div class="col-1 border">
                             <div class="row">
                                 <button class="btn" type="button" data-bs-toggle="offcanvas"
                                     data-bs-target="#search_offcanvas" aria-controls="search_offcanvas">
@@ -290,13 +305,13 @@ GENERAL TODO:
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="offcanvas-body">
-                                        <!-- Search input field -->
+                                         Search input field COMMENT
                                         <div class="container">
                                             <input type="text" class="form-control mx-auto rounded-pill"
                                                 placeholder="Search">
                                         </div>
 
-                                        <!-- Placeholder text -->
+                                        Placeholder text COMMENT
                                         <div
                                             class="container align-items-center justify-content-center text-center mt-5">
                                             <div class="container ">
@@ -306,10 +321,10 @@ GENERAL TODO:
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <!-- Vertical 3 dots Menu anchor -->
-                        <div class="col-1">
+                        <!-- Vertical 3 dots Menu anchor COMMENT -->
+                        <!-- <div class="col-1">
                             <div class="dropstart row">
                                 <button class="btn" type="button" id="settings-dropdown" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -326,19 +341,20 @@ GENERAL TODO:
                                     <li><a class="dropdown-item" href="#">Foobar</a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+
             </div>
 
             <!-- Chat display area -->
-            <div class="row">
-
-            </div>
+            <div class="" id="chat"></div>
 
             <!-- Bottom chat row -->
-            <div class="row border-top p-2 justify-content-center" style="position: absolute; bottom: 0; width: 100%">
-                <!-- Left of chat field -->
+            <div class="row border-top p-3 mb-2 justify-content-center" style="position: absolute; bottom: 0; width: 100%">
+<!--
+                FEATURE ON HOLD COMMENT
+                Left of chat field (Emoji) COMMENT
                 <div class="col-1">
                     <div class="row">
                         <button class="btn" type="button">
@@ -351,21 +367,21 @@ GENERAL TODO:
                         </button>
                     </div>
                 </div>
+-->
 
-                <form class="col">
-                    <div class="row">
-                        <!-- Chat input field -->
+
+                <!-- Chat input field -->
                         <div class="col">
                             <div>
-                                <input type="text" class="form-control rounded-pill" placeholder="Type a message">
+                                <input id="chat_input" type="text" class="form-control form-control-md rounded-pill" placeholder="Type a message" autocomplete="off">
                             </div>
                         </div>
 
-                        <!-- Right of chat field -->
+                        <!-- Right of chat field (Chat Send Button)-->
                         <div class="col-1">
                             <div class="row">
-                                <button class="btn" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                <button id="chat_button" class="reset-btn gray-hover-highlight-btn" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                         class="bi bi-send-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
@@ -373,8 +389,6 @@ GENERAL TODO:
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </form>
             </div>
 
             <!-- Row Containing Left Panel and Main Chat Sections -->
@@ -382,4 +396,7 @@ GENERAL TODO:
         <!-- Main Page Container -->
     </div>
 
+    <script>
+        const user_ID = `{{ session["user_id"] }}`;
+    </script>
     {% endblock%}

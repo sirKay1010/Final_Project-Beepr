@@ -55,13 +55,16 @@
 }
 
 .gray-hover-highlight-btn {
-    width: 32px;
-    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
 .gray-hover-highlight-btn:hover {
-    background-color: #929ad9;
+    background-color: #DCDCDC;
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 

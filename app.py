@@ -1,5 +1,5 @@
-import os
 import re
+import json
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -7,9 +7,16 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required
+from flask_socketio import SocketIO, send, emit, join_room, leave_room
+from datetime import datetime
 
 # Configure application
 app = Flask(__name__)
+
+# Secret Key configuration
+app.config['SECRET_KEY'] = '@secret321'
+socketio = SocketIO(app, cors_allowed_origins="*")
+# socketio = SocketIO(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -19,10 +26,15 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+# LIST TO HOLD NAME OF ROOMS
+# ROOMS = [0]
+
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///beepr.db")
 
 # request handling
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -47,9 +59,11 @@ def register():
     usernames_list = []
     email_list = []
     usernames = db.execute("SELECT username, email FROM users")
-    for userdata in usernames:
-        usernames_list.append(userdata["username"])
-        email_list.append(userdata["email"])
+    usernames = json.dumps(usernames, indent=1)
+
+    # for userdata in usernames:
+    #     usernames_list.append(usernames[userdata]["username"])
+    #     email_list.append(userdata["email"])
 
     if request.method == "POST":
         # store a new users info
@@ -105,7 +119,8 @@ def register():
         password_hash = generate_password_hash(password)
 
         # Update users table with users info
-        db.execute("INSERT INTO users (name, username, email, password_hash) VALUES(?,?,?,?)", firstname + " " + lastname,  username, email, password_hash)
+        db.execute("INSERT INTO users (name, username, email, password_hash) VALUES(?,?,?,?)",
+                   firstname + " " + lastname,  username, email, password_hash)
         return redirect("/login")
 
     else:
@@ -126,7 +141,6 @@ def login():
     # if login form was submitted
     if request.method == "POST":
 
-
         # if no username was typed
         if not request.form.get("username"):
             error = "Please enter a username"
@@ -140,7 +154,8 @@ def login():
             return render_template("login.html", error=error, element_id=element_id)
 
         # get the user info from the name
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE username = ?",
+                          request.form.get("username"))
         print(rows)
 
         # if username does not exist
@@ -159,7 +174,6 @@ def login():
         if request.form.get("remember_me"):
             session.permanent = True
 
-
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
 
@@ -173,24 +187,25 @@ def login():
 # Logout route
 @app.route("/logout")
 def logout():
-    """ Write Logout view function """
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/onboarding")
 
 
 # chat_page route
 @app.route("/chat_page", methods=["GET", "POST"])
-# @login_required
+@login_required
 def chat():
-    #
-    # Temporarily assign a session id
-    session["user_id"] = 2
-
     """ Modify chat view function """
     if request.method == "POST":
 
         # Check the form that was submitted
         if request.form.get("username"):
             # Get friend data
-            friend = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+            friend = db.execute(
+                "SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
             # Check if friend exists
             if not friend:
@@ -209,7 +224,8 @@ def chat():
                 return redirect("/chat_page")
 
             # Insert friend into database
-            db.execute("INSERT INTO friends (user_id, friends_id) VALUES (?, ?)", session["user_id"], friend[0]["id"])
+            db.execute("INSERT INTO friends (user_id, friends_id) VALUES (?, ?)",
+                       session["user_id"], friend[0]["id"])
 
             #
             return redirect("/chat_page")
@@ -230,15 +246,59 @@ def chat():
             usernames.append(user["username"])
 
         # Query database for current user's friends
-        friends_id = db.execute("SELECT * FROM friends WHERE user_id = ?", session["user_id"])
+        friends_id = db.execute(
+            "SELECT * FROM friends WHERE user_id = ?", session["user_id"])
 
         # Check if user has friends
         if friends_id:
             # Query database for the usernames of the friends
             for friend_id in friends_id:
-                user = db.execute("SELECT * FROM users WHERE id = ?", friend_id["friends_id"])
+                user = db.execute(
+                    "SELECT * FROM users WHERE id = ?", friend_id["friends_id"])
 
                 # Add friend's username to the friends list
                 friends.append(user[0])
 
         return render_template("chat_page.html", friends=friends, usernames=usernames)
+
+# beginning of socket implementation
+# bucket for messaging
+
+
+@socketio.on("message")
+def handle_message(message):
+    if message != "Connected!":
+        send(
+            {"msg": message["msg"], "user_ID": message["user_ID"]}, room=message["room"])
+        # time = datetime.now()
+        # add message to the database
+        db.execute(
+            "INSERT into messages (sender_id, receiver_id, message) VALUES (?, ?, ?)",
+            message["user_ID"], message["friend_id"], message["msg"])
+
+
+# bucket to leave a room
+@socketio.on("leave")
+def leave(data):
+    leave_room(data["room"])
+    # send({"msg": "User " + data["user_ID"] + " has left the " +
+    #      data["room"] + " room"}, room=data["room"])
+
+
+# bucket to join a room
+@socketio.on("join")
+def join(data):
+    join_room(data["room"])
+    # instead of sending that the user has joined the room, send previous messages instead
+    # send({"msg": "User " + data["user_ID"] + " has joined the " +
+    #      data["room"] + " room"}, room=data["room"])
+
+    previous_messages = db.execute("SELECT * FROM messages WHERE sender_id IN (?, ?) AND receiver_id IN (?, ?) ORDER BY server_date_time",
+                                   data["user_ID"], data["friend_id"], data["user_ID"], data["friend_id"])
+
+    if previous_messages:
+        emit("previous messages", previous_messages)
+
+
+if __name__ == '__main__':
+    socketio.run(app, host="localhost")

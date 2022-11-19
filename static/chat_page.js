@@ -1,95 +1,135 @@
-// Listen for complete page load
-document.addEventListener("DOMContentLoaded", () => {
-    // Get users data from database
-    let users = document.querySelector("#users").getAttribute("data-users");
+// Get users data from database
+let users = document.querySelector("#users").getAttribute("data-users");
 
-    // Get the add user form node from DOM
-    let add_user_form = document.querySelector("#addcontact");
+// Get the add user form node from DOM
+let add_user_form = document.querySelector("#addcontact");
 
-    // Get input field in the form node
-    let input = add_user_form.querySelector("input");
+// Get input field in the form node
+let input = add_user_form.querySelector("input");
 
-    // Get the submit btn in the form node
-    let submit_btn = add_user_form.querySelector("button[type='submit']");
+// Get the submit btn in the form node
+let submit_btn = add_user_form.querySelector("button[type='submit']");
 
-    // Disable submit button
-    submit_btn.disabled = true;
+// Disable submit button
+submit_btn.disabled = true;
 
-    // Listen for keyboard input in input field
-    input.addEventListener("keyup", () => {
-        //
-        let empty = true;
+// Listen for keyboard input in input field
+input.addEventListener("keyup", () => {
+    //
+    let empty = true;
 
-        // Check if the input field is empty
-        if (input.value !== ""){
-            // submit_btn.disabled = false;
-            empty = false;
-        }
+    // Check if the input field is empty
+    if (input.value !== ""){
+        // submit_btn.disabled = false;
+        empty = false;
+    }
 
-        if (empty == false){
-            submit_btn.disabled = false;
-        }
+    if (empty == false){
+        submit_btn.disabled = false;
+    }
 
-        else{
-            submit_btn.disabled = true;
-        }
-    });
+    else{
+        submit_btn.disabled = true;
+    }
+});
 
     // add_user_form.addEventListener("submit", (e) => {
     //     event.preventDefault(e)
     //     event.stopPropagation(e)
     // });
+
+// Set enter key to send message
+document.querySelector("#chat_input").addEventListener("keypress", (event) => {
+    if (event.key == "Enter"){
+        document.querySelector("#chat_button").click();
+    }
+});
+
+// create list for rooms
+let room_pairs = []
+// Create room variable
+let room;
+let friend_id;
+//  beginning of  Socket Implementation
+var socket = io.connect("http://localhost:5000");
+
+socket.on('connect', function() {
+    socket.send("Connected!");
+    console.log("Hello");
+});
+
+// User sending a message
+document.querySelector("#chat_button").onclick = function() {
+    console.log(room);
+    let input = document.querySelector("#chat_input");
+    socket.send({"msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id});
+    input.value = "";
+}
+
+// previous messages event
+socket.on("previous messages", function(data) {
+    for (message of data) {
+        let p = document.createElement("p");
+        let br = document.createElement("br");
+        p.innerHTML = message["message"] + br.outerHTML;
+        document.querySelector("#chat").append(p);
+    }
+});
+
+// message event. We can't
+socket.on("message", function(data) {
+    // Vanilla Javascript
+    let p = document.createElement("p");
+    let br = document.createElement("br");
+    p.innerHTML = data["msg"] + br.outerHTML;
+    document.querySelector("#chat").append(p);
 });
 
 
+// room selection AND Clicking on a new chat
+document.querySelectorAll(".block").forEach(friend => {
+    friend.addEventListener("click", () => {
+        // Get the name of current chat
+        const current_chat = document.querySelector("#current_chat");
+        current_chat.innerHTML = friend.querySelector("h4").innerHTML;
 
+        // Get the friends ID to chat with
+        friend_id = friend.querySelector(".friends_id").innerHTML;
 
+        // convert users and friends ID to int
+        users_User_ID = parseInt(user_ID);
+        friend_id = parseInt(friend_id);
 
-// /* javascript file for the chat_page */
+        // calculate unique value for a room for user and friend
+        room = uniqueRoom(users_User_ID, friend_id);
 
-// // form that adds new contacts / friends
-// let form = document.getElementById("addcontact");
+        // convert unique value to string
+        room = room.toString();
 
-// // prevent the page from submitting
-// form.addEventListener('submit', event => {
-//     event.preventDefault();
-// });
+        // Join the room
+        joinRoom(room);
+    });
+});
 
-// //
-// document.getElementById("cancel").onclick = function () {
+// Create functions for leave room, join room and system message
+function leaveRoom(room){
+    socket.emit("leave", {"user_ID": user_ID, "room": room});
+}
 
-//     form.style.display = "none";
-//     document.getElementById("contacts").style.display = "inline";
-//     document.getElementById("contactform").style.display = "inline";
+function joinRoom(room){
+    socket.emit("join", {"user_ID": user_ID, "friend_id": friend_id, "room": room});
+    // clear chat section
+    document.querySelector("#chat").innerHTML = ""
+}
 
+// this function creates a unique number from two numbers using a modified cantor pairing function
+function uniqueRoom(id_1, id_2) {
+    return ((id_1 + id_2 + 1)*(id_1 + id_2) / 2) + (id_1 * id_2);
+}
+
+// function systemMessage(msg){
+//     // Display a system message
+//     const p = document.createElement("p");
+//     p.innerHTML = msg;
+//     document.querySelector("#chat").append(p);
 // }
-
-// document.getElementById("contactform").onclick = function () {
-//     form.style.display = "inline";
-//     document.getElementById("contactform").style.display = "none";
-//     document.getElementById("contacts").style.display = "none";
-
-// }
-
-// document.getElementById("dismiss").onclick = function () {
-//     form.style.display = "none";
-//     document.getElementById("contactform").style.display = "inline";
-//     document.getElementById("contacts").style.display = "inline";
-
-// }
-
-
-// // for some reason turning it into a funtion does not allow it to work
-// /*
-// function() form_control {
-
-//     form.style.display = "inline";
-//     document.getElementById("contactform").style.display = "none";
-//     document.getElementById("contacts").style.display = "none";
-
-// }
-
-
-// document.getElementById("contactform").onclick = form_control();
-// document.getElementById("dismiss").onclick = form_control();
-// */
