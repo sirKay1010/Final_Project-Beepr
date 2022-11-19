@@ -245,6 +245,19 @@ def chat():
             # Add user's username to the usernames list
             usernames.append(user["username"])
 
+
+
+
+
+        # find all the people there's an existing chat
+        previous_chats = db.execute(
+            "SELECT username, id FROM users WHERE id IN (SELECT receiver_id FROM messages WHERE sender_id = ? UNION SELECT sender_id FROM messages WHERE receiver_id = ?)",
+            session["user_id"], session["user_id"])
+
+
+
+
+
         # Query database for current user's friends
         friends_id = db.execute(
             "SELECT * FROM friends WHERE user_id = ?", session["user_id"])
@@ -259,7 +272,8 @@ def chat():
                 # Add friend's username to the friends list
                 friends.append(user[0])
 
-        return render_template("chat_page.html", friends=friends, usernames=usernames)
+
+        return render_template("chat_page.html", friends=friends, usernames=usernames, previous_chats=previous_chats)
 
 # beginning of socket implementation
 # bucket for messaging
@@ -269,7 +283,7 @@ def chat():
 def handle_message(message):
     if message != "Connected!":
         send(
-            {"msg": message["msg"], "user_ID": message["user_ID"]}, room=message["room"])
+            {"msg": message["msg"], "user_ID": message["user_ID"], "friend_id": message["friend_id"], "friend_username": message["friend_username"]}, room=message["room"])
         # time = datetime.now()
         # add message to the database
         db.execute(

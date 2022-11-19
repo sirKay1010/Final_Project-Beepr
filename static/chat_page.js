@@ -19,28 +19,28 @@ input.addEventListener("keyup", () => {
     let empty = true;
 
     // Check if the input field is empty
-    if (input.value !== ""){
+    if (input.value !== "") {
         // submit_btn.disabled = false;
         empty = false;
     }
 
-    if (empty == false){
+    if (empty == false) {
         submit_btn.disabled = false;
     }
 
-    else{
+    else {
         submit_btn.disabled = true;
     }
 });
 
-    // add_user_form.addEventListener("submit", (e) => {
-    //     event.preventDefault(e)
-    //     event.stopPropagation(e)
-    // });
+// add_user_form.addEventListener("submit", (e) => {
+//     event.preventDefault(e)
+//     event.stopPropagation(e)
+// });
 
 // Set enter key to send message
 document.querySelector("#chat_input").addEventListener("keypress", (event) => {
-    if (event.key == "Enter"){
+    if (event.key == "Enter") {
         document.querySelector("#chat_button").click();
     }
 });
@@ -50,24 +50,29 @@ let room_pairs = []
 // Create room variable
 let room;
 let friend_id;
+
+// the current chat we're in
+const current_chat = document.querySelector("#current_chat");
+
+
 //  beginning of  Socket Implementation
 var socket = io.connect("http://localhost:5000");
 
-socket.on('connect', function() {
+socket.on('connect', function () {
     socket.send("Connected!");
     console.log("Hello");
 });
 
 // User sending a message
-document.querySelector("#chat_button").onclick = function() {
+document.querySelector("#chat_button").onclick = function () {
     console.log(room);
     let input = document.querySelector("#chat_input");
-    socket.send({"msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id});
+    socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML});
     input.value = "";
 }
 
 // previous messages event
-socket.on("previous messages", function(data) {
+socket.on("previous messages", function (data) {
     for (message of data) {
         let p = document.createElement("p");
         let br = document.createElement("br");
@@ -76,13 +81,41 @@ socket.on("previous messages", function(data) {
     }
 });
 
+let chatid_list = [];
+// all the existing active chats
+// chats = document.querySelectorAll(".chats .friends_id");
+for (let chat of document.querySelectorAll(".chats .friends_id")) {
+    chatid_list.push(parseInt(chat.innerHTML));
+}
+
+console.log(chatid_list);
+
 // message event. We can't
-socket.on("message", function(data) {
+socket.on("message", function (data) {
     // Vanilla Javascript
-    let p = document.createElement("p");
-    let br = document.createElement("br");
-    p.innerHTML = data["msg"] + br.outerHTML;
-    document.querySelector("#chat").append(p);
+    // append a new message
+    if (current_chat.innerHTML == data["friend_username"]) {
+        let p = document.createElement("p");
+        let br = document.createElement("br");
+        p.innerHTML = data["msg"] + br.outerHTML;
+        document.querySelector("#chat").append(p);
+    }
+
+    if (!chatid_list.includes(data["friend_id"])) {
+
+        let newchat = `<div class="block chats">` +
+            `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
+            + `<div class="details">` +
+            `<div class="listHead">` +
+            `<h4>${current_chat.innerHTML}</h4>` +
+            `<h4 hidden class="friends_id">${data["friend_id"]}</h4>`
+            + `</div>`
+            + `</div>` +
+            `</div>`;
+
+        document.querySelector("#chat_id").innerHTML += newchat;
+
+    }
 });
 
 
@@ -90,11 +123,13 @@ socket.on("message", function(data) {
 document.querySelectorAll(".block").forEach(friend => {
     friend.addEventListener("click", () => {
         // Get the name of current chat
-        const current_chat = document.querySelector("#current_chat");
+        // const current_chat = document.querySelector("#current_chat");
+        // current_chat = document.querySelector("#current_chat");
         current_chat.innerHTML = friend.querySelector("h4").innerHTML;
 
         // Get the friends ID to chat with
         friend_id = friend.querySelector(".friends_id").innerHTML;
+        console.log(friend_id);
 
         // convert users and friends ID to int
         users_User_ID = parseInt(user_ID);
@@ -108,23 +143,24 @@ document.querySelectorAll(".block").forEach(friend => {
 
         // Join the room
         joinRoom(room);
+
     });
 });
 
 // Create functions for leave room, join room and system message
-function leaveRoom(room){
-    socket.emit("leave", {"user_ID": user_ID, "room": room});
+function leaveRoom(room) {
+    socket.emit("leave", { "user_ID": user_ID, "room": room });
 }
 
-function joinRoom(room){
-    socket.emit("join", {"user_ID": user_ID, "friend_id": friend_id, "room": room});
+function joinRoom(room) {
+    socket.emit("join", { "user_ID": user_ID, "friend_id": friend_id, "room": room });
     // clear chat section
     document.querySelector("#chat").innerHTML = ""
 }
 
 // this function creates a unique number from two numbers using a modified cantor pairing function
 function uniqueRoom(id_1, id_2) {
-    return ((id_1 + id_2 + 1)*(id_1 + id_2) / 2) + (id_1 * id_2);
+    return ((id_1 + id_2 + 1) * (id_1 + id_2) / 2) + (id_1 * id_2);
 }
 
 // function systemMessage(msg){

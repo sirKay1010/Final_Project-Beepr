@@ -137,6 +137,21 @@ GENERAL TODO:
 -->
             <!--Left Panel Friends Chat section -->
             <div class="row left-panel-chat-section">
+                <div class="chatlist" id="chat_id">
+                    {% for chat in previous_chats %}
+                    <div class="block chats">
+                        <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
+                        <div class="details">
+                            <div class="listHead">
+                                <h4 class="username">{{ chat["username"] }}</h4>
+                                <h4 hidden class="friends_id">{{ chat["id"] }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" style="width: 48px;"> -->
 
                 <!-- Left Panel New chat bubble setion -->
                 <div class="dropstart">
@@ -185,7 +200,7 @@ GENERAL TODO:
                         <!-- Display list of current user's friends -->
                         <div class="chatlist" id="contacts">
                             {% for friend in friends %}
-                            <div class="block">
+                            <div class="block" data-bs-dismiss="offcanvas">
                                 <!-- <div class="imgBox"> -->
                                 <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
                                 <!-- <img src="https://avatars.dicebear.com/api/human/123.svg" > -->
