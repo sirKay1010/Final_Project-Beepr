@@ -113,8 +113,9 @@ socket.on("message", function (data) {
             + `</div>` +
             `</div>`;
 
-        document.querySelector("#chat_id").innerHTML += newchat;
+        // document.querySelector("#chat_id").innerHTML += newchat;
 
+        document.querySelector("#chat_id").innerHTML = newchat + document.querySelector("#chat_id").innerHTML;
     }
 });
 

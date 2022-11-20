@@ -276,7 +276,7 @@ def chat():
                 friends.append(user[0])
 
         print(friends)
-        return render_template("chat_page.html", friends=friends, user=user[0])
+        return render_template("chat_page.html", friends=friends, user=user[0], previous_chats=previous_chats)
 
 # beginning of socket implementation
 # bucket for messaging
