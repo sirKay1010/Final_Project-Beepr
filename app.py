@@ -187,7 +187,11 @@ def login():
 # Logout route
 @app.route("/logout")
 def logout():
-    """ Write Logout view function """
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/onboarding")
 
 
 # chat_page route
@@ -244,6 +248,19 @@ def chat():
         # # Query database for current user's data
         user = db.execute("SELECT name, username, phone_number, email, bio FROM users WHERE id = ?", session["user_id"])
 
+
+
+
+
+        # find all the people there's an existing chat
+        previous_chats = db.execute(
+            "SELECT username, id FROM users WHERE id IN (SELECT receiver_id FROM messages WHERE sender_id = ? UNION SELECT sender_id FROM messages WHERE receiver_id = ?)",
+            session["user_id"], session["user_id"])
+
+
+
+
+
         # Query database for current user's friends
         friends_id = db.execute(
             "SELECT * FROM friends WHERE user_id = ?", session["user_id"])
@@ -269,7 +286,7 @@ def chat():
 def handle_message(message):
     if message != "Connected!":
         send(
-            {"msg": message["msg"], "user_ID": message["user_ID"]}, room=message["room"])
+            {"msg": message["msg"], "user_ID": message["user_ID"], "friend_id": message["friend_id"], "friend_username": message["friend_username"]}, room=message["room"])
         # time = datetime.now()
         # add message to the database
         db.execute(
