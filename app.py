@@ -269,13 +269,13 @@ def chat():
         if friends_id:
             # Query database for the usernames of the friends
             for friend_id in friends_id:
-                user = db.execute(
+                users = db.execute(
                     "SELECT id, name, username, phone_number, email, bio FROM users WHERE id = ?", friend_id["friends_id"])
 
                 # Add friend's username to the friends list
-                friends.append(user[0])
+                friends.append(users[0])
 
-        print(friends)
+        # print(friends)
         return render_template("chat_page.html", friends=friends, user=user[0])
 
 # beginning of socket implementation
@@ -316,6 +316,14 @@ def join(data):
     if previous_messages:
         emit("previous messages", previous_messages)
 
+
+# Bucket to get current friend's data
+@socketio.on("friend profile")
+def friend_profile(username):
+    # Query database for friend's data
+    data = db.execute("SELECT id, name, username, phone_number, email, bio FROM users WHERE username = ?", username)
+
+    emit("friend profile", data[0])
 
 if __name__ == '__main__':
     socketio.run(app, host="localhost")

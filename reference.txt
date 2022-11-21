@@ -60,6 +60,7 @@ CREATE TABLE users (
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name TEXT,
 	username TEXT UNIQUE,
+	phone_number TEXT UNIQUE,
 	email TEXT UNIQUE,
 	password_hash TEXT,
 	bio TEXT DEFAULT "empty"
