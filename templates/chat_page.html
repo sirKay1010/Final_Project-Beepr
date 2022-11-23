@@ -229,7 +229,7 @@ GENERAL TODO:
             <!--Left Panel Friends Chat section -->
             <div class="row left-panel-chat-section">
                 <div class="chatlist" id="chat_id">
-                    {% for chat in previous_chats %}
+                    {% for chat in previous_chats | reverse %}
                     <div class="block chats">
                         <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
                         <div class="details">

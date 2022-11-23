@@ -67,7 +67,7 @@ socket.on('connect', function () {
 document.querySelector("#chat_button").onclick = function () {
     console.log(room);
     let input = document.querySelector("#chat_input");
-    socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML});
+    socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML });
     input.value = "";
 }
 
@@ -92,8 +92,10 @@ console.log(chatid_list);
 
 // message event. We can't
 socket.on("message", function (data) {
+
+
     // Vanilla Javascript
-    // append a new message
+    // append a new message`
     if (current_chat.innerHTML == data["friend_username"]) {
         let p = document.createElement("p");
         let br = document.createElement("br");
@@ -101,8 +103,13 @@ socket.on("message", function (data) {
         document.querySelector("#chat").append(p);
     }
 
+    // if it is a new chat
     if (!chatid_list.includes(data["friend_id"])) {
 
+        // add the friend id to the list of existing chats
+        chatid_list.push(data["friend_id"]);
+
+        // html for the new chat block
         let newchat = `<div class="block chats">` +
             `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
             + `<div class="details">` +
@@ -113,8 +120,7 @@ socket.on("message", function (data) {
             + `</div>` +
             `</div>`;
 
-        // document.querySelector("#chat_id").innerHTML += newchat;
-
+        // append user to the top of the chat
         document.querySelector("#chat_id").innerHTML = newchat + document.querySelector("#chat_id").innerHTML;
     }
 });
