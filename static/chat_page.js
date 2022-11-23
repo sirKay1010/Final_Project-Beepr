@@ -67,7 +67,7 @@ socket.on('connect', function () {
 document.querySelector("#chat_button").onclick = function () {
     console.log(room);
     let input = document.querySelector("#chat_input");
-    socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML});
+    socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML });
     input.value = "";
 }
 
@@ -92,8 +92,10 @@ console.log(chatid_list);
 
 // message event. We can't
 socket.on("message", function (data) {
+
+
     // Vanilla Javascript
-    // append a new message
+    // append a new message`
     if (current_chat.innerHTML == data["friend_username"]) {
         let p = document.createElement("p");
         let br = document.createElement("br");
@@ -101,10 +103,18 @@ socket.on("message", function (data) {
         document.querySelector("#chat").append(p);
     }
 
+    // if it is a new chat
     if (!chatid_list.includes(data["friend_id"])) {
 
-        let newchat = `<div class="block chats">` +
-            `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
+        // add the friend id to the list of existing chats
+        chatid_list.push(data["friend_id"]);
+
+        // create a new div element
+        let div = document.createElement("div");
+
+        // add the classes and inner HTML to the div
+        div.classList.add("block", "chats");
+        div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
             + `<div class="details">` +
             `<div class="listHead">` +
             `<h4>${current_chat.innerHTML}</h4>` +
@@ -113,7 +123,8 @@ socket.on("message", function (data) {
             + `</div>` +
             `</div>`;
 
-        document.querySelector("#chat_id").innerHTML += newchat;
+        // append user to the top of the chat
+        document.querySelector("#chat_id").prepend(div);
 
     }
 });
@@ -122,6 +133,7 @@ socket.on("message", function (data) {
 // room selection AND Clicking on a new chat
 document.querySelectorAll(".block").forEach(friend => {
     friend.addEventListener("click", () => {
+        console.log("click");
         // Get the name of current chat
         // const current_chat = document.querySelector("#current_chat");
         // current_chat = document.querySelector("#current_chat");
