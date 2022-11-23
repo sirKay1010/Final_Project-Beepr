@@ -233,7 +233,7 @@ GENERAL TODO:
             <!--Left Panel Friends Chat section -->
             <div class="row left-panel-chat-section">
                 <div class="chatlist" id="chat_id">
-                    {% for chat in previous_chats %}
+                    {% for chat in previous_chats | reverse %}
                     <div class="block chats">
                         <img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">
                         <div class="details">
@@ -323,20 +323,21 @@ GENERAL TODO:
                     </div>
                     <div class="offcanvas-body">
                         <!-- form adds a new contact either by uername -->
-                        <form action="/chat_page" method="post" id="addcontact">
-                            <div class="container py-5 text-center">
+                        <!-- <form action="/chat_page" method="post" id="addcontact"> -->
+                            <div id="add_friend_div" class="container py-5 text-center">
 
                                 <h4 style="padding-bottom: 20px;">Enter username</h4>
                                 <div class="mb-3">
                                     <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
                                         id="username" name="username" placeholder="Username" type="text">
                                 </div>
+                                <p></p>
                                 <!-- <div class="mb-3">
                                     <input autocomplete="off" autofocus class="form-control mx-auto w-auto"
                                         id="phone_number" name="phone_number" placeholder="phone number" type="text">
 
                                     </div> -->
-                                <button class="submit-btn mx-auto my-1 w-auto btn text-white" type="submit">
+                                <button class="submit-btn mx-auto my-1 w-auto btn text-white" type="button">
                                     <!--btn btn-->
                                     Add user
                                 </button>
@@ -344,7 +345,7 @@ GENERAL TODO:
                                 <button class="btn btn-secondary" type="button"
                                     data-bs-dismiss="offcanvas">Cancel</button>
                             </div>
-                        </form>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>
