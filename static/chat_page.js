@@ -109,9 +109,12 @@ socket.on("message", function (data) {
         // add the friend id to the list of existing chats
         chatid_list.push(data["friend_id"]);
 
-        // html for the new chat block
-        let newchat = `<div class="block chats">` +
-            `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
+        // create a new div element
+        let div = document.createElement("div");
+
+        // add the classes and inner HTML to the div
+        div.classList.add("block", "chats");
+        div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
             + `<div class="details">` +
             `<div class="listHead">` +
             `<h4>${current_chat.innerHTML}</h4>` +
@@ -121,7 +124,8 @@ socket.on("message", function (data) {
             `</div>`;
 
         // append user to the top of the chat
-        document.querySelector("#chat_id").innerHTML = newchat + document.querySelector("#chat_id").innerHTML;
+        document.querySelector("#chat_id").prepend(div);
+
     }
 });
 
@@ -129,6 +133,7 @@ socket.on("message", function (data) {
 // room selection AND Clicking on a new chat
 document.querySelectorAll(".block").forEach(friend => {
     friend.addEventListener("click", () => {
+        console.log("click");
         // Get the name of current chat
         // const current_chat = document.querySelector("#current_chat");
         // current_chat = document.querySelector("#current_chat");
