@@ -184,22 +184,22 @@ function uniqueRoom(id_1, id_2) {
 
 
 //
-const add_friend_div = document.querySelector("#add_friend_div");
+// const add_friend_div = document.querySelector("#add_friend_div");
 
-alert(add_friend_div);
+// alert(add_friend_div);
 
-add_friend_div.querySelector("button[type='button']").onclick = () => {
-    //
-    alert("Hello");
-    socket.emit("add friend", add_friend_div.querySelector("input"));
-}
+// add_friend_div.querySelector("button[type='button']").onclick = () => {
+//     //
+//     alert("Hello");
+//     socket.emit("add friend", add_friend_div.querySelector("input"));
+// }
 
-socket.on("add friend", (response) => {
-    //
-    if (response != "Added"){
-        add_friend_div.querySelector("p").innerHTML = reponse;
-    }
-});
+// socket.on("add friend", (response) => {
+//     //
+//     if (response != "Added"){
+//         add_friend_div.querySelector("p").innerHTML = reponse;
+//     }
+// });
 
 
 

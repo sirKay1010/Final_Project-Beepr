@@ -317,30 +317,30 @@ def join(data):
         emit("previous messages", previous_messages)
 
 
-# Bucket to add new friend
-@socketio.on("add friend")
-def add_friend(username):
-    # Query database for friend's data
-    friend = db.execute("SELECT * FROM users WHERE username = ?", username)
+# # Bucket to add new friend
+# @socketio.on("add friend")
+# def add_friend(username):
+#     # Query database for friend's data
+#     friend = db.execute("SELECT * FROM users WHERE username = ?", username)
 
-    # Check if friend exists
-    if not friend:
-        emit("add friend", "User does not exist")
+#     # Check if friend exists
+#     if not friend:
+#         emit("add friend", "User does not exist")
 
-    # Check if user is trying to self add
-    elif friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
-        emit("add friend", "You can not add yourself")
+#     # Check if user is trying to self add
+#     elif friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
+#         emit("add friend", "You can not add yourself")
 
-    # Check if user already has friend
-    elif db.execute("SELECT friends_id FROM friends WHERE friends_id = ? AND user_id = ?", friend[0]["id"], session["user_id"]):
-        # Add a feature to select the friend from the list of frieds when this happens
-        emit("add friend", "You already have this user added")
+#     # Check if user already has friend
+#     elif db.execute("SELECT friends_id FROM friends WHERE friends_id = ? AND user_id = ?", friend[0]["id"], session["user_id"]):
+#         # Add a feature to select the friend from the list of frieds when this happens
+#         emit("add friend", "You already have this user added")
 
-    # Insert friend into database
-    db.execute("INSERT INTO friends (user_id, friends_id) VALUES (?, ?)",
-                session["user_id"], friend[0]["id"])
+#     # Insert friend into database
+#     db.execute("INSERT INTO friends (user_id, friends_id) VALUES (?, ?)",
+#                 session["user_id"], friend[0]["id"])
 
-    emit("add friend", "Added")
+#     emit("add friend", "Added")
 
 
 # Bucket to get current friend's data
