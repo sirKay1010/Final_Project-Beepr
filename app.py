@@ -269,11 +269,11 @@ def chat():
         if friends_id:
             # Query database for the usernames of the friends
             for friend_id in friends_id:
-                user = db.execute(
+                users = db.execute(
                     "SELECT id, name, username, phone_number, email, bio FROM users WHERE id = ?", friend_id["friends_id"])
 
                 # Add friend's username to the friends list
-                friends.append(user[0])
+                friends.append(users[0])
 
         print(friends)
         return render_template("chat_page.html", friends=friends, user=user[0], previous_chats=previous_chats)
@@ -316,6 +316,40 @@ def join(data):
     if previous_messages:
         emit("previous messages", previous_messages)
 
+
+# # Bucket to add new friend
+# @socketio.on("add friend")
+# def add_friend(username):
+#     # Query database for friend's data
+#     friend = db.execute("SELECT * FROM users WHERE username = ?", username)
+
+#     # Check if friend exists
+#     if not friend:
+#         emit("add friend", "User does not exist")
+
+#     # Check if user is trying to self add
+#     elif friend == db.execute("SELECT * FROM users WHERE id = ?", session["user_id"]):
+#         emit("add friend", "You can not add yourself")
+
+#     # Check if user already has friend
+#     elif db.execute("SELECT friends_id FROM friends WHERE friends_id = ? AND user_id = ?", friend[0]["id"], session["user_id"]):
+#         # Add a feature to select the friend from the list of frieds when this happens
+#         emit("add friend", "You already have this user added")
+
+#     # Insert friend into database
+#     db.execute("INSERT INTO friends (user_id, friends_id) VALUES (?, ?)",
+#                 session["user_id"], friend[0]["id"])
+
+#     emit("add friend", "Added")
+
+
+# Bucket to get current friend's data
+@socketio.on("friend profile")
+def friend_profile(username):
+    # Query database for friend's data
+    data = db.execute("SELECT id, name, username, phone_number, email, bio FROM users WHERE username = ?", username)
+
+    emit("friend profile", data[0])
 
 if __name__ == '__main__':
     socketio.run(app, host="localhost")

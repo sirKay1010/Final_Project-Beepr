@@ -181,3 +181,48 @@ function uniqueRoom(id_1, id_2) {
 //     p.innerHTML = msg;
 //     document.querySelector("#chat").append(p);
 // }
+
+
+//
+// const add_friend_div = document.querySelector("#add_friend_div");
+
+// alert(add_friend_div);
+
+// add_friend_div.querySelector("button[type='button']").onclick = () => {
+//     //
+//     alert("Hello");
+//     socket.emit("add friend", add_friend_div.querySelector("input"));
+// }
+
+// socket.on("add friend", (response) => {
+//     //
+//     if (response != "Added"){
+//         add_friend_div.querySelector("p").innerHTML = reponse;
+//     }
+// });
+
+
+
+
+
+// Add Event Listener to friend profile button
+document.querySelector("#friend_profile_button").onclick = () => {
+    // Pass friend's username to backend bucket
+    socket.emit("friend profile", current_chat.innerHTML);
+}
+
+socket.on("friend profile", (data) => {
+    // Get profile fields from DOM
+    document.querySelector("#friend_name").innerHTML = data["name"];
+    document.querySelector("#friend_username").innerHTML = data["username"];
+    document.querySelector("#friend_email").innerHTML = data["email"];
+    document.querySelector("#friend_phone_number").innerHTML = data["phone_number"];
+
+    // Check if user has a bio
+    if (data["bio"] == "empty"){
+        document.querySelector("#friend_bio").innerHTML = 'Some place holder text if bio is "empty"';
+    }
+    else{
+        document.querySelector("#friend_bio").innerHTML = data["bio"]
+    }
+});
