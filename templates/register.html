@@ -25,7 +25,9 @@
 	var emailValidated = false;
 	var passwordValidated = false;
 	var usernameValidated = false;
-	let time_ID;
+	let emailTime_ID;
+	let passwordTime_ID;
+	let formTime_ID;
 	document.addEventListener("DOMContentLoaded", function () {
 		// Select and disable button
 		const register_btn = document.getElementById("register_btn");
@@ -36,7 +38,8 @@
 		// Add an input event listener for each input field
 		for (const input of inputs) {
 			input.addEventListener("input", function(){
-				setTimeout(validateForm, 1801, inputs);
+				clearTimeout(formTime_ID);
+				formTime_ID = setTimeout(validateForm, 1801, inputs);
 			});
 		}
 
@@ -50,8 +53,8 @@
 		let emailRegEx = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 		email.onkeypress = function () {
 			resetValidation(email, emailErrorMessage);
-			clearTimeout(time_ID);
-			time_ID = setTimeout(validateEmail, 1800, emailRegEx, email, emailErrorMessage, ErrorMessageForEmail);
+			clearTimeout(emailTime_ID);
+			emailTime_ID = setTimeout(validateEmail, 1800, emailRegEx, email, emailErrorMessage, ErrorMessageForEmail);
 		}
 
 		// Validate password
@@ -61,8 +64,8 @@
 		let passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 		password.onkeypress = function () {
 			resetValidation(password, passwordErrorMessage);
-			clearTimeout(time_ID);
-			time_ID = setTimeout(validatePassword, 1800, passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword);
+			clearTimeout(passwordTime_ID);
+			passwordTime_ID = setTimeout(validatePassword, 1800, passwordRegEx, password, passwordErrorMessage, ErrorMessageForPassword);
 		}
 	});
 

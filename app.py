@@ -45,7 +45,7 @@ def after_request(response):
 
 
 # Onboarding route
-@app.route("/onboarding")
+@app.route("/")
 def index():
     """  """
 

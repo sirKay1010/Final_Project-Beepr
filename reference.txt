@@ -60,10 +60,10 @@ CREATE TABLE users (
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	name TEXT,
 	username TEXT UNIQUE,
-	phone_number TEXT UNIQUE,
 	email TEXT UNIQUE,
+	phone_number TEXT UNIQUE
 	password_hash TEXT,
-	bio TEXT DEFAULT "empty"
+	bio TEXT DEFAULT "empty",
 );
 
 CREATE TABLE friends (
@@ -77,7 +77,6 @@ CREATE TABLE messages (
     sender_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
     message TEXT NOT NULL,
-	date_time DATETIME NOT NULL,
     server_date_time DATETIME DEFAULT CURRENT_TIMESTAMP,
 	FOREIGN KEY(sender_id) REFERENCES users(id),
 	FOREIGN KEY(receiver_id) REFERENCES users(id)
