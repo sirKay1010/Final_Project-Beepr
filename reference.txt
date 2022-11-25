@@ -118,4 +118,3 @@ CREATE TABLE messages (
         //     joinRoom(newRoom);
         //     room = newRoom;
         // }
-Kayode
