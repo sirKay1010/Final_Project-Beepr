@@ -191,7 +191,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
-    return redirect("/onboarding")
+    return redirect("/")
 
 
 # chat_page route

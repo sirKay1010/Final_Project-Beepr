@@ -134,6 +134,14 @@ socket.on("message", function (data) {
 document.querySelectorAll(".block").forEach(friend => {
     friend.addEventListener("click", () => {
         console.log("click");
+
+        // Set main chat top row to become visible
+        // document.querySelector(".main-chat-section").style.visibility = "visible";
+        document.querySelector(".main-chat-section").style.display = "block";
+
+        // Set main chat top row to become visible
+        document.querySelector(".default-chat-section").style.display = "none";
+
         // Get the name of current chat
         // const current_chat = document.querySelector("#current_chat");
         // current_chat = document.querySelector("#current_chat");
@@ -157,6 +165,15 @@ document.querySelectorAll(".block").forEach(friend => {
         joinRoom(room);
 
     });
+});
+
+// Back button functionality
+document.querySelector("#back_button").addEventListener("click", () => {
+    // leaveRoom("room");
+    // document.querySelector(".main-chat-section").style.visibility = "hidden";
+    document.querySelector(".main-chat-section").style.display = "none";
+    document.querySelector(".default-chat-section").style.display = "flex";
+
 });
 
 // Create functions for leave room, join room and system message

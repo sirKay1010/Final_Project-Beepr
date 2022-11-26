@@ -71,6 +71,21 @@
     flex: 0.40;
 }
 
+/* Main chat section */
+.main-chat-section {
+    /* visibility: hidden; */
+    display: none;
+}
+
+/* default chat section */
+.default-chat-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 625px;
+    border: 2px solid #872eb8;
+}
+
 .left-panel-chat-section {
     flex: 1;
     position: relative;

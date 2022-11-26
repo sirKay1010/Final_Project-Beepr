@@ -174,7 +174,7 @@ GENERAL TODO:
                 <!-- Logout Icon -->
                 <div class="col-3" style="display: flex; justify-content: center; align-items: center;">
                     <div class="gray-hover-highlight-btn">
-                        <button class="reset-btn">
+                        <button class="reset-btn" data-toggle="tooltip" data-placement="top" title="Log out">
                             <a href="/logout" id="logout-btn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -251,7 +251,7 @@ GENERAL TODO:
                 <!-- Left Panel New chat bubble setion -->
                 <div class="dropstart">
                     <a class="btn float" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                        aria-expanded="false" data-toggle="tooltip" data-placement="top" title="New Chat">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             class="bi bi-plus-lg pt-2" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -287,8 +287,8 @@ GENERAL TODO:
                         <div class="container text-center">
                             <!-- <a class="btn submit-btn text-white" aria-controls="addcontact_offcanvas" role="button" href="#addcontact_offcanvas" data-bs-toggle="offcanvas">Add Contact</a> -->
                             <button class="submit-btn btn text-white" data-bs-target="#addcontact_offcanvas"
-                                aria-controls="addcontact_offcanvas" data-bs-toggle="offcanvas" id="contactform">Add
-                                contact</button>
+                                aria-controls="addcontact_offcanvas" data-bs-toggle="offcanvas" id="contactform">Add New
+                                Contact</button>
                             <!-- Style....................................-->
                         </div>
 
@@ -352,16 +352,46 @@ GENERAL TODO:
             <!-- Left Panel Section -->
         </div>
 
+
         <!-- Main Chat section -->
         <div class="col" style="position: relative">
+
+            <!-- default chat page -->
+            <div class="container my-3 default-chat-section rounded-pill">
+                <div class="row">
+                    <div class="col">
+                        <hr style="height:5px; width: 100%; border-width:0; background-color:#872eb8">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#872eb8" class="bi bi-activity"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z" />
+                        </svg>
+                        <p class="">Beep Beep</p>
+                        <p class="">Ready to start beeping?</p>
+                        <p class="">Beep (click) a friend to the left.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-chat-section">
             <!-- Top bar -->
             <div class="row shadow-sm align-items-center" style="height: 3.5rem;">
                 <!-- Contact info section -->
                 <!--
                     <div class="col">
                     <div class="row"> -->
+
+                <!-- Back button -->
+                <div class="col-1 w-auto" id="back_button">
+                    <button id="friend_profile_button" class="reset-btn gray-hover-highlight-btn" type="button" aria-label="Close" data-toggle="tooltip" data-placement="top" title="Close Chat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                    </button>
+                </div>
+
                 <!-- Profile settings -->
-                <div class="col-1 mx-2 w-auto">
+                <div class="col-1 me-2 w-auto">
                     <div class="row">
                         <button id="friend_profile_button" class="reset-btn gray-hover-highlight-btn" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#friend_profile_section" aria-controls="friend_profile_section">
@@ -456,17 +486,15 @@ GENERAL TODO:
                 </div>
 
                 <div class="col">
-                    <!-- <div class="row border justify-content-start m-auto"> -->
+                    <!-- <div class="row border justify-content-start m-auto"> comment -->
                     <div class="row fs-5" id="current_chat">
-                        <!-- Jerry -->
-                        <!-- <p class="text-start">Jerry</p> -->
                     </div>
                     <div class="row text-muted">
                         Always online
-                        <!-- <p class="text-start">online</p> -->
                     </div>
-                    <!-- </div> -->
+                    <!-- </div> comment -->
                 </div>
+
                 <!--
                     </div>
                 </div> -->
@@ -573,7 +601,7 @@ GENERAL TODO:
                 <!-- Right of chat field (Chat Send Button)-->
                 <div class="col-1">
                     <div class="row">
-                        <button id="chat_button" class="reset-btn gray-hover-highlight-btn" type="button">
+                        <button id="chat_button" class="reset-btn gray-hover-highlight-btn" type="button" data-toggle="tooltip" data-placement="top" title="Send Message">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 class="bi bi-send-fill" viewBox="0 0 16 16">
                                 <path
@@ -583,11 +611,13 @@ GENERAL TODO:
                     </div>
                 </div>
             </div>
-
-            <!-- Row Containing Left Panel and Main Chat Sections -->
+            </div>
         </div>
-        <!-- Main Page Container -->
+
+    <!-- Row Containing Left Panel and Main Chat Sections -->
     </div>
+<!-- Main Page Container -->
+</div>
 
     <script>
         const user_ID = `{{ session["user_id"] }}`;
