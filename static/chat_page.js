@@ -60,12 +60,10 @@ var socket = io.connect("http://localhost:5000");
 
 socket.on('connect', function () {
     socket.send("Connected!");
-    console.log("Hello");
 });
 
 // User sending a message
 document.querySelector("#chat_button").onclick = function () {
-    console.log(room);
     let input = document.querySelector("#chat_input");
     socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML });
     input.value = "";
@@ -74,74 +72,124 @@ document.querySelector("#chat_button").onclick = function () {
 // previous messages event
 socket.on("previous messages", function (data) {
     for (message of data) {
+
+        let div = document.createElement("div");
+
+
         let p = document.createElement("p");
         let br = document.createElement("br");
         p.innerHTML = message["message"] + br.outerHTML;
+
+        // div.innerHTML = p.outerHTML;
+        // logged in user_ID
+        let our_user = parseInt(user_ID);
+        // div.classList.add("message");
+        // check who sent the message
+        if (our_user == message["sender_id"]) {
+            // users message on the right
+            p.classList.add("from-me");
+
+        }
+        else {
+            // users message on the left
+            p.classList.add("from-them");
+
+        }
+
         document.querySelector("#chat").append(p);
     }
 });
 
-let chatid_list = [];
-// all the existing active chats
-// chats = document.querySelectorAll(".chats .friends_id");
-for (let chat of document.querySelectorAll(".chats .friends_id")) {
-    chatid_list.push(parseInt(chat.innerHTML));
-}
+// let chatid_list = [];
+// // all the existing active chats
+// // chats = document.querySelectorAll(".chats .friends_id");
+// for (let chat of document.querySelectorAll(".chats .friends_id")) {
+//     chatid_list.push(parseInt(chat.innerHTML));
+// }
 
-console.log(chatid_list);
-
-// message event. We can't
+// message event
 socket.on("message", function (data) {
-
-
     // Vanilla Javascript
-    // append a new message`
+    // append a new message
     if (current_chat.innerHTML == data["friend_username"]) {
         let p = document.createElement("p");
         let br = document.createElement("br");
         p.innerHTML = data["msg"] + br.outerHTML;
-        document.querySelector("#chat").append(p);
-    }
 
+        if (user_ID == data["user_ID"]) {
+            p.classList.add("from-me");
+        }
+        else {
+            p.classList.add("from-them");
+        }
+
+        let chat_area = document.querySelector(".chat-section");
+        chat_area.append(p);
+        chat_area.scrollTop = chat_area.scrollHeight;
+    }
     // if it is a new chat
-    if (!chatid_list.includes(data["friend_id"])) {
+    // let new_chat = false;
 
-        // add the friend id to the list of existing chats
-        chatid_list.push(data["friend_id"]);
+    // for (let chat of document.querySelectorAll(".chats .friends_id")) {
+    //     if (parseInt(chat.innerHTML) == data["friend_id"]) {
+    //         new_chat = true;
+    //     }
+    // }
 
-        // create a new div element
-        let div = document.createElement("div");
+    // if (new_chat) {
+    //     let div = document.createElement("div");
 
-        // add the classes and inner HTML to the div
-        div.classList.add("block", "chats");
-        div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
-            + `<div class="details">` +
-            `<div class="listHead">` +
-            `<h4>${current_chat.innerHTML}</h4>` +
-            `<h4 hidden class="friends_id">${data["friend_id"]}</h4>`
-            + `</div>`
-            + `</div>` +
-            `</div>`;
+    //     // add the classes and inner HTML to the div
+    //     div.classList.add("block", "chats");
+    //     div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
+    //         + `<div class="details">` +
+    //         `<div class="listHead">` +
+    //         `<h4>${current_chat.innerHTML}</h4>` +
+    //         `<h4 hidden class="friends_id">${data["friend_id"]}</h4>`
+    //         + `</div>`
+    //         + `</div>` +
+    //         `</div>`;
 
-        // append user to the top of the chat
-        document.querySelector("#chat_id").prepend(div);
+    //     // append user to the top of the chat
+    //     document.querySelector("#chat_id").prepend(div);
+    // }
 
-    }
+
+    // if (!chatid_list.includes(data["friend_id"])) {
+
+    //     // add the friend id to the list of existing chats
+    //     chatid_list.push(data["friend_id"]);
+
+    //     // create a new div element
+    //     let div = document.createElement("div");
+
+    //     // add the classes and inner HTML to the div
+    //     div.classList.add("block", "chats");
+    //     div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
+    //         + `<div class="details">` +
+    //         `<div class="listHead">` +
+    //         `<h4>${current_chat.innerHTML}</h4>` +
+    //         `<h4 hidden class="friends_id">${data["friend_id"]}</h4>`
+    //         + `</div>`
+    //         + `</div>` +
+    //         `</div>`;
+
+    //     // append user to the top of the chat
+    //     document.querySelector("#chat_id").prepend(div);
+
+    // }
 });
 
 
 // room selection AND Clicking on a new chat
 document.querySelectorAll(".block").forEach(friend => {
     friend.addEventListener("click", () => {
-        console.log("click");
         // Get the name of current chat
         // const current_chat = document.querySelector("#current_chat");
         // current_chat = document.querySelector("#current_chat");
         current_chat.innerHTML = friend.querySelector("h4").innerHTML;
-
         // Get the friends ID to chat with
         friend_id = friend.querySelector(".friends_id").innerHTML;
-        console.log(friend_id);
 
         // convert users and friends ID to int
         users_User_ID = parseInt(user_ID);
@@ -219,10 +267,10 @@ socket.on("friend profile", (data) => {
     document.querySelector("#friend_phone_number").innerHTML = data["phone_number"];
 
     // Check if user has a bio
-    if (data["bio"] == "empty"){
+    if (data["bio"] == "empty") {
         document.querySelector("#friend_bio").innerHTML = 'Some place holder text if bio is "empty"';
     }
-    else{
+    else {
         document.querySelector("#friend_bio").innerHTML = data["bio"]
     }
 });
