@@ -121,4 +121,5 @@ CREATE TABLE messages (
 		Things to do:
 		1. Index queries
 		2. remove ability to send empty messages
-		3. 
+		3. check to fit the default page content from 200px
+		4. check to fix scrolling height from 80vh
