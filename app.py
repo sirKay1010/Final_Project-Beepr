@@ -248,18 +248,10 @@ def chat():
         # # Query database for current user's data
         user = db.execute("SELECT name, username, phone_number, email, bio FROM users WHERE id = ?", session["user_id"])
 
-
-
-
-
         # find all the people there's an existing chat
         previous_chats = db.execute(
             "SELECT username, id FROM users WHERE id IN (SELECT receiver_id FROM messages WHERE sender_id = ? UNION SELECT sender_id FROM messages WHERE receiver_id = ?)",
             session["user_id"], session["user_id"])
-
-
-
-
 
         # Query database for current user's friends
         friends_id = db.execute(
@@ -278,10 +270,10 @@ def chat():
         print(friends)
         return render_template("chat_page.html", friends=friends, user=user[0], previous_chats=previous_chats)
 
+
 # beginning of socket implementation
+
 # bucket for messaging
-
-
 @socketio.on("message")
 def handle_message(message):
     if message != "Connected!":
@@ -298,18 +290,14 @@ def handle_message(message):
 @socketio.on("leave")
 def leave(data):
     leave_room(data["room"])
-    # send({"msg": "User " + data["user_ID"] + " has left the " +
-    #      data["room"] + " room"}, room=data["room"])
 
 
 # bucket to join a room
 @socketio.on("join")
 def join(data):
     join_room(data["room"])
-    # instead of sending that the user has joined the room, send previous messages instead
-    # send({"msg": "User " + data["user_ID"] + " has joined the " +
-    #      data["room"] + " room"}, room=data["room"])
 
+    # previous messages from that particular chat
     previous_messages = db.execute("SELECT * FROM messages WHERE sender_id IN (?, ?) AND receiver_id IN (?, ?) ORDER BY server_date_time",
                                    data["user_ID"], data["friend_id"], data["user_ID"], data["friend_id"])
 
@@ -350,6 +338,8 @@ def friend_profile(username):
     data = db.execute("SELECT id, name, username, phone_number, email, bio FROM users WHERE username = ?", username)
 
     emit("friend profile", data[0])
+
+
 
 if __name__ == '__main__':
     socketio.run(app, host="localhost")

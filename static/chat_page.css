@@ -92,7 +92,7 @@
     overflow-y: hidden;
 }
 
-.float{
+.float {
     display: none;
 }
 
@@ -113,9 +113,14 @@
     animation-timing-function: ease-out;
 }
 
-@keyframes glide-up{
-    from{bottom: -40px;}
-    to{bottom: 20px;}
+@keyframes glide-up {
+    from {
+        bottom: -40px;
+    }
+
+    to {
+        bottom: 20px;
+    }
 }
 
 /* positioning for the add chat button */
@@ -137,5 +142,45 @@
 }
 
 #logout-btn:hover {
-    /* color: #000000; */
+    color: #000000;
+}
+
+div.chat-section {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 800px;
+}
+
+.chat-section p {
+    border-radius: 1.15rem;
+    line-height: 1.25;
+    max-width: 75%;
+
+
+    padding: 0.5rem .875rem;
+    word-wrap: break-word;
+}
+
+.from-me {
+    align-self: flex-end;
+    width: fit-content;
+    background-color: #872eb8;
+    color: #fff;
+}
+
+p.from-me~p.from-me {
+    margin: 0.25rem 0 0;
+}
+
+
+/* p.from-them~p.from-them {
+    margin: 0.25rem 0 0;
+} */
+
+.from-them {
+    width: fit-content;
+    background-color: #e5e5ea;
+    color: #000;
 }
