@@ -82,8 +82,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 625px;
-    border: 2px solid #872eb8;
+    padding: 200px;
+    /* height: 625px; */
+    /* border: 2px solid #872eb8; */
 }
 
 .left-panel-chat-section {
@@ -150,7 +151,7 @@ div.chat-section {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    height: 800px;
+    height: 85vh;
 }
 
 .chat-section p {
