@@ -117,3 +117,8 @@ CREATE TABLE messages (
         //     joinRoom(newRoom);
         //     room = newRoom;
         // }
+
+		Things to do:
+		1. Index queries
+		2. remove ability to send empty messages
+		3. 
