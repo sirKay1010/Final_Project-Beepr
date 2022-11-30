@@ -83,7 +83,7 @@ CREATE TABLE messages (
 );
 
 .........................ROOMS APPLICATION...........................................
-		// J-I-K code
+		// J-I-K code for joining rooms
         // If a room already exists
         // if (room_pairs.includes(user_ID + friend_id)){
         //     alert("already exists");
