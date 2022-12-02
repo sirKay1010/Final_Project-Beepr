@@ -51,6 +51,7 @@ let room_pairs = []
 let room;
 let friend_id;
 
+
 // the current chat we're in
 const current_chat = document.querySelector("#current_chat");
 
@@ -65,8 +66,10 @@ socket.on('connect', function () {
 // User sending a message
 document.querySelector("#chat_button").onclick = function () {
     let input = document.querySelector("#chat_input");
-    socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML });
-    input.value = "";
+    if (input.value) {
+        socket.send({ "msg": input.value, "user_ID": user_ID, "room": room, "friend_id": friend_id, "friend_username": current_chat.innerHTML });
+        input.value = "";
+    }
 }
 
 // previous messages event
@@ -100,18 +103,12 @@ socket.on("previous messages", function (data) {
     }
 });
 
-// let chatid_list = [];
-// // all the existing active chats
-// // chats = document.querySelectorAll(".chats .friends_id");
-// for (let chat of document.querySelectorAll(".chats .friends_id")) {
-//     chatid_list.push(parseInt(chat.innerHTML));
-// }
-
 // message event
 socket.on("message", function (data) {
-    // Vanilla Javascript
     // append a new message
-    if (current_chat.innerHTML == data["friend_username"]) {
+
+    // if (data["friend_username"] == current_chat.innerHTML) {
+    if (data["room"] == room) {
         let p = document.createElement("p");
         let br = document.createElement("br");
         p.innerHTML = data["msg"] + br.outerHTML;
@@ -124,104 +121,49 @@ socket.on("message", function (data) {
         }
 
         let chat_area = document.querySelector(".chat-section");
+
         chat_area.append(p);
         chat_area.scrollTop = chat_area.scrollHeight;
     }
+
     // if it is a new chat
-    // let new_chat = false;
+    let new_chat = true;
 
-    // for (let chat of document.querySelectorAll(".chats .friends_id")) {
-    //     if (parseInt(chat.innerHTML) == data["friend_id"]) {
-    //         new_chat = true;
-    //     }
-    // }
+    for (let chat of document.querySelectorAll(".chats .friends_id")) {
+        if (parseInt(chat.innerHTML) == data["friend_id"]) {
+            new_chat = false;
+        }
+    }
 
-    // if (new_chat) {
-    //     let div = document.createElement("div");
+    if (new_chat) {
 
-    //     // add the classes and inner HTML to the div
-    //     div.classList.add("block", "chats");
-    //     div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
-    //         + `<div class="details">` +
-    //         `<div class="listHead">` +
-    //         `<h4>${current_chat.innerHTML}</h4>` +
-    //         `<h4 hidden class="friends_id">${data["friend_id"]}</h4>`
-    //         + `</div>`
-    //         + `</div>` +
-    //         `</div>`;
+        let div = document.createElement("div");
 
-    //     // append user to the top of the chat
-    //     document.querySelector("#chat_id").prepend(div);
-    // }
+        // add the classes and inner HTML to the div
+        div.classList.add("block", "chats");
+        div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
+            + `<div class="details">` +
+            `<div class="listHead">` +
+            `<h4>${current_chat.innerHTML}</h4>` +
+            `<h4 hidden class="friends_id">${data["friend_id"]}</h4>`
+            + `</div>`
+            + `</div>` +
+            `</div>`;
 
-
-    // if (!chatid_list.includes(data["friend_id"])) {
-
-    //     // add the friend id to the list of existing chats
-    //     chatid_list.push(data["friend_id"]);
-
-    //     // create a new div element
-    //     let div = document.createElement("div");
-
-    //     // add the classes and inner HTML to the div
-    //     div.classList.add("block", "chats");
-    //     div.innerHTML = `<img class="imgBox" src="https://avatars.dicebear.com/api/human/123.svg">`
-    //         + `<div class="details">` +
-    //         `<div class="listHead">` +
-    //         `<h4>${current_chat.innerHTML}</h4>` +
-    //         `<h4 hidden class="friends_id">${data["friend_id"]}</h4>`
-    //         + `</div>`
-    //         + `</div>` +
-    //         `</div>`;
-
-    //     // append user to the top of the chat
-    //     document.querySelector("#chat_id").prepend(div);
-
-    // }
+        // append user to the top of the chat
+        document.querySelector("#chat_id").prepend(div);
+        start_chat(div);
+    }
 });
 
 
-// room selection AND Clicking on a new chat
 document.querySelectorAll(".block").forEach(friend => {
-    friend.addEventListener("click", () => {
-
-        console.log("click");
-
-        // Set main chat top row to become visible
-        // document.querySelector(".main-chat-section").style.visibility = "visible";
-        document.querySelector(".main-chat-section").style.display = "block";
-
-        // Set main chat top row to become visible
-        document.querySelector(".default-chat-section").style.display = "none";
-
-
-
-        // Get the name of current chat
-        // const current_chat = document.querySelector("#current_chat");
-        // current_chat = document.querySelector("#current_chat");
-        current_chat.innerHTML = friend.querySelector("h4").innerHTML;
-        // Get the friends ID to chat with
-        friend_id = friend.querySelector(".friends_id").innerHTML;
-
-        // convert users and friends ID to int
-        users_User_ID = parseInt(user_ID);
-        friend_id = parseInt(friend_id);
-
-        // calculate unique value for a room for user and friend
-        room = uniqueRoom(users_User_ID, friend_id);
-
-        // convert unique value to string
-        room = room.toString();
-
-        // Join the room
-        joinRoom(room);
-
-    });
+    start_chat(friend);
 });
 
 // Back button functionality
 document.querySelector("#back_button").addEventListener("click", () => {
-    // leaveRoom("room");
+    leaveRoom(room);
     // document.querySelector(".main-chat-section").style.visibility = "hidden";
     document.querySelector(".main-chat-section").style.display = "none";
     document.querySelector(".default-chat-section").style.display = "flex";
@@ -242,6 +184,38 @@ function joinRoom(room) {
 // this function creates a unique number from two numbers using a modified cantor pairing function
 function uniqueRoom(id_1, id_2) {
     return ((id_1 + id_2 + 1) * (id_1 + id_2) / 2) + (id_1 * id_2);
+}
+
+function start_chat(contact) {
+
+    contact.addEventListener("click", () => {
+
+        // Set main chat top row to become visible
+        document.querySelector(".main-chat-section").style.display = "block";
+
+        // Set main chat top row to become visible
+        document.querySelector(".default-chat-section").style.display = "none";
+
+
+
+        // Get the name of current chat
+        current_chat.innerHTML = contact.querySelector("h4").innerHTML;
+        // Get the friends ID to chat with
+        friend_id = contact.querySelector(".friends_id").innerHTML;
+
+        // convert users and friends ID to int
+        users_User_ID = parseInt(user_ID);
+        friend_id = parseInt(friend_id);
+
+        // calculate unique value for a room for user and friend
+        room = uniqueRoom(users_User_ID, friend_id);
+
+        // convert unique value to string
+        room = room.toString();
+
+        // Join the room
+        joinRoom(room);
+    });
 }
 
 // function systemMessage(msg){

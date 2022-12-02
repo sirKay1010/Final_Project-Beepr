@@ -123,3 +123,12 @@ CREATE TABLE messages (
 		2. remove ability to send empty messages
 		3. check to fit the default page content from 200px
 		4. check to fix scrolling height from 80vh
+
+		Things to conmfirm and change:
+		1. onboarding (The whole sign in with [Email])
+		2. Ibrahim, the thing he did today, the display none and block, when a new chat is added
+		3. are we using onboarding version of "beepr OR beepR"
+		4. Do we want the background color of the register page?? Or it should be white like the onboarding and login pages... (This determines the signup link color for easy visibility)
+
+		Things I've done:
+		1. Changed the color of "BEEPr" on the onboarding

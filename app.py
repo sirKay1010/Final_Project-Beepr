@@ -278,7 +278,7 @@ def chat():
 def handle_message(message):
     if message != "Connected!":
         send(
-            {"msg": message["msg"], "user_ID": message["user_ID"], "friend_id": message["friend_id"], "friend_username": message["friend_username"]}, room=message["room"])
+            {"msg": message["msg"], "user_ID": message["user_ID"], "friend_id": message["friend_id"], "friend_username": message["friend_username"], "room": message["room"]}, room=message["room"])
         # time = datetime.now()
         # add message to the database
         db.execute(
