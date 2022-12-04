@@ -1,37 +1,48 @@
-// Get users data from database
-let users = document.querySelector("#users").getAttribute("data-users");
+// Get the add friend div node from DOM
+const add_friend_div = document.querySelector("#add_friend_div");
 
-// Get the add user form node from DOM
-let add_user_form = document.querySelector("#addcontact");
+// // Get input field in the form node
+// let add_friend_input = add_friend_div.querySelector("input");
 
-// Get input field in the form node
-let input = add_user_form.querySelector("input");
+// // Get the submit btn in the form node
+// let submit_btn = add_friend_div.querySelector(".submit-btn");
 
-// Get the submit btn in the form node
-let submit_btn = add_user_form.querySelector("button[type='submit']");
+// alert(add_friend_div.querySelector(".submit-btn").innerHTML);
 
-// Disable submit button
-submit_btn.disabled = true;
-
-// Listen for keyboard input in input field
-input.addEventListener("keyup", () => {
+add_friend_div.querySelector(".submit-btn").onclick = () => {
     //
-    let empty = true;
+    socket.emit("add friend", add_friend_div.querySelector("input").value);
+}
 
-    // Check if the input field is empty
-    if (input.value !== "") {
-        // submit_btn.disabled = false;
-        empty = false;
-    }
-
-    if (empty == false) {
-        submit_btn.disabled = false;
-    }
-
-    else {
-        submit_btn.disabled = true;
+socket.on("foo", function (response) {
+    //
+    if (response != "Added"){
+        add_friend_div.querySelector("p").innerHTML = response;
     }
 });
+
+// // Disable submit button
+// submit_btn.disabled = true;
+
+// // Listen for keyboard input in input field
+// input.addEventListener("keyup", () => {
+//     //
+//     let empty = true;
+
+//     // Check if the input field is empty
+//     if (input.value !== "") {
+//         // submit_btn.disabled = false;
+//         empty = false;
+//     }
+
+//     if (empty == false) {
+//         submit_btn.disabled = false;
+//     }
+
+//     else {
+//         submit_btn.disabled = true;
+//     }
+// });
 
 // add_user_form.addEventListener("submit", (e) => {
 //     event.preventDefault(e)
@@ -181,28 +192,6 @@ function uniqueRoom(id_1, id_2) {
 //     p.innerHTML = msg;
 //     document.querySelector("#chat").append(p);
 // }
-
-
-//
-// const add_friend_div = document.querySelector("#add_friend_div");
-
-// alert(add_friend_div);
-
-// add_friend_div.querySelector("button[type='button']").onclick = () => {
-//     //
-//     alert("Hello");
-//     socket.emit("add friend", add_friend_div.querySelector("input"));
-// }
-
-// socket.on("add friend", (response) => {
-//     //
-//     if (response != "Added"){
-//         add_friend_div.querySelector("p").innerHTML = reponse;
-//     }
-// });
-
-
-
 
 
 // Add Event Listener to friend profile button
