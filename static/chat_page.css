@@ -151,7 +151,12 @@ div.chat-section {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+<<<<<<< HEAD
+    /* height: 800px; */
+    height: 80vh;
+=======
     height: 85vh;
+>>>>>>> main
 }
 
 .chat-section p {

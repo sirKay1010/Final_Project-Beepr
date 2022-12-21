@@ -117,3 +117,13 @@ CREATE TABLE messages (
         //     joinRoom(newRoom);
         //     room = newRoom;
         // }
+
+		Things to do:
+		1. Index queries
+
+		3. check to fit the default page content from 200px
+		4. check to fix scrolling height from 80vh
+
+		Things to conmfirm and change:
+
+		4. Do we want the background color of the register/login page?? Or it should be white like the onboarding page... (This determines the signup?signin link color for easy visibility)
