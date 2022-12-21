@@ -113,7 +113,7 @@ def register():
             flash("Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!")
             return redirect("/register")
             # error = "Password must be atleast 8 letters, with uppercase, lowercase, num and a special character. It's for your own safety!"
-            # return render_template("register.html", error=error)
+            # return render_temaplate("register.html", error=error)
 
         # Generate passwords hash
         password_hash = generate_password_hash(password)
