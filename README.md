@@ -7,10 +7,10 @@ Beepr is an web app which is built using the python flask framework. The applica
 
 The static file contains the javascript and CSS files that allow for the responsiveness, styling and interactivity of the web app.
 
-In order to implement the live chatting functionality we made use of socket programming. Specifically the flask-SocketIO library. The app.py file contains several functions which were used as event buckets for the sending, receiving and inserting of messages into the database. Other features that required realtime two way communication such as looking up friends profiles, leaving and joining rooms were also implemented using socketIO
+In order to implement the live chatting functionality we made use of socket programming; specifically the flask-SocketIO library. The app.py file contains several functions which were used as event buckets for the sending, receiving and inserting of messages into the database. Other features that required realtime two way communication such as looking up friends profiles, leaving and joining rooms were also implemented using socketIO
 
-The styles.css file contains the css for the app
-The script.js file contains the javascript for the app
+The styles.css file contains the css for the app.\
+The script.js file contains the javascript for the app.\
 The script.js handles the functionality of sending messages to the backend, and recieving them, adding new users, viewing friends profiles, starting a chat, all through socket programming
 
 The template folder contains all the template files for the webapp. These include the default page when you enter the app which offers a little description about what the app is about and links which lead you to either the login page if you have an account or the register page if you are a newcomer.
@@ -19,7 +19,7 @@ The template folder contains all the template files for the webapp. These includ
 Layout.html is a html file which contains the general html template of the entire app. it includes all the js files, css and the script tags for the socketIO. All other html files extend from this file
 
 
-The register page is a html page with a form that asks for your first and last names, username, password and email.
+The register page is a html page with a form that asks for your first and last names, username, password and email.\
 This page is handled by the register function in the app.py
 
 ```
@@ -29,8 +29,8 @@ An email regex is also used to check the validity of email to make sure any emai
 ```
 
 
-The login.html page is handled by the the login function in the app.py file.
-login.html has two fields which must be filled before the form can be submitted.
+The login.html page is handled by the the login function in the app.py file.\
+login.html has two fields which must be filled before the form can be submitted.\
 Incorrect parameters will be flagged by the login function and the error will be displayed with red text on the page
 
 
