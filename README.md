@@ -1,9 +1,9 @@
 #### Video Demo:  <URL HERE>
 
 #### Description:
-This Repository contains all files involved in the development of Beepr, which includes the Static, templates and flask_session folders, app.py (python application file) and beepr.db (a database file). BeepR is a simple, userfriendly chat app developed as a final project for Havards CS50x course in 2022.
+This Repository contains all files involved in the development of BeepR, which includes the Static, templates and flask_session folders, app.py (python application file) and beepr.db (a database file). BeepR is a simple, userfriendly chat app developed as a final project for Havards CS50x course in 2022.
 
-Beepr is an web app which is built using the python flask framework. The application file(app.py) contains the logic for the backend of the website. Specifically the database accessing, registration and login authentication.
+BeepR is a web app which is built using the python flask framework. The application file(app.py) contains the logic for the backend of the website. Specifically the database accessing, registration and login authentication.
 
 The static file contains the javascript and CSS files that allow for the responsiveness, styling and interactivity of the web app.
 
